@@ -1,9 +1,10 @@
 import {DataSource} from "typeorm";
 import {ConfigService} from "@nestjs/config";
+import {DATABASE} from "./database.constants";
 
 export const databaseProviders = [
     {
-        provide: 'DATABASE',
+        provide: DATABASE,
         useFactory: async (config: ConfigService) => {
             const dataSource = new DataSource({
                 type: 'mongodb',
