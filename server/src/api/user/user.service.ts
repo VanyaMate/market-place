@@ -1,10 +1,11 @@
-import {HttpException, HttpStatus, Inject} from "@nestjs/common";
+import {HttpException, HttpStatus, Inject, Injectable} from "@nestjs/common";
 import {USER_REPOSITORY} from "../../database/database.constants";
 import {Repository} from "typeorm";
 import {User} from "./user.entity";
 import {UserDto} from "./dto/user.dto";
-import bcrypt from 'bcrypt';
+import * as bcrypt from 'bcrypt';
 
+@Injectable()
 export class UserService {
 
     constructor(@Inject(USER_REPOSITORY) private userRepository: Repository<User>) {}
@@ -18,7 +19,7 @@ export class UserService {
             return user;
         }
         catch (e) {
-            throw new HttpException('Ошибка создания пользователя', HttpStatus.BAD_REQUEST);
+            throw new HttpException(e.message, HttpStatus.BAD_REQUEST);
         }
     }
 

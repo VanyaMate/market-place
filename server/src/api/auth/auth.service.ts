@@ -1,20 +1,26 @@
 import {TokensService} from "../tokens/tokens.service";
 import {Injectable} from "@nestjs/common";
+import {UserService} from "../user/user.service";
+import {UserLoginDto} from "./dto/user-login.dto";
+import {User} from "../user/user.entity";
 
 @Injectable()
 export class AuthService {
 
-    constructor (private tokenService: TokensService) {}
+    constructor (private tokenService: TokensService,
+                 private userService: UserService) {}
 
-    async registration () {
-        return this.tokenService.generateToken();
+    async registration (userLoginDto: UserLoginDto): Promise<[User, string]> {
+        const user = await this.userService.create(userLoginDto);
+        const token = await this.tokenService.generateTokenToUser(user);
+        return [ user, token ];
     }
 
-    async login (email: string, password: string) {
+    async login (userLoginDto: UserLoginDto) {
 
     }
 
-    async logout (authToken: string) {
+    async logout (accessToken: string) {
 
     }
 
