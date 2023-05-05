@@ -1,4 +1,4 @@
-import {Column, Entity, ManyToOne, ObjectIdColumn} from "typeorm";
+import {Column, Entity, ManyToOne, ObjectId, ObjectIdColumn} from "typeorm";
 import {User} from "../user/user.entity";
 
 
@@ -11,7 +11,7 @@ export class Token {
     @Column()
     token: string;
 
-    @ManyToOne(() => User, '')
-    user: User;
+    @Column()
+    user: ObjectId;
 
 }

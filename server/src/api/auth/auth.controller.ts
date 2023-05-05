@@ -1,10 +1,13 @@
-import {Body, Controller, Post, UsePipes, Res} from "@nestjs/common";
+import {Body, Controller, Post, UsePipes, Res, UseGuards} from "@nestjs/common";
 import {ValidationPipe} from "../../pipes/validation.pipe";
-import {UserDto} from "../user/dto/user.dto";
 import {UserLoginDto} from "./dto/user-login.dto";
 import {AuthService} from "./auth.service";
-import { Response } from 'express';
+import {Response} from 'express';
 import {UserPrivateDataDto} from "../user/dto/user-private-data.dto";
+import {AccessTokenGuard} from "../../guards/access-token-guard.service";
+import {Cookies} from "../../decorators/Cookies.decorator";
+import {ACCESS_TOKEN_NAME} from "../../.constants";
+import {getMSDays} from "../../methods.utils";
 
 @Controller('/api/auth')
 export class AuthController {
@@ -18,11 +21,11 @@ export class AuthController {
         @Res() res: Response,
     ) {
         const [user, token] = await this.authService.registration(userDto);
-        res.cookie('accessToken', token, {
+        res.cookie(ACCESS_TOKEN_NAME, token, {
             httpOnly: true,
-            maxAge: 7 * 24 * 60 * 60 * 1000,
+            maxAge: getMSDays(7),
         })
-        res.json({ user: new UserPrivateDataDto(user) });
+        res.json(new UserPrivateDataDto(user));
     }
 
     @Post('/login')
@@ -32,8 +35,9 @@ export class AuthController {
     }
 
     @Post('/logout')
-    logout () {
-
+    @UseGuards(AccessTokenGuard)
+    logout (@Cookies(ACCESS_TOKEN_NAME) accessToken: string) {
+        return 'logout' + accessToken;
     }
 
 }
