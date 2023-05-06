@@ -7,10 +7,10 @@ import {UsersModule} from "./users/users.module";
 
 @Module({
     imports: [
-        UserModule,
         OrdersModule,
         AuthModule,
         TokensModule,
+        UserModule,
         UsersModule,
     ]
 })

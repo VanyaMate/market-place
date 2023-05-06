@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import {ConfigModule} from "@nestjs/config";
 import {DatabaseModule} from "./database/database.module";
 import {ApiModule} from "./api/api.module";
+import {MongooseModule} from "@nestjs/mongoose";
 
 @Module({
     imports: [
@@ -9,7 +10,7 @@ import {ApiModule} from "./api/api.module";
             envFilePath: `.${ process.env.NODE_ENV }.env`,
             isGlobal: true,
         }),
-        DatabaseModule,
+        MongooseModule.forRoot(process.env.MONGO_DB_URL),
         ApiModule,
     ],
     controllers: [],

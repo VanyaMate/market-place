@@ -1,21 +1,23 @@
-import {HttpException, HttpStatus, Inject, Injectable} from "@nestjs/common";
-import {USER_REPOSITORY} from "../../database/database.constants";
-import {Repository} from "typeorm";
-import {User} from "./user.entity";
+import {HttpException, HttpStatus, Injectable} from "@nestjs/common";
+import {User, UserDocument} from "./schemas/user.schema";
 import {UserDto} from "./dto/user.dto";
 import * as bcrypt from 'bcrypt';
+import {InjectModel} from "@nestjs/mongoose";
+import {Model} from "mongoose";
+import * as uuid from 'uuid';
 
 @Injectable()
 export class UserService {
+    constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
-    constructor(@Inject(USER_REPOSITORY) private userRepository: Repository<User>) {}
-
-    async create (userDto: UserDto) {
+    async create (userDto: UserDto): Promise<UserDocument> {
         try {
-            const user = await this.userRepository.create({...userDto})
-            user.password = await bcrypt.hash(user.password, 3);
+            const user = await this.userModel.create({
+                ...userDto,
+                password: await bcrypt.hash(userDto.password, 3),
+                secretKey: uuid.v4(),
+            })
 
-            await this.userRepository.manager.save(user)
             return user;
         }
         catch (e) {
