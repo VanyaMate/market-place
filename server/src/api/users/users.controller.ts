@@ -1,6 +1,6 @@
 import {Controller, Get, Param, Query, UseGuards, UseInterceptors} from "@nestjs/common";
 import {UsersService} from "./users.service";
-import {UserPublicInterceptor} from "../interceptors/user-public.interceptor";
+import {UserPublicInterceptor} from "../../interceptors/user-public.interceptor";
 import {AccessTokenGuard} from "../../guards/access-token-guard.service";
 
 @Controller('/api/users')
