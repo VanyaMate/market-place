@@ -8,7 +8,7 @@ export class UserPublicInterceptor implements NestInterceptor {
         return next
             .handle()
             .pipe(
-                map((users) => users.map((user) => new UserPublicDataDto(user))),
+                map((users) => Array.isArray(users) ? users.map((user) => new UserPublicDataDto(user)) : new UserPublicDataDto(users)),
             );
     }
 }
