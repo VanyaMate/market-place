@@ -4,7 +4,7 @@ import {ConfigService} from "@nestjs/config";
 import {JWT_SECRET_KEY} from "../../env.constants";
 import {InjectModel} from "@nestjs/mongoose";
 import {Model} from 'mongoose';
-import {UserDocument} from "../user/schemas/user.schema";
+import {User, UserDocument} from "../user/schemas/user.schema";
 import {Token} from "./schemas/token.schema";
 
 @Injectable()
@@ -15,15 +15,15 @@ export class TokensService {
 
     async generateTokenToUser (user: UserDocument): Promise<string> {
         const token = new this.tokenModel({
-            token: jwt.sign({id: user._id, secretKey: user.secretKey}, this.config.get<string>(JWT_SECRET_KEY), { expiresIn: '7d' }),
+            token: jwt.sign({id: user._id, sessionKey: user.sessionKey}, this.config.get<string>(JWT_SECRET_KEY), { expiresIn: '7d' }),
             user: user._id
         })
 
-        return (await token.save()).token;
+        return token.token;
     }
 
-    verifyToken (token: string): { id: string, secretKey: string } {
-        return jwt.verify(token, this.config.get<string>(JWT_SECRET_KEY)) as { id: string, secretKey: string };
+    verifyToken (token: string): { id: string, sessionKey: string } {
+        return jwt.verify(token, this.config.get<string>(JWT_SECRET_KEY)) as { id: string, sessionKey: string };
     }
 
 }

@@ -1,6 +1,6 @@
-import {Controller, Get, Param, Query, UseGuards, UseInterceptors} from "@nestjs/common";
+import {Controller, Get, Query, UseGuards, UseInterceptors} from "@nestjs/common";
 import {UsersService} from "./users.service";
-import {UserPublicInterceptor} from "../../interceptors/user-public.interceptor";
+import {UserPublicDataInterceptor} from "../../interceptors/user-public-data.interceptor";
 import {AccessTokenGuard} from "../../guards/access-token-guard.service";
 
 @Controller('/api/users')
@@ -10,16 +10,29 @@ export class UsersController {
 
     @Get('/all')
     @UseGuards(AccessTokenGuard)
-    @UseInterceptors(UserPublicInterceptor)
-    getAll () {
-        return this.usersService.getAll();
+    getAll (@Query('limit') limit: number = 10,
+            @Query('offset') offset: number = 0) {
+        return this.usersService.getAll(Number(limit), Number(offset), {
+            email: true,
+            firstName: true,
+            lastName: true,
+            telephone: true,
+            orders: true,
+        });
     }
 
     @Get('/findByEmail')
     @UseGuards(AccessTokenGuard)
-    @UseInterceptors(UserPublicInterceptor)
-    getByEmail (@Query('email') email: string) {
-        return this.usersService.findByEmail(email);
+    getByEmail (@Query('email') email: string,
+                @Query('limit') limit: number = 10,
+                @Query('offset') offset: number = 0) {
+        return this.usersService.findByEmail(email, Number(limit), Number(offset), {
+            email: true,
+            firstName: true,
+            lastName: true,
+            telephone: true,
+            orders: true,
+        });
     }
 
 }

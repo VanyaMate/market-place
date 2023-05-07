@@ -13,6 +13,9 @@ import {TokensModule} from "../tokens/tokens.module";
     imports: [
         MongooseModule.forFeature([ { name: User.name, schema: UserSchema } ]),
         TokensModule,
+    ],
+    exports: [
+        UsersService,
     ]
 })
 export class UsersModule {}

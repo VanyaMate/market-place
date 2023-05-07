@@ -1,4 +1,4 @@
-import {Body, Controller, Get, Post, UsePipes} from "@nestjs/common";
+import {Body, Controller, Get, Post, Query, UsePipes} from "@nestjs/common";
 import {UserService} from "./user.service";
 import {UserDto} from "./dto/user.dto";
 import {ValidationPipe} from "../../pipes/validation.pipe";
@@ -17,21 +17,6 @@ export class UserController {
     @Post('/delete')
     delete () {
         return this.userService.delete();
-    }
-
-    @Get('/findByEmail')
-    findByEmail () {
-        return this.userService.findByEmail();
-    }
-
-    @Get('/findByTelephone')
-    findByTelephone () {
-        return this.userService.findByTelephone();
-    }
-
-    @Get('/findById')
-    findById () {
-        return this.userService.findById();
     }
 
 }

@@ -8,26 +8,26 @@ export type UserDocument = HydratedDocument<User>;
 @Schema()
 export class User {
 
-    @Prop()
+    @Prop({ type: String })
     email: string;
 
-    @Prop()
+    @Prop({ type: Boolean })
     isActivated: boolean;
 
-    @Prop()
+    @Prop({ type: String })
     password: string;
 
-    @Prop()
+    @Prop({ type: String })
     firstName: string;
 
-    @Prop()
+    @Prop({ type: String })
     lastName: string;
 
-    @Prop()
+    @Prop({ type: String })
     telephone: string;
 
-    @Prop()
-    secretKey: string;
+    @Prop({ type: String })
+    sessionKey: string;
 
     @Prop({ type: [ { type: mongoose.Schema.Types.ObjectId, ref: 'Order' } ]})
     orders: Order[];

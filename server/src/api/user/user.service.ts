@@ -15,7 +15,7 @@ export class UserService {
             const user = await this.userModel.create({
                 ...userDto,
                 password: await bcrypt.hash(userDto.password, 3),
-                secretKey: uuid.v4(),
+                sessionKey: uuid.v4(),
             })
 
             return user;
@@ -26,33 +26,6 @@ export class UserService {
     }
 
     async delete () {
-        try {
-
-        }
-        catch (e) {
-
-        }
-    }
-
-    async findByEmail () {
-        try {
-
-        }
-        catch (e) {
-
-        }
-    }
-
-    async findByTelephone () {
-        try {
-
-        }
-        catch (e) {
-
-        }
-    }
-
-    async findById () {
         try {
 
         }

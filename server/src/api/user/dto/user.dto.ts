@@ -11,15 +11,15 @@ export class UserDto extends UserLoginDto {
     @Length(2, 20, { message: 'Длина имени может составлять от 2 до 20 символов' })
     @IsString({ message: 'Имя должно быть строкой' })
     @ValidateIf((object, value) => value !== undefined)
-    readonly firstName?;
+    readonly firstName?: string;
 
     @Length(2, 20, { message: 'Длина имени может составлять от 2 до 20 символов' })
     @IsString({ message: 'Имя должно быть строкой' })
     @ValidateIf((object, value) => value !== undefined)
-    readonly lastName?;
+    readonly lastName?: string;
 
     @IsPhoneNumber('RU', { message: 'Неверно введен номер телефона' })
     @ValidateIf((object, value) => value !== undefined)
-    readonly telephone?;
+    readonly telephone?: string;
 
 }
