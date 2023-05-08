@@ -2,7 +2,7 @@ import {CanActivate, ExecutionContext, Injectable, UnauthorizedException} from "
 import {catchError, Observable} from "rxjs";
 import {Request} from 'express';
 import {TokensService} from "../api/tokens/tokens.service";
-import {ACCESS_TOKEN_NAME} from "../.constants";
+import {ACCESS_TOKEN_NAME, USER} from "../.constants";
 import {UsersService} from "../api/users/users.service";
 
 @Injectable()
@@ -30,6 +30,9 @@ export class AccessTokenGuard implements CanActivate {
             if (!user || user.sessionKey !== sessionKey) {
                 throw { message: 'Ошибка авторизации' };
             }
+
+            req[ACCESS_TOKEN_NAME] = verified;
+            req[USER] = user;
 
             return true;
         }

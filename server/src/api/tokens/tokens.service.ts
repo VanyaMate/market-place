@@ -7,6 +7,11 @@ import {Model} from 'mongoose';
 import {User, UserDocument} from "../user/schemas/user.schema";
 import {Token} from "./schemas/token.schema";
 
+export interface ITokenData {
+    id: string,
+    sessionKey: string,
+}
+
 @Injectable()
 export class TokensService {
 
@@ -22,8 +27,8 @@ export class TokensService {
         return token.token;
     }
 
-    verifyToken (token: string): { id: string, sessionKey: string } {
-        return jwt.verify(token, this.config.get<string>(JWT_SECRET_KEY)) as { id: string, sessionKey: string };
+    verifyToken (token: string): ITokenData {
+        return jwt.verify(token, this.config.get<string>(JWT_SECRET_KEY)) as ITokenData;
     }
 
 }

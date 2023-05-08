@@ -2,6 +2,7 @@ import {Schema, Prop, SchemaFactory, MongooseModule} from "@nestjs/mongoose";
 import {HydratedDocument} from "mongoose";
 import * as mongoose from "mongoose";
 import {User} from "../../user/schemas/user.schema";
+import {Brand} from "../../brands/schemas/brand.schema";
 
 export type ProductDocument = HydratedDocument<Product>;
 
@@ -32,9 +33,20 @@ export class Product {
     @Prop({ type: String })
     discountType: string;
 
+    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Brand' })
+    brand: Brand;
+
     @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
     author: User;
 
 }
 
 export const ProductSchema = SchemaFactory.createForClass(Product);
+
+ProductSchema.pre(["find", "findOne"], function (next) {
+    this.populate('brand', ['title', 'description', 'image']);
+    this.select('-author');
+    this.select('-__v');
+    this.select('-_id');
+    next();
+})

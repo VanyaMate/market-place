@@ -12,6 +12,10 @@ export class ProductDto {
     @IsString({ message: 'Описание товара должно быть строкой' })
     readonly description: string;
 
+    @Length(1, 40, { message: 'Имя бренда может составлять от 2 до 40 символов' })
+    @IsString({ message: 'Имя бренда должно быть строкой' })
+    readonly brand: string;
+
     @IsPositiveOrZero()
     readonly price: number;
 

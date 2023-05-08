@@ -1,7 +1,7 @@
 import {
     Body,
-    Controller,
-    Post,
+    Controller, Get, NestInterceptor, Param,
+    Post, Query,
     UploadedFiles,
     UseGuards,
     UseInterceptors,
@@ -9,11 +9,10 @@ import {
 } from "@nestjs/common";
 import {ProductDto} from "./dto/product.dto";
 import {ProductsService} from "./products.service";
-import {Cookies} from "../../decorators/cookies.decorator";
-import {ACCESS_TOKEN_NAME} from "../../.constants";
 import {AccessTokenGuard} from "../../guards/access-token-guard.service";
 import {ValidationPipe} from "../../pipes/validation.pipe";
 import {FileFieldsInterceptor} from "@nestjs/platform-express";
+import {IUserVerifiedData, UserVerified} from "../../decorators/user-verified.decorator";
 
 @Controller('/api/products')
 export class ProductsController {
@@ -23,19 +22,37 @@ export class ProductsController {
     @Post('/create')
     @UseGuards(AccessTokenGuard)
     @UsePipes(ValidationPipe)
-    @UseInterceptors(FileFieldsInterceptor([
+    @UseInterceptors(new (FileFieldsInterceptor([
         { name: 'generalImage', maxCount: 1 },
         { name: 'images', maxCount: 20 },
-    ]))
+    ])))
     create (@UploadedFiles() files: { [key: string]: Express.Multer.File[] },
             @Body() productDto: ProductDto,
-            @Cookies(ACCESS_TOKEN_NAME) accessToken: string) {
-        return this.productsService.create(productDto, files, accessToken);
+            @UserVerified() userVerified: IUserVerifiedData) {
+        return this.productsService.create(productDto, files, userVerified.user._id);
     }
 
     @Post('/delete')
     delete () {
 
+    }
+
+    @Get('/all')
+    getAll (@Query('limit') limit: number = 10,
+            @Query('offset') offset: number = 0) {
+        return this.productsService.getAll({limit: Number(limit), offset: Number(offset)});
+    }
+
+    @Get('/findBy')
+    findBy (@Query('title') title: string = '',
+            @Query('category') category: string = '',
+            @Query('brand') brand: string = '',
+            @Query('limit') limit: number = 10,
+            @Query('offset') offset: number = 0) {
+        return this.productsService.findBy(
+            {title, category, brand},
+            {limit: Number(limit), offset: Number(offset)}
+        );
     }
 
 }

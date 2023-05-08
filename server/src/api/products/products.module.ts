@@ -6,12 +6,14 @@ import {Product, ProductSchema} from "./schemas/product.schema";
 import {UsersModule} from "../users/users.module";
 import {TokensModule} from "../tokens/tokens.module";
 import {FileSystemModule} from "../../fileSystem/file-system.module";
+import {Brand, BrandSchema} from "../brands/schemas/brand.schema";
 
 @Module({
     controllers: [ ProductsController ],
-    providers: [ ProductsService],
+    providers: [ ProductsService ],
     imports: [
         MongooseModule.forFeature([ { name: Product.name, schema: ProductSchema } ]),
+        MongooseModule.forFeature([ { name: Brand.name, schema: BrandSchema } ]),
         UsersModule,
         TokensModule,
         FileSystemModule,
