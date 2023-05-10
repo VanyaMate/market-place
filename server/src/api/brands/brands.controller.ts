@@ -1,7 +1,7 @@
 import {
     Body,
-    Controller,
-    Post,
+    Controller, Get,
+    Post, Query,
     UploadedFile,
     UploadedFiles,
     UseGuards,
@@ -35,6 +35,13 @@ export class BrandsController {
     @Post('/delete')
     delete () {
         return this.brandsService.delete();
+    }
+
+    @Get('/all')
+    @UseGuards(AccessTokenGuard)
+    getAll (@Query('limit') limit: number = 10,
+            @Query('offset') offset: number = 0) {
+        return this.brandsService.getAll({ limit: Number(limit), offset: Number(offset) })
     }
 
 }

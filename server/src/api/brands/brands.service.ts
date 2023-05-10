@@ -1,9 +1,10 @@
-import {BadRequestException, Injectable} from "@nestjs/common";
+import {BadRequestException, HttpException, HttpStatus, Injectable} from "@nestjs/common";
 import {BrandDto} from "./dto/brand.dto";
 import {Model, Types} from "mongoose";
 import {FileSystemService, FileType} from "../../fileSystem/file-system.service";
 import {InjectModel} from "@nestjs/mongoose";
-import {Brand} from "./schemas/brand.schema";
+import {Brand, BrandDocument} from "./schemas/brand.schema";
+import {ISearchOptions} from "../../interfaces/search.interfaces";
 
 @Injectable()
 export class BrandsService {
@@ -31,5 +32,24 @@ export class BrandsService {
 
     async delete () {
 
+    }
+
+    async getAll (options: ISearchOptions, projections: { [key: string]: boolean } = {}) {
+        try {
+            const count: number = await this.brandModel.count() as number;
+            const brands: BrandDocument[] = await this.brandModel
+                .find({}, projections)
+                .skip(options.offset)
+                .limit(options.limit) as BrandDocument[];
+
+            return {
+                brands,
+                count,
+                options
+            }
+        }
+        catch (e) {
+            throw new BadRequestException(e);
+        }
     }
 }

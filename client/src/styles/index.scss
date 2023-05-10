@@ -1,0 +1,27 @@
+@import "colors";
+
+$scrollWidth: 4;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    font-family: "Montserrat";
+
+    &::-webkit-scrollbar {
+        position: absolute;
+        width: #{$scrollWidth}px;
+        height: #{$scrollWidth}px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: $darkBlack;
+        border-radius: calc(#{$scrollWidth}px / 2);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $markBlueLight;
+        border-radius: calc(#{$scrollWidth}px / 2);
+    }
+}

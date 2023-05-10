@@ -92,10 +92,28 @@ export class ProductsService {
 
             const count = await this.productModel.find(filter).count();
 
-            const products = await this.productModel
+            let productsQuery = this.productModel
                 .find(filter, projections)
                 .skip(options.offset)
                 .limit(options.limit)
+
+            /**
+             *
+             *  TODO: Нужен механ для удобной сортировки  и фильтрации. Везде одни и те же запросы
+             */
+            if (props.sortByPrice === 'asc') {
+                productsQuery = productsQuery.sort({ price: 'asc' })
+            } else if (props.sortByPrice === 'desc') {
+                productsQuery = productsQuery.sort({ price: 'desc' })
+            }
+
+            if (props.sortByTitle === 'asc') {
+                productsQuery = productsQuery.sort({ title: 'asc' })
+            } else if (props.sortByTitle === 'desc') {
+                productsQuery = productsQuery.sort({ title: 'desc' })
+            }
+
+            const products = await productsQuery.exec();
 
             return {
                 products,

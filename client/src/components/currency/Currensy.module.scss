@@ -1,0 +1,12 @@
+@import "src/styles/colors";
+@import "src/styles/sizes";
+
+.container {
+    padding: $smallOffset;
+    background: $lightBlack;
+    color: $black;
+    display: inline-flex;
+
+    text-transform: uppercase;
+    font-size: 12px;
+}

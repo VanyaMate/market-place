@@ -18,9 +18,9 @@ export class UsersService {
             const users: UserDocument[] = await this.userModel
                 .find({}, projections)
                 .skip(offset)
-                .limit(limit);
+                .limit(limit) as UserDocument[];
 
-            const count: number = await this.userModel.count();
+            const count: number = await this.userModel.count() as number;
 
             return { users, count, limit, offset };
         }
@@ -39,10 +39,10 @@ export class UsersService {
             const users: UserDocument[] = await this.userModel
                 .find({ email: { "$regex": `^${email}`, "$options": "i" } }, projections)
                 .skip(offset)
-                .limit(limit);
+                .limit(limit) as UserDocument[];
 
             const count: number = await this.userModel
-                .count({ email: { "$regex": `^${email}`, "$options": "i" } })
+                .count({ email: { "$regex": `^${email}`, "$options": "i" } }) as number;
 
             return { users, count, limit, offset };
         }

@@ -26,5 +26,6 @@ export const BrandSchema = SchemaFactory.createForClass(Brand);
 
 BrandSchema.pre(['find', 'findOne'], function (next) {
     this.select('-author');
+    this.select('-__v');
     next();
 });
