@@ -1,0 +1,19 @@
+@import "src/styles/sizes";
+
+.container {
+    height: $mediumHeight;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 $smallOffset;
+
+    .img {
+        height: $smallHeight;
+        filter: invert(1);
+    }
+
+    .title {
+        margin-top: $smallOffset;
+        font-size: 12px;
+    }
+}

@@ -1,0 +1,11 @@
+@import "src/styles/sizes";
+
+.container {
+    & > * {
+        margin-right: $mediumOffset;
+    }
+
+    & > *:last-child {
+        margin-right: 0;
+    }
+}

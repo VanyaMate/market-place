@@ -1,0 +1,12 @@
+@import "src/styles/colors";
+@import "src/styles/sizes";
+
+.container {
+    padding: $smallOffset $mediumOffset;
+    font-size: 14px;
+
+    outline: none;
+    border: none;
+
+    border-radius: $smallOffset;
+}

@@ -1,0 +1,25 @@
+@import "src/styles/colors";
+@import "src/styles/sizes";
+
+.container {
+    background: $markBlueLight;
+    color: $white;
+    opacity: .8;
+    pointer-events: none;
+
+    border: none;
+    outline: none;
+
+    border-radius: $smallOffset;
+    transition: .1s;
+
+    &.active {
+        opacity: 1;
+        pointer-events: auto;
+        cursor: pointer;
+
+        &:hover {
+            background: lighten($markBlueLight, 2)
+        }
+    }
+}

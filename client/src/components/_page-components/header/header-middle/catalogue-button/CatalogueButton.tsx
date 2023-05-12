@@ -1,11 +1,16 @@
 import React from 'react';
 import css from './CatalogueButton.module.scss';
+import Button from "../../../../_ui/_buttons/button/Button";
 
 const CatalogueButton = () => {
     return (
-        <div className={css.container}>
+        <Button
+            className={css.container}
+            onClick={() => {}}
+            active
+        >
             Каталог
-        </div>
+        </Button>
     );
 };
 
