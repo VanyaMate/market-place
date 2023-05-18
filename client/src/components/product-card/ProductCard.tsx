@@ -2,6 +2,7 @@ import React from 'react';
 import css from './ProductCard.module.scss';
 import ProductCardSlider from "./product-card-slider/ProductCardSlider";
 import Button from "../_ui/_buttons/button/Button";
+import ProductPrice from "../product-price/ProductPrice";
 
 export interface IProductCardData {
     article: string;
@@ -31,7 +32,7 @@ const ProductCard: React.FC<IProductCardData> = (props) => {
                 <div className={css.brand}>{ props.brand.title }</div>
             </div>
             <div className={css.title}>{ props.title }</div>
-            <div className={css.price}>{ props.price } <span>{ currency }</span></div>
+            <ProductPrice {...props}/>
             <Button
                 onClick={() => {}}
                 active
