@@ -7,7 +7,7 @@ import BasketPage from "../../_pages/basket/BasketPage";
 import OrderPage from "../../_pages/order/OrderPage";
 import ProductPage from "../../_pages/product/ProductPage";
 import ProfilePage from "../../_pages/profile/ProfilePage";
-import SearchPage from "../../_pages/search/SearchPage";
+import CataloguePage from "../../_pages/search/CataloguePage";
 
 const PageContent = () => {
     return (
@@ -19,7 +19,7 @@ const PageContent = () => {
                 <Route path={'/order'} element={<OrderPage/>}/>
                 <Route path={'/product/:id'} element={<ProductPage/>}/>
                 <Route path={'/profile'} element={<ProfilePage/>}/>
-                <Route path={'/search'} element={<SearchPage/>}/>
+                <Route path={'/catalogue'} element={<CataloguePage/>}/>
                 <Route path={'*'} element={<Page404/>}/>
             </Routes>
         </div>

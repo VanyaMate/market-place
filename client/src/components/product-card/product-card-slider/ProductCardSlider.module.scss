@@ -1,0 +1,19 @@
+@import "src/styles/sizes";
+
+.container {
+    width: 100%;
+
+    .slide {
+        height: 100%;
+        border-radius: $smallOffset;
+
+        img {
+            width: 100%;
+            border-radius: $mediumOffset;
+        }
+
+        &.empty {
+            background: red;
+        }
+    }
+}

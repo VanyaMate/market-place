@@ -1,0 +1,35 @@
+@import "src/styles/sizes";
+@import "src/styles/colors";
+
+.container {
+    width: 240px;
+    padding: $mediumOffset;
+    background: lighten($darkBlack, 2);
+    border-radius: $mediumOffset;
+
+    .head {
+        display: flex;
+        justify-content: space-between;
+        .article {
+            font-size: 12px;
+            color: $lightGray;
+        }
+        .brand {
+            font-size: 12px;
+        }
+    }
+    .title {
+        padding: $mediumOffset 0;
+    }
+    .price {
+        span {
+            font-size: 12px;
+            color: $lightGray;
+        }
+    }
+    .addToCardButton {
+        margin-top: $mediumOffset;
+        padding: $mediumOffset;
+        width: 100%;
+    }
+}
