@@ -1,0 +1,17 @@
+@keyframes slideImage {
+    0% {
+        background-position: 0 0;
+    }
+
+    50% {
+        background-position: 100% 100%;
+    }
+
+    100% {
+        background-position: 0 0;
+    }
+}
+
+.container {
+    animation: slideImage 10s infinite ease-in-out;
+}
