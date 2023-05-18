@@ -33,8 +33,8 @@ const ProductCardSlider: React.FC<IProductCardSlider> = (props) => {
                                 return <SwiperSlide className={css.slide} key={index}>
                                     <AnimatedImageContainer
                                         src={BACKEND_HOST + '/' + slide}
-                                        w={240}
-                                        h={240}
+                                        w={220}
+                                        h={220}
                                     />
                                 </SwiperSlide>
                             })
