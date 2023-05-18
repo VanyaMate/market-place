@@ -39,8 +39,9 @@ export class ProductsController {
 
     @Get('/all')
     getAll (@Query('limit') limit: number = 10,
-            @Query('offset') offset: number = 0) {
-        return this.productsService.getAll({limit: Number(limit), offset: Number(offset)});
+            @Query('offset') offset: number = 0,
+            @Query('sort') sort: string = '') {
+        return this.productsService.getAll({limit: Number(limit), offset: Number(offset), sort: sort.split(',')});
     }
 
     @Get('/findBy')

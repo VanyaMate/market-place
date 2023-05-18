@@ -110,6 +110,7 @@ export class ProductsService {
 
         for (let i = 0; i < sort.length; i++) {
             const [key, sortType] = sort[i].split(':');
+            if (!key) continue;
             sortParams[key] = sortType ?? 'asc';
         }
 

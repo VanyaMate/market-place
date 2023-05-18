@@ -9,7 +9,7 @@ export class CompilationsService {
 
     async getNewProducts (limit: number) {
         const products = await this.productsService
-            .getAll({ limit: 30, offset: 0, sort: ['createdAt']})
+            .getAll({ limit: 30, offset: 0, sort: ['date:desc']})
 
         return this._getRandomArrayElements(products.products, limit);
     }
