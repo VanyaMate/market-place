@@ -1,4 +1,4 @@
-import {Controller, Get, Param, UseGuards} from "@nestjs/common";
+import {Controller, Get, Param, Query, UseGuards} from "@nestjs/common";
 import {AccessTokenGuard} from "../../guards/access-token-guard.service";
 import {IUserVerifiedData, UserVerified} from "../../decorators/user-verified.decorator";
 import {CompilationsService} from "./compilations.service";
@@ -9,13 +9,13 @@ export class CompilationsController {
     constructor(private compilationsService: CompilationsService) {}
 
     @Get('/new')
-    getNew(@Param() limit: number = 10) {
+    getNew(@Query() limit: number = 10) {
         return this.compilationsService.getNewProducts(limit);
     }
 
     @Get('/user-recommendations')
     @UseGuards(AccessTokenGuard)
-    getUserRecommendations(@Param() limit: number = 10,
+    getUserRecommendations(@Query() limit: number = 10,
                            @UserVerified() userData: IUserVerifiedData) {
         return this.compilationsService.getUserRecommendations(
             userData.user._id.toString(),
@@ -24,15 +24,15 @@ export class CompilationsController {
     }
 
     @Get('/product-recommendations')
-    getProductRecommendations (@Param() limit: number = 10,
-                               @Param() productId: string) {
+    getProductRecommendations (@Query() limit: number = 10,
+                               @Query() productId: string) {
         return this.compilationsService.getProductRecommendations(
             productId, limit
         )
     }
 
     @Get('/sales')
-    getSales(@Param() limit: number = 10) {
+    getSales(@Query() limit: number = 10) {
         return this.compilationsService.getSales(limit);
     }
 
