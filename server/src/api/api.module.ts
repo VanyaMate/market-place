@@ -6,6 +6,7 @@ import {TokensModule} from "./tokens/tokens.module";
 import {UsersModule} from "./users/users.module";
 import {ProductsModule} from "./products/products.module";
 import {BrandsModule} from "./brands/brands.module";
+import {CompilationsModule} from "./compilations/compilations.module";
 
 @Module({
     imports: [
@@ -16,6 +17,7 @@ import {BrandsModule} from "./brands/brands.module";
         UsersModule,
         ProductsModule,
         BrandsModule,
+        CompilationsModule,
     ]
 })
 export class ApiModule {}

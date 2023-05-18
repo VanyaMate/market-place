@@ -3,8 +3,6 @@ import {ProductDto} from "./dto/product.dto";
 import {InjectModel} from "@nestjs/mongoose";
 import {Product, ProductDocument} from "./schemas/product.schema";
 import {Model, Types} from "mongoose";
-import {TokensService} from "../tokens/tokens.service";
-import {UsersService} from "../users/users.service";
 import {FileSystemService, FileType} from "../../fileSystem/file-system.service";
 import {IProductSearchProps} from "../../interfaces/products.interface";
 import {ISearchOptions} from "../../interfaces/search.interfaces";
@@ -57,6 +55,7 @@ export class ProductsService {
                 .find({}, projections)
                 .skip(options.offset)
                 .limit(options.limit)
+                .sort(options.sort.join(' '))
 
             return {
                 products,

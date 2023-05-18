@@ -17,6 +17,7 @@ import {Brand, BrandSchema} from "../brands/schemas/brand.schema";
         UsersModule,
         TokensModule,
         FileSystemModule,
-    ]
+    ],
+    exports: [ ProductsService ]
 })
 export class ProductsModule {}
