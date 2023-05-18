@@ -8,10 +8,11 @@ export const compilationsApi = createApi({
         baseUrl: COMPILATIONS_API,
     }),
     endpoints: (build) => ({
-        getNew: build.query<ProductsEntity[], any>({
-            query: () => ({
-                url: '/new',
-                method: 'GET'
+        getNew: build.query<ProductsEntity[], { uid: string }>({
+            query: (props) => ({
+                url: `/new?uid=${props.uid}`,
+                method: 'GET',
+                cache: 'no-cache'
             })
         })
     })

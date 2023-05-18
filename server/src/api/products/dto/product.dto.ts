@@ -1,6 +1,6 @@
 import {IsCurrency, IsString, Length, ValidateIf} from "class-validator";
 import {IsPositiveOrZero} from "../../../validators/is-positive-or-zero.validator";
-import {IsProductDiscountType} from "../../../validators/is-product-discount-type.validator";
+import {DiscountType, IsProductDiscountType} from "../../../validators/is-product-discount-type.validator";
 
 export class ProductDto {
 
@@ -29,6 +29,6 @@ export class ProductDto {
 
     @IsProductDiscountType()
     @ValidateIf((object, value) => value !== undefined)
-    readonly discountType?: string;
+    readonly discountType?: DiscountType;
 
 }

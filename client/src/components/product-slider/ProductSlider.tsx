@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useMemo, useRef} from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import css from './ProductSlider.module.scss';
 import 'swiper/css';
@@ -21,7 +21,11 @@ export interface IProductSlider {
 }
 
 const ProductSlider: React.FC<IProductSlider> = (props) => {
-    const {isFetching, isError, data} = useGetNewQuery({});
+    /**
+     * TODO: Временное решение для того, чтобы каждый слайдер был уникальный и rtq делал разные запросы
+     */
+    const productSliderId = useMemo(() => Math.random().toString(), []);
+    const {isFetching, isError, data} = useGetNewQuery({uid: productSliderId});
     const isLoading = !isError && !isFetching && !!data;
 
     return (

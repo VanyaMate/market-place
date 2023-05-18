@@ -1,5 +1,10 @@
 import {ValidateBy, ValidationArguments} from "class-validator";
 
+export enum DiscountType {
+    PERCENT = 'PERCENT',
+    FIX = 'FIX',
+}
+
 export function IsProductDiscountType(): PropertyDecorator {
     return ValidateBy({
         name: 'IsProductDiscountType',
@@ -7,7 +12,7 @@ export function IsProductDiscountType(): PropertyDecorator {
         validator: {
             validate(value: any): boolean {
                 if (typeof value === 'string') {
-                    if (value === 'PERCENT' || value === 'FIX') {
+                    if (value === DiscountType.PERCENT || value === DiscountType.FIX) {
                         return true;
                     }
                 }
