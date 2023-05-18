@@ -49,11 +49,10 @@ export class ProductsController {
             @Query('brand') brand: string = '',
             @Query('limit') limit: number = 10,
             @Query('offset') offset: number = 0,
-            @Query('sortByTitle') sortByTitle: string = '',
-            @Query('sortByPrice') sortByPrice: string = '') {
+            @Query('sort') sort: string = '') {
         return this.productsService.findBy(
-            {title, category, brand, sortByTitle, sortByPrice},
-            {limit: Number(limit), offset: Number(offset)}
+            {title, category, brand},
+            {limit: Number(limit), offset: Number(offset), sort: sort.split(',')}
         );
     }
 

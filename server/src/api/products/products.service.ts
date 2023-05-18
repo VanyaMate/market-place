@@ -55,7 +55,7 @@ export class ProductsService {
                 .find({}, projections)
                 .skip(options.offset)
                 .limit(options.limit)
-                .sort(options.sort.join(' '))
+                .sort(this._getSortParams(options.sort))
 
             return {
                 products,
@@ -74,19 +74,13 @@ export class ProductsService {
             /**
              * TODO: Сделать поиск не только в начале по title
              */
-            const filter = { $and: [] };
-            if (props.title) {
-                filter.$and.push({ title: { $in: [ new RegExp(`^${ props.title }`, 'gi') ] } })
-            }
 
-            const brand = (await this.brandModel.findOne({ title: props.brand })) as BrandDocument;
+            const filter = {};
 
+            if (props.title) filter['title'] = new RegExp(`^${ props.title }`, 'gi');
             if (props.brand) {
-                if (!brand) return {
-                    products: [],
-                    options,
-                }
-                filter.$and.push({ brand: brand._id })
+                const brand = (await this.brandModel.findOne({ title: props.brand })) as BrandDocument;
+                filter['brand'] = brand._id;
             }
 
             const count = await this.productModel.find(filter).count();
@@ -95,22 +89,7 @@ export class ProductsService {
                 .find(filter, projections)
                 .skip(options.offset)
                 .limit(options.limit)
-
-            /**
-             *
-             *  TODO: Нужен механ для удобной сортировки  и фильтрации. Везде одни и те же запросы
-             */
-            if (props.sortByPrice === 'asc') {
-                productsQuery = productsQuery.sort({ price: 'asc' })
-            } else if (props.sortByPrice === 'desc') {
-                productsQuery = productsQuery.sort({ price: 'desc' })
-            }
-
-            if (props.sortByTitle === 'asc') {
-                productsQuery = productsQuery.sort({ title: 'asc' })
-            } else if (props.sortByTitle === 'desc') {
-                productsQuery = productsQuery.sort({ title: 'desc' })
-            }
+                .sort(this._getSortParams(options.sort))
 
             const products = await productsQuery.exec();
 
@@ -124,6 +103,17 @@ export class ProductsService {
             console.log(e);
             throw new BadRequestException({ message: 'Ошибка поиска' });
         }
+    }
+
+    private _getSortParams (sort: string[]) {
+        const sortParams = {};
+
+        for (let i = 0; i < sort.length; i++) {
+            const [key, sortType] = sort[i].split(':');
+            sortParams[key] = sortType ?? 'asc';
+        }
+
+        return sortParams;
     }
 
 }
