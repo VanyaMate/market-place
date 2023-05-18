@@ -10,7 +10,6 @@ export class CompilationsController {
 
     @Get('/new')
     getNew(@Query('limit') limit: number = 10) {
-        console.log(limit);
         return this.compilationsService.getNewProducts(limit);
     }
 

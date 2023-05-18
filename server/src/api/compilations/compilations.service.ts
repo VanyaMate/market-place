@@ -52,7 +52,7 @@ export class CompilationsService {
             randomElements.push(array.splice(getRandomInt(0, array.length), 1));
         }
 
-        return randomElements;
+        return randomElements.flat(1);
     }
 
 }

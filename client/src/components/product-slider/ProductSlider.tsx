@@ -6,7 +6,7 @@ import 'swiper/css/pagination'
 import "swiper/css/navigation";
 import ProductCard from "../product-card/ProductCard";
 import {HashNavigation, Navigation, Pagination, Autoplay} from "swiper";
-import {useGetProductsQuery, useLazyGetProductsQuery} from "../../store/products/products.api";
+import {useGetNewQuery} from "../../store/compilations/compilations.api";
 
 export enum ProductSliderType {
     ALL,
@@ -21,8 +21,8 @@ export interface IProductSlider {
 }
 
 const ProductSlider: React.FC<IProductSlider> = (props) => {
-    const {isFetching, isError, data} = useGetProductsQuery({});
-    const isLoading = !isError && !isFetching && !!data?.products;
+    const {isFetching, isError, data} = useGetNewQuery({});
+    const isLoading = !isError && !isFetching && !!data;
 
     return (
         <Swiper
@@ -55,9 +55,9 @@ const ProductSlider: React.FC<IProductSlider> = (props) => {
             modules={[Pagination, Navigation, HashNavigation, Autoplay]}
         >
             {
-                isLoading ? data.products!.map((product) =>
-                    <SwiperSlide className={css.slide}>
-                        <ProductCard {...product} article={'asd'}/>
+                isLoading ? data.map((product, index) =>
+                    <SwiperSlide className={css.slide} key={index}>
+                        <ProductCard {...product} article={'98209210'}/>
                     </SwiperSlide>
                 ) : ''
             }
@@ -65,4 +65,4 @@ const ProductSlider: React.FC<IProductSlider> = (props) => {
     );
 };
 
-export default ProductSlider;
+export default React.memo(ProductSlider);

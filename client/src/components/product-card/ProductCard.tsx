@@ -20,6 +20,7 @@ export interface IProductCardData {
 }
 
 const ProductCard: React.FC<IProductCardData> = (props) => {
+    console.log(props);
     const currency = props.priceCurrency ?? 'руб.'
 
     return (
