@@ -9,7 +9,7 @@ export class CompilationsService {
 
     async getNewProducts (limit: number) {
         const products = await this.productsService
-            .getAll({ limit: 30, offset: 0, sort: ['date:desc']})
+            .getAll({ limit: limit * 3, offset: 0, sort: ['date:desc']})
 
         return this._getRandomArrayElements(products.products, limit);
     }
@@ -19,7 +19,7 @@ export class CompilationsService {
          * TODO: Пока что без рекомендаций.
          */
         const products = await this.productsService
-            .getAll({ limit: 30, offset: 0, sort: ['createdAt']})
+            .getAll({ limit: limit * 3, offset: 0, sort: ['createdAt']})
 
         return this._getRandomArrayElements(products.products, limit);
     }
@@ -29,7 +29,7 @@ export class CompilationsService {
          * TODO: Пока что без рекомендаций.
          */
         const products = await this.productsService
-            .getAll({ limit: 30, offset: 0, sort: ['createdAt']})
+            .getAll({ limit: limit * 3, offset: 0, sort: ['createdAt']})
 
         return this._getRandomArrayElements(products.products, limit);
     }
@@ -39,7 +39,7 @@ export class CompilationsService {
          * TODO: Сначала переделаю productsService и вернусь.
          */
         const products = await this.productsService
-            .getAll({ limit: 30, offset: 0 })
+            .getAll({ limit: limit * 3, offset: 0, sort: ['discount:desc'] })
 
         return this._getRandomArrayElements(products.products, limit);
     }

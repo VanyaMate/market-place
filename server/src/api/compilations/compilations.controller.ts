@@ -9,13 +9,14 @@ export class CompilationsController {
     constructor(private compilationsService: CompilationsService) {}
 
     @Get('/new')
-    getNew(@Query() limit: number = 10) {
+    getNew(@Query('limit') limit: number = 10) {
+        console.log(limit);
         return this.compilationsService.getNewProducts(limit);
     }
 
     @Get('/user-recommendations')
     @UseGuards(AccessTokenGuard)
-    getUserRecommendations(@Query() limit: number = 10,
+    getUserRecommendations(@Query('limit') limit: number = 10,
                            @UserVerified() userData: IUserVerifiedData) {
         return this.compilationsService.getUserRecommendations(
             userData.user._id.toString(),
@@ -24,15 +25,15 @@ export class CompilationsController {
     }
 
     @Get('/product-recommendations')
-    getProductRecommendations (@Query() limit: number = 10,
-                               @Query() productId: string) {
+    getProductRecommendations (@Query('limit') limit: number = 10,
+                               @Query('productId') productId: string) {
         return this.compilationsService.getProductRecommendations(
             productId, limit
         )
     }
 
     @Get('/sales')
-    getSales(@Query() limit: number = 10) {
+    getSales(@Query('limit') limit: number = 10) {
         return this.compilationsService.getSales(limit);
     }
 
