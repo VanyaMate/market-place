@@ -35,6 +35,7 @@ const ProductCardSlider: React.FC<IProductCardSlider> = (props) => {
                                         src={BACKEND_HOST + '/' + slide}
                                         w={220}
                                         h={220}
+                                        seconds={10}
                                     />
                                 </SwiperSlide>
                             })

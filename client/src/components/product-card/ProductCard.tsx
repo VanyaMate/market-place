@@ -3,8 +3,10 @@ import css from './ProductCard.module.scss';
 import ProductCardSlider from "./product-card-slider/ProductCardSlider";
 import Button from "../_ui/_buttons/button/Button";
 import ProductPrice from "../product-price/ProductPrice";
+import {Link} from "react-router-dom";
 
 export interface IProductCardData {
+    _id: string;
     article: string;
     generalImage: string;
     images?: string[];
@@ -21,8 +23,6 @@ export interface IProductCardData {
 }
 
 const ProductCard: React.FC<IProductCardData> = (props) => {
-    const currency = props.priceCurrency ?? 'руб.'
-
     return (
         <div className={css.container}>
             <ProductCardSlider slides={[props.generalImage, ...(props.images || [])]}/>
@@ -30,7 +30,7 @@ const ProductCard: React.FC<IProductCardData> = (props) => {
                 <div className={css.article}>article: 6893890</div>
                 <div className={css.brand}>{ props.brand.title }</div>
             </div>
-            <div className={css.title}>{ props.title }</div>
+            <Link to={`/product/${ props._id }`} className={css.title}>{ props.title }</Link>
             <ProductPrice {...props}/>
             <Button
                 onClick={() => {}}

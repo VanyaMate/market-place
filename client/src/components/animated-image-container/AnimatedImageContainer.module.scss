@@ -1,4 +1,11 @@
+@import "src/styles/colors";
+
 .container {
+    transition: filter 1s;
+    &.loading {
+        filter: blur(10px);
+        animation: loading 2s infinite ease-in-out;
+    }
     img {
 
     }

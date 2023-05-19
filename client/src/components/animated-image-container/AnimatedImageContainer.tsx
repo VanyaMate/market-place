@@ -9,6 +9,7 @@ export interface IAnimatedImageContainer extends IDefaultComponent {
     src: string;
     w: number;
     h: number;
+    seconds: number;
 }
 
 const StyledContainer = styled.div`
@@ -32,11 +33,13 @@ const slideImageKeyframes = (w: number, h: number, x_coef: number, y_coef: numbe
   }
 `;
 
-type StyleImageType = { src: string, w: number, h: number, x_coef: number, y_coef: number };
+type StyleImageType = { src: string, w: number, h: number, x_coef: number, y_coef: number, seconds: number; };
 
 const StyledImage = styled.img`
     background: url(${(props: StyleImageType) => props.src});
-    animation: ${(props: StyleImageType) => slideImageKeyframes(props.w, props.h, props.x_coef, props.y_coef)} 10s infinite ease-in-out;
+    animation: 
+            ${(props: StyleImageType) => slideImageKeyframes(props.w, props.h, props.x_coef, props.y_coef)} 
+            ${(props: StyleImageType) => props.seconds}s infinite ease-in-out;
     width: ${(props: StyleImageType) => props.x_coef >= props.y_coef ? '100%' : 'auto' };
     height: ${(props: StyleImageType) => props.x_coef <= props.y_coef ? '100%' : 'auto' };
 `;
@@ -44,9 +47,14 @@ const StyledImage = styled.img`
 const AnimatedImageContainer: React.FC<IAnimatedImageContainer> = (props) => {
     const [updater, setUpdater] = useState<number>(0);
     const [image, setImage] = useState<HTMLImageElement>(new Image());
+    const [loader, setLoader] = useState<boolean>(true);
 
     useEffect(() => {
-        const updateMethod = () => setUpdater(Math.random());
+        const updateMethod = () => {
+            setUpdater(Math.random());
+            setLoader(false);
+        };
+        setLoader(true);
         image.src = props.src;
         image.addEventListener('load', updateMethod);
         return () => {
@@ -62,8 +70,8 @@ const AnimatedImageContainer: React.FC<IAnimatedImageContainer> = (props) => {
     }, [updater])
 
     return (
-        <StyledContainer {...props} className={css.container}>
-            <StyledImage src={props.src} w={props.w} h={props.h} x_coef={x_coef} y_coef={y_coef}/>
+        <StyledContainer {...props} className={[css.container, loader ? css.loading : ''].join(' ')}>
+            <StyledImage src={props.src} w={props.w} h={props.h} x_coef={x_coef} y_coef={y_coef} seconds={props.seconds}/>
         </StyledContainer>
     );
 };
