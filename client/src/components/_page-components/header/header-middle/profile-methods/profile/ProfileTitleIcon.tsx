@@ -5,7 +5,7 @@ const ProfileTitleIcon = () => {
     return (
         <div>
             <TitleIcon
-                icon={'icons/editing.png'}
+                icon={'/icons/editing.png'}
                 title={'Иван'}
             />
         </div>
