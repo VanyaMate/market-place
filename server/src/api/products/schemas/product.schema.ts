@@ -50,6 +50,5 @@ ProductSchema.pre(["find", "findOne"], function (next) {
     this.populate('brand', ['title', 'description', 'image']);
     this.select('-author');
     this.select('-__v');
-    this.select('-_id');
     next();
 })

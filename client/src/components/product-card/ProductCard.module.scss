@@ -20,14 +20,8 @@
         }
     }
     .title {
-        color: $white;
-        text-decoration: none;
         padding: $mediumOffset 0;
-        display: block;
-
-        &:hover {
-            text-decoration: underline;
-        }
+        display: inline-flex;
     }
     .price {
         span {

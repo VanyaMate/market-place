@@ -1,11 +1,12 @@
 import React from 'react';
 import css from './Logo.module.scss';
+import DefaultLink from "../../../../_ui/_links/default-link/DefaultLink";
 
 const Logo = () => {
     return (
-        <div className={css.container}>
+        <DefaultLink to={'/'} className={css.container}>
             MARKET
-        </div>
+        </DefaultLink>
     );
 };
 

@@ -13,8 +13,15 @@ export const productsApi = createApi({
                 url: '/all',
                 method: 'get',
             })
+        }),
+        getProductsBy: build.query<Products, any>({
+            query: (params) => ({
+                url: '/findBy',
+                method: 'get',
+                params: params
+            })
         })
     })
 })
 
-export const {useLazyGetProductsQuery, useGetProductsQuery} = productsApi;
+export const {useLazyGetProductsQuery, useGetProductsQuery, useLazyGetProductsByQuery} = productsApi;

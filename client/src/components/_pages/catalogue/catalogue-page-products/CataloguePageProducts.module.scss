@@ -1,0 +1,13 @@
+@import "src/styles/sizes";
+
+.container {
+    width: 80%;
+    display: flex;
+    padding: $mediumOffset 0;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    & > * {
+        margin-top: $mediumOffset;
+    }
+}

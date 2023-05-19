@@ -7,7 +7,7 @@ import BasketPage from "../../_pages/basket/BasketPage";
 import OrderPage from "../../_pages/order/OrderPage";
 import ProductPage from "../../_pages/product/ProductPage";
 import ProfilePage from "../../_pages/profile/ProfilePage";
-import CataloguePage from "../../_pages/search/CataloguePage";
+import CataloguePage from "../../_pages/catalogue/CataloguePage";
 
 const PageContent = () => {
     return (

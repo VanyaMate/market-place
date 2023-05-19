@@ -4,6 +4,7 @@ export interface Products {
     count: number;
 }
 export interface ProductsEntity {
+    _id: string;
     title: string;
     description: string;
     generalImage: string;
