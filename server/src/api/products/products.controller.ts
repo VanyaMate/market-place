@@ -57,4 +57,9 @@ export class ProductsController {
         );
     }
 
+    @Get('/id/:id')
+    byId (@Param('id') id: string) {
+        return this.productsService.getById(id);
+    }
+
 }

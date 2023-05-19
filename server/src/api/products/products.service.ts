@@ -105,6 +105,10 @@ export class ProductsService {
         }
     }
 
+    async getById (id: string) {
+        return this.productModel.findById(id);
+    }
+
     private _getSortParams (sort: string[]) {
         const sortParams = {};
 
