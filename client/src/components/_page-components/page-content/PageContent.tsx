@@ -8,10 +8,11 @@ import OrderPage from "../../_pages/order/OrderPage";
 import ProductPage from "../../_pages/product/ProductPage";
 import ProfilePage from "../../_pages/profile/ProfilePage";
 import CataloguePage from "../../_pages/catalogue/CataloguePage";
+import css from './PageContent.module.scss';
 
 const PageContent = () => {
     return (
-        <div>
+        <div className={css.container}>
             <Routes>
                 <Route path={'/'} element={<HomePage/>}/>
                 <Route path={'/login'} element={<AuthPage/>}/>

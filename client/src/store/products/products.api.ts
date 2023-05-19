@@ -1,6 +1,6 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {PRODUCTS_API} from "../../cfg/links.config";
-import {Products} from "./products.types";
+import {Products, ProductsEntity} from "./products.types";
 
 export const productsApi = createApi({
     reducerPath: 'products/api',
@@ -20,8 +20,14 @@ export const productsApi = createApi({
                 method: 'get',
                 params: params
             })
+        }),
+        getProductById: build.query<ProductsEntity, { id: string }>({
+            query: ({ id }) => ({
+                url: `/id/${id}`,
+                method: 'get',
+            })
         })
     })
 })
 
-export const {useLazyGetProductsQuery, useGetProductsQuery, useLazyGetProductsByQuery} = productsApi;
+export const {useLazyGetProductsQuery, useGetProductsQuery, useLazyGetProductsByQuery, useGetProductByIdQuery} = productsApi;

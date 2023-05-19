@@ -1,0 +1,33 @@
+.container {
+    width: 500px;
+    height: 400px;
+    display: flex;
+    justify-content: space-between;
+
+    .main {
+        width: 400px;
+        height: 400px;
+        margin: 0;
+    }
+    .second {
+        width: 95px;
+        height: 400px;
+        margin: 0;
+
+        :global {
+            .swiper-slide-thumb-active {
+                opacity: 1 !important;
+            }
+        }
+
+        .second_slide {
+            height: 95px;
+            opacity: .4;
+            transition: .1s;
+
+            &:hover {
+                opacity: .8;
+            }
+        }
+    }
+}

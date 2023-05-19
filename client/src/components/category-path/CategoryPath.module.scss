@@ -1,0 +1,31 @@
+@import "src/styles/colors";
+@import "src/styles/sizes";
+
+.container {
+    display: flex;
+    align-items: center;
+
+    .default {
+        color: $gray;
+        font-size: 14px;
+        padding-right: $bigOffset;
+        position: relative;
+
+        &:after {
+            content: '/';
+            position: absolute;
+            right: $mediumOffset;
+            top: 50%;
+            transform: translate(50%, -50%);
+            font-size: 12px;
+        }
+    }
+    .last {
+        color: $markBlueLight;
+        font-size: 16px;
+
+        &:after {
+            display: none;
+        }
+    }
+}
