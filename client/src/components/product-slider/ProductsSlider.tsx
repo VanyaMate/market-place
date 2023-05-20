@@ -8,19 +8,21 @@ import ProductCard from "../product-card/ProductCard";
 import {HashNavigation, Navigation, Pagination, Autoplay} from "swiper";
 import {useGetNewQuery} from "../../store/compilations/compilations.api";
 
-export enum ProductSliderType {
+export enum ProductsSliderType {
     ALL,
     CATEGORY,
     BRAND,
+    PRODUCT
 }
 
-export interface IProductSlider {
-    type: ProductSliderType,
-    category?: string,
-    brand?: string,
+export interface IProductsSlider {
+    type: ProductsSliderType,
+    id?: string;
+    brand?: string;
+    category?: string;
 }
 
-const ProductSlider: React.FC<IProductSlider> = (props) => {
+const ProductsSlider: React.FC<IProductsSlider> = (props) => {
     /**
      * TODO: Временное решение для того, чтобы каждый слайдер был уникальный и rtq делал разные запросы
      */
@@ -69,4 +71,4 @@ const ProductSlider: React.FC<IProductSlider> = (props) => {
     );
 };
 
-export default React.memo(ProductSlider);
+export default React.memo(ProductsSlider);

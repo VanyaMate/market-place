@@ -4,7 +4,7 @@ import {useGetProductByIdQuery} from "../../../store/products/products.api";
 import ProductPageHeader from "./product-page-header/ProductPageHeader";
 import ProductPageGeneralInfo from "./product-page-general-info/ProductPageGeneralInfo";
 import Vertical from "../../_ui/_containers/vertical/Vertical";
-import ProductSlider from "../../product-slider/ProductSlider";
+import ProductsSlider, {ProductsSliderType} from "../../product-slider/ProductsSlider";
 import TitledBlock from "../../titled-block/TitledBlock";
 
 const ProductPage = () => {
@@ -13,13 +13,16 @@ const ProductPage = () => {
 
     return (
         <Vertical offset={10}>
-            <ProductPageHeader categories={['Электроника', 'Безопасность', 'Замки']}/>
-            { data ? <ProductPageGeneralInfo {...data}/> : '' }
-            <TitledBlock title={'Похожие товары'}>
-                <ProductSlider/>
-                <ProductSlider/>
-            </TitledBlock>
-
+            {
+                data ? <>
+                    <ProductPageHeader categories={['Электроника', 'Безопасность', 'Замки']}/>
+                    <ProductPageGeneralInfo {...data}/>
+                    <TitledBlock title={'Похожие товары'}>
+                        <ProductsSlider type={ProductsSliderType.PRODUCT} id={id ?? ''}/>
+                        <ProductsSlider type={ProductsSliderType.BRAND} brand={data.brand.title}/>
+                    </TitledBlock>
+                </> : ''
+            }
         </Vertical>
     );
 };

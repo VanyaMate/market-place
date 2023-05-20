@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductSlider, {ProductSliderType} from "../../product-slider/ProductSlider";
+import ProductSlider, {ProductsSliderType} from "../../product-slider/ProductsSlider";
 import TitledBlock from "../../titled-block/TitledBlock";
 
 const HomePage = () => {
@@ -7,17 +7,17 @@ const HomePage = () => {
         <div>
             HomePage
             <TitledBlock title={'Новинки'}>
-                <ProductSlider type={ProductSliderType.ALL}/>
-                <ProductSlider type={ProductSliderType.ALL}/>
+                <ProductSlider type={ProductsSliderType.ALL}/>
+                <ProductSlider type={ProductsSliderType.ALL}/>
             </TitledBlock>
 
             <TitledBlock title={'Рекомендации'}>
-                <ProductSlider type={ProductSliderType.ALL}/>
+                <ProductSlider type={ProductsSliderType.ALL}/>
             </TitledBlock>
 
             <TitledBlock title={'Продукты'}>
-                <ProductSlider type={ProductSliderType.ALL}/>
-                <ProductSlider type={ProductSliderType.ALL}/>
+                <ProductSlider type={ProductsSliderType.ALL}/>
+                <ProductSlider type={ProductsSliderType.ALL}/>
             </TitledBlock>
         </div>
     );
