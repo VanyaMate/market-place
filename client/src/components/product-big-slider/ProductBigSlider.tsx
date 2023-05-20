@@ -30,6 +30,7 @@ const ProductBigSlider: React.FC<IProductBigSlider> = (props) => {
                 thumbs={{ swiper: mainSwiper && !mainSwiper.destroyed ? mainSwiper : null }}
                 modules={[Mousewheel, Thumbs]}
                 className={css.main}
+                mousewheel={true}
             >
                 {
                     props.slides.map((slide, index) => {
@@ -51,6 +52,7 @@ const ProductBigSlider: React.FC<IProductBigSlider> = (props) => {
                 watchSlidesProgress={true}
                 modules={[Mousewheel, Pagination, Thumbs]}
                 className={css.second}
+                mousewheel={true}
             >
                 {
                     props.slides.map((slide, index) => {
