@@ -1,0 +1,30 @@
+@import "src/styles/sizes";
+
+.container {
+    position: relative;
+
+    &.showed {
+        :global {
+            .popup {
+                opacity: 1;
+                padding: $mediumOffset;
+                height: auto;
+            }
+        }
+    }
+
+    :global {
+        .popup {
+            transition: .1s;
+            opacity: 0;
+            padding: 0;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            height: 0;
+            overflow: hidden;
+        }
+    }
+}

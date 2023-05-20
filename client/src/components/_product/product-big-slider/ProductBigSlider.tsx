@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {Swiper, SwiperRef, SwiperSlide} from "swiper/react";
 import {FreeMode, Mousewheel, Pagination, Thumbs} from "swiper";
-import AnimatedImageContainer from "../animated-image-container/AnimatedImageContainer";
-import {BACKEND_HOST} from "../../cfg/links.config";
+import AnimatedImageContainer from "../../animated-image-container/AnimatedImageContainer";
+import {BACKEND_HOST} from "../../../cfg/links.config";
 import css from './ProductBigSlider.module.scss';
 
 import "swiper/css";

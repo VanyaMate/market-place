@@ -1,0 +1,17 @@
+@import "src/styles/colors";
+@import "src/styles/sizes";
+.container {
+    width: 200px;
+    padding: $mediumOffset;
+    background: $black;
+    border-radius: $mediumOffset;
+    .item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: $smallOffset;
+        border: 1px solid $lightGray;
+        width: 100%;
+        height: $mediumSmallHeight;
+    }
+}

@@ -6,7 +6,7 @@ import 'swiper/css/pagination'
 import "swiper/css/navigation";
 import ProductCard from "../product-card/ProductCard";
 import {HashNavigation, Navigation, Pagination, Autoplay} from "swiper";
-import {useGetNewQuery} from "../../store/compilations/compilations.api";
+import {useGetNewQuery} from "../../../store/compilations/compilations.api";
 
 export enum ProductsSliderType {
     ALL,

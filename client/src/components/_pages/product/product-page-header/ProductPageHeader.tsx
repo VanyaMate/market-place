@@ -1,5 +1,5 @@
 import React from 'react';
-import CategoryPath from "../../../category-path/CategoryPath";
+import CategoryPath from "../../../_category/category-path/CategoryPath";
 
 export interface IProductPageHeader {
     categories: string[]

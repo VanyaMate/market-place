@@ -1,5 +1,5 @@
 import React from 'react';
-import {IDefaultComponent} from "../../interfaces/default-component.interface";
+import {IDefaultComponent} from "../../../interfaces/default-component.interface";
 import css from './ProductPrice.module.scss';
 
 export interface IProductPrice extends IDefaultComponent {

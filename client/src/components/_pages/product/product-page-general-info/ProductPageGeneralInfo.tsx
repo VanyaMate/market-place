@@ -1,7 +1,7 @@
 import React from 'react';
 import css from './ProductPageGeneralInfo.module.scss';
 import {ProductsEntity} from "../../../../store/products/products.types";
-import ProductBigSlider from "../../../product-big-slider/ProductBigSlider";
+import ProductBigSlider from "../../../_product/product-big-slider/ProductBigSlider";
 import Row from "../../../_ui/_containers/row/Row";
 import ProductPageInfo from "./product-page-info/ProductPageInfo";
 

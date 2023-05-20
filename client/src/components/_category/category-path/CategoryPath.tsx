@@ -1,6 +1,6 @@
 import React from 'react';
 import css from './CategoryPath.module.scss';
-import DefaultLink from "../_ui/_links/default-link/DefaultLink";
+import DefaultLink from "../../_ui/_links/default-link/DefaultLink";
 
 export interface ICategoryPath {
     categories: string[],

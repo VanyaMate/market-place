@@ -1,10 +1,10 @@
 import React from 'react';
 import css from './ProductCard.module.scss';
 import ProductCardSlider from "./product-card-slider/ProductCardSlider";
-import Button from "../_ui/_buttons/button/Button";
+import Button from "../../_ui/_buttons/button/Button";
 import ProductPrice from "../product-price/ProductPrice";
 import {Link} from "react-router-dom";
-import DefaultLink from "../_ui/_links/default-link/DefaultLink";
+import DefaultLink from "../../_ui/_links/default-link/DefaultLink";
 
 export interface IProductCardData {
     _id: string;

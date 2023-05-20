@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {useLazyGetProductsByQuery} from "../../../../store/products/products.api";
 import {useLocation, useParams} from "react-router-dom";
-import ProductCard from "../../../product-card/ProductCard";
+import ProductCard from "../../../_product/product-card/ProductCard";
 import css from './CataloguePageProducts.module.scss';
 import {useSearchParams} from "../../../../hooks/useSearchParams.hook";
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductSlider, {ProductsSliderType} from "../../product-slider/ProductsSlider";
+import ProductSlider, {ProductsSliderType} from "../../_product/product-slider/ProductsSlider";
 import TitledBlock from "../../titled-block/TitledBlock";
 
 const HomePage = () => {

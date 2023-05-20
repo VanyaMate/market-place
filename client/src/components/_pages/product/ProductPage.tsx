@@ -4,7 +4,7 @@ import {useGetProductByIdQuery} from "../../../store/products/products.api";
 import ProductPageHeader from "./product-page-header/ProductPageHeader";
 import ProductPageGeneralInfo from "./product-page-general-info/ProductPageGeneralInfo";
 import Vertical from "../../_ui/_containers/vertical/Vertical";
-import ProductsSlider, {ProductsSliderType} from "../../product-slider/ProductsSlider";
+import ProductsSlider, {ProductsSliderType} from "../../_product/product-slider/ProductsSlider";
 import TitledBlock from "../../titled-block/TitledBlock";
 
 const ProductPage = () => {
