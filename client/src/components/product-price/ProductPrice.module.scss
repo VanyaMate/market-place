@@ -3,7 +3,7 @@
 
 .container {
     span {
-        font-size: .6em;
+        font-size: .7em;
         color: $lightGray;
         padding: 0 $smallOffset;
     }
@@ -15,14 +15,14 @@
         .original {
             display: flex;
             align-items: center;
-            font-size: .6em;
+            font-size: .7em;
             color: $lightGray;
             margin-bottom: $smallOffset;
         }
 
         .amount {
             color: $markOrangeLight;
-            font-size: .8em;
+            font-size: 1em;
         }
     }
 }

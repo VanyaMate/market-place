@@ -60,14 +60,14 @@ const AnimatedImageContainer: React.FC<IAnimatedImageContainer> = (props) => {
         return () => {
             image.removeEventListener('load', updateMethod);
         }
-    }, [])
+    }, [props.src])
 
     const [x_coef, y_coef] = useMemo(() => {
         return [
             props.w / image.width,
             props.h / image.height,
         ]
-    }, [updater])
+    }, [updater, props.src, props.w, props.h])
 
     return (
         <StyledContainer {...props} className={[css.container, loader ? css.loading : '', props.className].join(' ')}>
