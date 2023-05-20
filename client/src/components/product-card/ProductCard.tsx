@@ -32,7 +32,7 @@ const ProductCard: React.FC<IProductCardData> = (props) => {
                 <DefaultLink to={`/catalogue/?brand=${props.brand.title}`} className={css.brand}>{ props.brand.title }</DefaultLink>
             </div>
             <DefaultLink to={`/product/${ props._id }`} className={css.title}>{ props.title }</DefaultLink>
-            <ProductPrice {...props}/>
+            <ProductPrice {...props} className={css.price}/>
             <Button
                 onClick={() => {}}
                 active

@@ -70,7 +70,7 @@ const AnimatedImageContainer: React.FC<IAnimatedImageContainer> = (props) => {
     }, [updater])
 
     return (
-        <StyledContainer {...props} className={[css.container, loader ? css.loading : ''].join(' ')}>
+        <StyledContainer {...props} className={[css.container, loader ? css.loading : '', props.className].join(' ')}>
             <StyledImage src={props.src} w={props.w} h={props.h} x_coef={x_coef} y_coef={y_coef} seconds={props.seconds}/>
         </StyledContainer>
     );

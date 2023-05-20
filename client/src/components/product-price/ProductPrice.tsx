@@ -14,7 +14,7 @@ const ProductPrice: React.FC<IProductPrice> = (props) => {
     const priceWithDiscount = props.discountType === 'FIX' ? props.price - props.discount! : (props.price - props.price / 100 * props.discount!).toFixed(0);
 
     return (
-        <div className={css.container}>
+        <div className={[css.container, props.className].join(' ')}>
             {
                 !!props.discount ?
                     <div className={css.discount}>

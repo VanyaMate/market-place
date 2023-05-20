@@ -9,18 +9,26 @@ import ProductPage from "../../_pages/product/ProductPage";
 import ProfilePage from "../../_pages/profile/ProfilePage";
 import CataloguePage from "../../_pages/catalogue/CataloguePage";
 import css from './PageContent.module.scss';
+import {
+    ROUTE_BASKET, ROUTE_CATALOGUE,
+    ROUTE_HOME,
+    ROUTE_LOGIN,
+    ROUTE_ORDER,
+    ROUTE_PRODUCT_ID,
+    ROUTE_PROFILE
+} from "../../../cfg/links.config";
 
 const PageContent = () => {
     return (
         <div className={css.container}>
             <Routes>
-                <Route path={'/'} element={<HomePage/>}/>
-                <Route path={'/login'} element={<AuthPage/>}/>
-                <Route path={'/basket'} element={<BasketPage/>}/>
-                <Route path={'/order'} element={<OrderPage/>}/>
-                <Route path={'/product/:id'} element={<ProductPage/>}/>
-                <Route path={'/profile'} element={<ProfilePage/>}/>
-                <Route path={'/catalogue'} element={<CataloguePage/>}/>
+                <Route path={ROUTE_HOME} element={<HomePage/>}/>
+                <Route path={ROUTE_LOGIN} element={<AuthPage/>}/>
+                <Route path={ROUTE_BASKET} element={<BasketPage/>}/>
+                <Route path={ROUTE_ORDER} element={<OrderPage/>}/>
+                <Route path={ROUTE_PRODUCT_ID} element={<ProductPage/>}/>
+                <Route path={ROUTE_PROFILE} element={<ProfilePage/>}/>
+                <Route path={ROUTE_CATALOGUE} element={<CataloguePage/>}/>
                 <Route path={'*'} element={<Page404/>}/>
             </Routes>
         </div>

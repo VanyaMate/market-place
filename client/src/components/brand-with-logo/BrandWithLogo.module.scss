@@ -1,0 +1,8 @@
+@import "src/styles/sizes";
+
+.container {
+    align-items: center;
+    .logo {
+        border-radius: $smallOffset;
+    }
+}

@@ -2,14 +2,15 @@ import React from 'react';
 import css from './ProductPageGeneralInfo.module.scss';
 import {ProductsEntity} from "../../../../store/products/products.types";
 import ProductBigSlider from "../../../product-big-slider/ProductBigSlider";
+import Row from "../../../_ui/_containers/row/Row";
+import ProductPageInfo from "./product-page-info/ProductPageInfo";
 
 const ProductPageGeneralInfo: React.FC<ProductsEntity> = (props) => {
     return (
-        <div className={css.container}>
+        <Row className={css.container} offset={10}>
             <ProductBigSlider slides={[props.generalImage, ...(props.images ?? []), ...(props.images ?? []), ...(props.images ?? []), ...(props.images ?? [])]}/>
-            // slider
-            // info
-        </div>
+            <ProductPageInfo {...props}/>
+        </Row>
     );
 };
 

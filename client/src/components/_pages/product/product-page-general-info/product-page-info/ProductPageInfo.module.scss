@@ -1,0 +1,19 @@
+@import "src/styles/colors";
+@import "src/styles/sizes";
+
+.container {
+    .title {
+        font-size: 30px;
+    }
+    .description {
+        font-size: 16px;
+        color: $lightGray;
+    }
+    .price {
+        font-size: 40px;
+    }
+    .addToCartButton {
+        padding: $mediumOffset;
+        font-size: 16px;
+    }
+}
