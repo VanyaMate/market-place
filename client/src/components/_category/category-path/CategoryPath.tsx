@@ -1,6 +1,7 @@
 import React from 'react';
 import css from './CategoryPath.module.scss';
 import DefaultLink from "../../_ui/_links/default-link/DefaultLink";
+import {ROUTE_CATALOGUE} from "../../../cfg/links.config";
 
 export interface ICategoryPath {
     categories: string[],
@@ -15,8 +16,7 @@ const CategoryPath: React.FC<ICategoryPath> = (props) => {
                     return (
                         <DefaultLink
                             key={index}
-                            to={`/catalogue?category=${category}`}
-                            target={'_blank'}
+                            to={`${ROUTE_CATALOGUE}?category=${category}`}
                             className={[css.default, isLast ? css.last : ''].join(' ')}
                         >
                             {category}

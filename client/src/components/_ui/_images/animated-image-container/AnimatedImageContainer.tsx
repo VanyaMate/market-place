@@ -1,5 +1,5 @@
 import React, {useEffect, useMemo, useState} from 'react';
-import {IDefaultComponent} from "../../interfaces/default-component.interface";
+import {IDefaultComponent} from "../../../../interfaces/default-component.interface";
 import styled, {keyframes, css as s_css} from "styled-components";
 import css from './AnimatedImageContainer.module.scss';
 

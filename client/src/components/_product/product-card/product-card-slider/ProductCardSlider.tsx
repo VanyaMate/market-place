@@ -3,7 +3,7 @@ import {Swiper, SwiperSlide} from "swiper/react";
 import css from './ProductCardSlider.module.scss';
 import {Autoplay, HashNavigation, Navigation, Pagination} from "swiper";
 import {BACKEND_HOST} from "../../../../cfg/links.config";
-import AnimatedImageContainer from "../../../animated-image-container/AnimatedImageContainer";
+import AnimatedImageContainer from "../../../_ui/_images/animated-image-container/AnimatedImageContainer";
 
 export interface IProductCardSlider {
     slides: string[]
