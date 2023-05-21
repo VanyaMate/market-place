@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {BaseSyntheticEvent, useState} from 'react';
 import {JSX} from "react";
 import css from './ContainedPopup.module.scss';
 import styled from "styled-components";
@@ -21,7 +21,7 @@ const StyledContainerPopup = styled.div`
 
 const ContainedPopup: React.FC<IContainedPopup> = (props) => {
     const [showed, setShowed] = useState<boolean>(false);
-    const showOnClick = function () {
+    const showOnClick = function (e: BaseSyntheticEvent) {
         if (props.showOnClick) {
             setShowed((prev) => !prev);
         }
@@ -31,9 +31,10 @@ const ContainedPopup: React.FC<IContainedPopup> = (props) => {
         <StyledContainerPopup
             showOnHover={!!props.showOnHover}
             className={[css.container, showed ? css.showed : ''].join(' ')}
-            onClick={showOnClick}
         >
-            { props.element }
+            <div onClick={showOnClick}>
+                { props.element }
+            </div>
 
             <div className={'popup'}>
                 { props.popup }

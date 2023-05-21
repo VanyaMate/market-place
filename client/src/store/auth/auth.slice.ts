@@ -1,25 +1,31 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IUser} from "./auth.types";
-
-
+import {AUTH_STORAGE_NAME} from "../../cfg/storage.config";
 
 interface AuthData {
-    user: IUser | null,
+    user: IUser | null;
+    authDate: number;
 }
 
+const authData = JSON.parse(sessionStorage.getItem(AUTH_STORAGE_NAME) || '{}');
 const initialState: AuthData = {
-    user: null
+    user: authData.user ?? null,
+    authDate: authData.authDate ?? 0,
 };
 
 const authSlice = createSlice({
     name: 'authdata',
     initialState: initialState,
     reducers: {
-        setUser: (state, action: PayloadAction<AuthData>) => {
-            state.user = action.payload.user;
+        setUser: (state, action: PayloadAction<IUser>) => {
+            state.user = action.payload;
+            state.authDate = Date.now();
+            sessionStorage.setItem(AUTH_STORAGE_NAME, JSON.stringify(state));
         },
         resetUser: (state) => {
+            sessionStorage.removeItem(AUTH_STORAGE_NAME);
             state.user = null;
+            state.authDate = 0;
         }
     }
 })

@@ -5,7 +5,7 @@ import {Products, ProductsEntity} from "./products.types";
 export const productsApi = createApi({
     reducerPath: 'products/api',
     baseQuery: fetchBaseQuery({
-        baseUrl: PRODUCTS_API,
+        baseUrl: PRODUCTS_API
     }),
     endpoints: (build) => ({
         getProducts: build.query<Products, any>({

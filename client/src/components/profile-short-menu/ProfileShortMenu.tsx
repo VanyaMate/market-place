@@ -6,14 +6,15 @@ import Button from "../_ui/_buttons/button/Button";
 import DefaultLink from "../_ui/_links/default-link/DefaultLink";
 import Vertical from "../_ui/_containers/vertical/Vertical";
 import {useLazyLogoutQuery} from "../../store/auth/auth.api";
+import {useActions} from "../../hooks/_redux/useActions.hook";
 
 const ProfileShortMenu = () => {
     const [dispatchLogout, {isLoading, isError, data}] = useLazyLogoutQuery();
+    const {resetUser} = useActions();
 
     const logout = function () {
-        dispatchLogout().then(() => {
-            console.log('logouted');
-            location.reload();
+        dispatchLogout({}).then(() => {
+            resetUser();
         })
     }
 
