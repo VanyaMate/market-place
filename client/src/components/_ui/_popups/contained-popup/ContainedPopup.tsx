@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {JSX} from "react/ts5.0";
+import {JSX} from "react";
 import css from './ContainedPopup.module.scss';
 import styled from "styled-components";
 
@@ -28,11 +28,17 @@ const ContainedPopup: React.FC<IContainedPopup> = (props) => {
     }
 
     return (
-        <StyledContainerPopup {...props} className={[css.container, showed ? css.showed : '']} onClick={showOnClick}>
+        <StyledContainerPopup
+            showOnHover={!!props.showOnHover}
+            className={[css.container, showed ? css.showed : ''].join(' ')}
+            onClick={showOnClick}
+        >
             { props.element }
+
             <div className={'popup'}>
                 { props.popup }
             </div>
+
         </StyledContainerPopup>
     );
 };
