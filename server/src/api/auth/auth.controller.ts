@@ -3,11 +3,9 @@ import {ValidationPipe} from "../../pipes/validation.pipe";
 import {UserLoginDto} from "./dto/user-login.dto";
 import {AuthService} from "./auth.service";
 import {Response} from 'express';
-import {UserPrivateDataDto} from "../user/dto/user-private-data.dto";
 import {AccessTokenGuard} from "../../guards/access-token-guard.service";
 import {ACCESS_TOKEN_NAME} from "../../.constants";
 import {getMSDays} from "../../methods.utils";
-import {Cookies} from "../../decorators/cookies.decorator";
 
 @Controller('/api/auth')
 export class AuthController {
@@ -42,8 +40,7 @@ export class AuthController {
 
     @Post('/logout')
     @UseGuards(AccessTokenGuard)
-    logout (@Cookies(ACCESS_TOKEN_NAME) accessToken: string,
-            @Res() res: Response) {
+    logout (@Res() res: Response) {
         res.clearCookie(ACCESS_TOKEN_NAME);
         res.json({ logout: true })
     }
