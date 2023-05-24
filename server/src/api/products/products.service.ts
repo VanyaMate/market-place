@@ -7,19 +7,24 @@ import {FileSystemService, FileType} from "../../fileSystem/file-system.service"
 import {IProductSearchProps} from "../../interfaces/products.interface";
 import {ISearchOptions} from "../../interfaces/search.interfaces";
 import {Brand, BrandDocument} from "../brands/schemas/brand.schema";
+import {SharpService} from "../../sharp/sharp.service";
+import {randomUUID} from "crypto";
 
 @Injectable()
 export class ProductsService {
 
     constructor(@InjectModel(Product.name) private productModel: Model<Product>,
                 @InjectModel(Brand.name) private brandModel: Model<Brand>,
-                private fileSystemService: FileSystemService) {}
+                private fileSystemService: FileSystemService,
+                private sharpService: SharpService) {}
 
     async create (productDto: ProductDto, files: { [key: string]: Express.Multer.File[] }, userId: Types.ObjectId) {
         try {
             const { generalImage, images } = files;
-            const generalImagePath = this.fileSystemService.writeFile(FileType.IMAGE, generalImage[0]);
-            const imagesPaths = (images || []).map((image) => this.fileSystemService.writeFile(FileType.IMAGE, image));
+            const generalImagePath = await this.sharpService.saveProductImage(generalImage[0].buffer, userId.toString(), randomUUID());
+            const imagesPaths = await Promise.all((images || []).map((image) => {
+                return this.sharpService.saveProductImage(image.buffer, userId.toString(), randomUUID())
+            }))
             const brand = await this.brandModel.findOne({ title: productDto.brand });
             if (!brand) {
                 throw {message: 'Неверно указан бренд товара'};

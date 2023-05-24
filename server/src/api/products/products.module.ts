@@ -7,6 +7,7 @@ import {UsersModule} from "../users/users.module";
 import {TokensModule} from "../tokens/tokens.module";
 import {FileSystemModule} from "../../fileSystem/file-system.module";
 import {Brand, BrandSchema} from "../brands/schemas/brand.schema";
+import {SharpModule} from "../../sharp/sharp.module";
 
 @Module({
     controllers: [ ProductsController ],
@@ -17,6 +18,7 @@ import {Brand, BrandSchema} from "../brands/schemas/brand.schema";
         UsersModule,
         TokensModule,
         FileSystemModule,
+        SharpModule,
     ],
     exports: [ ProductsService ]
 })
