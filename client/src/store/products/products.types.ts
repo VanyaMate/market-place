@@ -5,6 +5,7 @@ export interface IProducts {
 }
 export interface IProduct {
     _id: string;
+    article: string;
     title: string;
     description: string;
     generalImage: string;

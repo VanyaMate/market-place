@@ -5,9 +5,9 @@ import {AuthService} from "./auth.service";
 import {Response} from 'express';
 import {UserPrivateDataDto} from "../user/dto/user-private-data.dto";
 import {AccessTokenGuard} from "../../guards/access-token-guard.service";
-import {Cookies} from "../../decorators/cookies.decorator";
 import {ACCESS_TOKEN_NAME} from "../../.constants";
 import {getMSDays} from "../../methods.utils";
+import {Cookies} from "../../decorators/cookies.decorator";
 
 @Controller('/api/auth')
 export class AuthController {

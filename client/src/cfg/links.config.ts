@@ -1,4 +1,5 @@
-export const BACKEND_HOST: string = 'http://localhost:5000';
+//export const BACKEND_HOST: string = 'http://localhost:5000';
+export const BACKEND_HOST: string = 'https://market-place-v1o0.onrender.com:5000';
 export const API: string = `${BACKEND_HOST}/api`;
 export const AUTH_API: string = `${API}/auth`;
 export const PRODUCTS_API: string = `${API}/products`;
