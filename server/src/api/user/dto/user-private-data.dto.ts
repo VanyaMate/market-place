@@ -4,6 +4,7 @@ export class UserPrivateDataDto {
     lastName: string;
     telephone: string;
     orders: string[];
+    cart: any[];
 
     constructor (props) {
         this.email = props.email;
@@ -12,5 +13,6 @@ export class UserPrivateDataDto {
         this.telephone = props.telephone;
 
         this.orders = props.orders ?? [];
+        this.cart = props.cart ?? [];
     }
 }

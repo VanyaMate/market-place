@@ -18,6 +18,7 @@ export class UsersController {
             lastName: true,
             telephone: true,
             orders: true,
+            cart: true,
         });
     }
 
@@ -32,6 +33,7 @@ export class UsersController {
             lastName: true,
             telephone: true,
             orders: true,
+            cart: true,
         });
     }
 

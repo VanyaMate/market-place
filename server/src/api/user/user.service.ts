@@ -5,6 +5,8 @@ import * as bcrypt from 'bcrypt';
 import {InjectModel} from "@nestjs/mongoose";
 import {Model} from "mongoose";
 import * as uuid from 'uuid';
+import {CartService} from "../cart/cart.service";
+import {Cart, CartDocument} from "../cart/schema/cart.schema";
 
 @Injectable()
 export class UserService {
