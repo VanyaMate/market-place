@@ -11,7 +11,7 @@ export class CartService {
     async resetCart (userId: string) {
         const cart = await this.cartModel.findOne({ user: userId }).exec();
         cart.products = [];
-        return await cart.save();
+        return cart.save().then((cart) => cart.products);
     }
 
     async createCart (userId: string) {
@@ -37,7 +37,9 @@ export class CartService {
     }
 
     async addToCart (userId: string, product: { product: string, amount: number }) {
-        const cart = await this.cartModel.findOne({ user: userId }).exec();
+        const cart = await this.cartModel
+            .findOne({ user: userId })
+            .exec();
         const cartItem = cart.products.filter((cartProduct) => cartProduct.product.toString() === product.product)[0];
 
         if (cartItem) {
@@ -45,13 +47,16 @@ export class CartService {
         } else {
             cart.products.push(product);
         }
-        return cart.save();
+        return cart.save().then(doc => doc.populate('products.product')).then((data) => data.products);
     }
 
     async changeCart (userId: string, product: { product: string, amount: number }) {
-        const cart = await this.cartModel.findOne({ user: userId }).exec();
+        const cart = await this.cartModel
+            .findOne({ user: userId })
+            .populate('products.product')
+            .exec();
         this._updateCartItem(cart, product);
-        return cart.save();
+        return cart.save().then(doc => doc.populate('products.product')).then((data) => data.products);
     }
 
     private _updateCartItem (cart, product: { product: string, amount: number }) {
