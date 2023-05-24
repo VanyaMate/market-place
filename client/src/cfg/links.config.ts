@@ -6,7 +6,7 @@ export const COMPILATIONS_API: string = `${API}/compilations`;
 
 export const ROUTE_HOME = '/';
 export const ROUTE_LOGIN = '/login';
-export const ROUTE_BASKET = '/basket';
+export const ROUTE_CART = '/cart';
 export const ROUTE_ORDER = '/order';
 export const ROUTE_PRODUCT = '/product';
 export const ROUTE_PRODUCT_ID = '/product/:id';

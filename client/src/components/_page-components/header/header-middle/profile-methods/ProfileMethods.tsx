@@ -4,6 +4,7 @@ import css from './ProfileMethods.module.scss';
 import Row from "../../../../_ui/_containers/row/Row";
 import {useMySelector} from "../../../../../hooks/_redux/useMySelector.hook";
 import LoginTitleIcon from "./login/LoginTitleIcon";
+import CartTitleIcon from "./cart/CartTitleIcon";
 
 const ProfileMethods = () => {
     const auth = useMySelector((state) => state.auth);
@@ -16,7 +17,7 @@ const ProfileMethods = () => {
                         <ProfileTitleIcon/>
                         <ProfileTitleIcon/>
                         <ProfileTitleIcon/>
-                        <ProfileTitleIcon/>
+                        <CartTitleIcon/>
                     </>
                 : <LoginTitleIcon/>
             }

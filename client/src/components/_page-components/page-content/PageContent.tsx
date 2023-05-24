@@ -10,7 +10,7 @@ import ProfilePage from "../../_pages/profile/ProfilePage";
 import CataloguePage from "../../_pages/catalogue/CataloguePage";
 import css from './PageContent.module.scss';
 import {
-    ROUTE_BASKET, ROUTE_CATALOGUE,
+    ROUTE_CART, ROUTE_CATALOGUE,
     ROUTE_HOME,
     ROUTE_LOGIN,
     ROUTE_ORDER,
@@ -24,7 +24,7 @@ const PageContent = () => {
             <Routes>
                 <Route path={ROUTE_HOME} element={<HomePage/>}/>
                 <Route path={ROUTE_LOGIN} element={<AuthPage/>}/>
-                <Route path={ROUTE_BASKET} element={<BasketPage/>}/>
+                <Route path={ROUTE_CART} element={<BasketPage/>}/>
                 <Route path={ROUTE_ORDER} element={<OrderPage/>}/>
                 <Route path={ROUTE_PRODUCT_ID} element={<ProductPage/>}/>
                 <Route path={ROUTE_PROFILE} element={<ProfilePage/>}/>
