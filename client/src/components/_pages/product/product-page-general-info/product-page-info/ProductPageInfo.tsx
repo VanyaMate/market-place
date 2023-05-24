@@ -5,6 +5,7 @@ import BrandWithLogo from "../../../../_brand/brand-with-logo/BrandWithLogo";
 import css from './ProductPageInfo.module.scss';
 import ProductPrice from "../../../../_product/product-price/ProductPrice";
 import Button from "../../../../_ui/_buttons/button/Button";
+import AddToCartButton from "../../../../_buttons/add-to-cart-button/AddToCartButton";
 
 const ProductPageInfo: React.FC<IProduct> = (props) => {
     return (
@@ -13,13 +14,12 @@ const ProductPageInfo: React.FC<IProduct> = (props) => {
             <h2 className={css.title}>{ props.title }</h2>
             <div className={css.description}>{ props.description }</div>
             <ProductPrice {...props} className={css.price}/>
-            <Button
-                onClick={() => {}}
-                active
+            <AddToCartButton
+                product={props}
                 className={css.addToCartButton}
             >
                 В корзину
-            </Button>
+            </AddToCartButton>
         </Vertical>
     );
 };
