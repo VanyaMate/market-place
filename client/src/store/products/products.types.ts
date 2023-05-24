@@ -1,9 +1,9 @@
-export interface Products {
-    products?: (ProductsEntity)[] | null;
-    options: Options;
+export interface IProducts {
+    products?: (IProduct)[] | null;
+    options: IResponseOptions;
     count: number;
 }
-export interface ProductsEntity {
+export interface IProduct {
     _id: string;
     title: string;
     description: string;
@@ -13,15 +13,15 @@ export interface ProductsEntity {
     priceCurrency?: string;
     discount?: number;
     discountType?: string;
-    brand: Brand;
+    brand: IBrand;
 }
-export interface Brand {
+export interface IBrand {
     _id: string;
     title: string;
     description: string;
     image: string;
 }
-export interface Options {
+export interface IResponseOptions {
     limit: number;
     offset: number;
 }

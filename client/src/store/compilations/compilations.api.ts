@@ -1,6 +1,6 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {COMPILATIONS_API} from "../../cfg/links.config";
-import {ProductsEntity} from "../products/products.types";
+import {IProduct} from "../products/products.types";
 
 export const compilationsApi = createApi({
     reducerPath: 'compilations/api',
@@ -8,7 +8,7 @@ export const compilationsApi = createApi({
         baseUrl: COMPILATIONS_API,
     }),
     endpoints: (build) => ({
-        getNew: build.query<ProductsEntity[], { uid: string }>({
+        getNew: build.query<IProduct[], { uid: string }>({
             query: (props) => ({
                 url: `/new?uid=${props.uid}`,
                 method: 'GET',
