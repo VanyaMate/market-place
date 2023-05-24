@@ -6,11 +6,12 @@ import AnimatedImageContainer from "../../_ui/_images/animated-image-container/A
 import ProductPrice from "../../_product/product-price/ProductPrice";
 import {BACKEND_HOST} from "../../../cfg/links.config";
 import Vertical from "../../_ui/_containers/vertical/Vertical";
+import {getProductImageLink, ImageLinkSize} from "../../../utils/links.methods";
 
 const MiniCartProductItem: React.FC<ICartItem> = (props) => {
     return (
         <Row className={css.container} offset={10}>
-            <AnimatedImageContainer src={BACKEND_HOST + '/' + props.product.generalImage} w={60} h={60} seconds={5} className={css.image}/>
+            <AnimatedImageContainer src={getProductImageLink(props.product.generalImage, ImageLinkSize.SMALL)} w={60} h={60} seconds={5} className={css.image}/>
             <Vertical offset={5}>
                 <div>{ props.product.title } [ {props.amount} ]</div>
                 <ProductPrice {...props.product}/>

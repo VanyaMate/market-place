@@ -7,9 +7,6 @@ import Vertical from "../_ui/_containers/vertical/Vertical";
 const MiniCart = () => {
     const cart = useMySelector((state) => state.cart);
 
-    console.log(cart);
-    console.log(cart.cart);
-
     return (
         <Vertical offset={10} className={css.container}>
             {

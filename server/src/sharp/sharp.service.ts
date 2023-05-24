@@ -20,14 +20,6 @@ export class SharpService {
 
         await prepare
             .resize({
-                width: 100,
-                height: 100,
-                fit: 'inside'
-            })
-            .toFile(filePath + '-100x100.jpeg');
-
-        await prepare
-            .resize({
                 width: 200,
                 height: 200,
                 fit: 'inside'
@@ -41,6 +33,14 @@ export class SharpService {
                 fit: 'inside'
             })
             .toFile(filePath + '-400x400.jpeg');
+
+        await prepare
+            .resize({
+                width: 800,
+                height: 800,
+                fit: 'inside'
+            })
+            .toFile(filePath + '-800x800.jpeg');
 
         await prepare.toFile(filePath + '.jpeg');
 

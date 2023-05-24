@@ -10,6 +10,7 @@ import "swiper/css/pagination";
 import "swiper/css/free-mode";
 import "swiper/css/thumbs";
 import {Swiper as SwiperClass} from "swiper/types";
+import {getProductImageLink, ImageLinkSize} from "../../../utils/links.methods";
 
 export interface IProductBigSlider {
     slides: string[]
@@ -35,7 +36,7 @@ const ProductBigSlider: React.FC<IProductBigSlider> = (props) => {
                 {
                     props.slides.map((slide, index) => {
                         return <SwiperSlide key={index} className={css.slide}>
-                            <AnimatedImageContainer src={BACKEND_HOST + '/' + slide} w={400} h={400} seconds={10}/>
+                            <AnimatedImageContainer src={getProductImageLink(slide, ImageLinkSize.BIG)} w={400} h={400} seconds={10}/>
                         </SwiperSlide>
                     })
                 }
@@ -57,7 +58,7 @@ const ProductBigSlider: React.FC<IProductBigSlider> = (props) => {
                 {
                     props.slides.map((slide, index) => {
                         return <SwiperSlide key={index} className={css.second_slide}>
-                            <AnimatedImageContainer src={BACKEND_HOST + '/' + slide} w={95} h={95} seconds={10}/>
+                            <AnimatedImageContainer src={getProductImageLink(slide, ImageLinkSize.SMALL)} w={95} h={95} seconds={10}/>
                         </SwiperSlide>
                     })
                 }
