@@ -13,13 +13,14 @@ const LoginForm = () => {
         return !!(email.value && password.value);
     }, [email.value, password.value])
     const [dispatchLogin, { isFetching, isError, data }] = useLazyLoginQuery();
-    const { setUser } = useActions();
+    const { setUser, updateCart } = useActions();
 
     const login = function () {
         dispatchLogin({ email: email.value, password: password.value})
             .then((response) => {
                 if (response.data?.email) {
                     setUser(response.data);
+                    updateCart(response.data.cart ?? []);
                 }
             })
     }

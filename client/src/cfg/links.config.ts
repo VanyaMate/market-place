@@ -3,6 +3,7 @@ export const API: string = `${BACKEND_HOST}/api`;
 export const AUTH_API: string = `${API}/auth`;
 export const PRODUCTS_API: string = `${API}/products`;
 export const COMPILATIONS_API: string = `${API}/compilations`;
+export const CART_API: string = `${API}/cart`;
 
 export const ROUTE_HOME = '/';
 export const ROUTE_LOGIN = '/login';

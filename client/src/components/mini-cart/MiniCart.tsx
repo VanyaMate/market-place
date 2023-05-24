@@ -2,21 +2,22 @@ import React, {useMemo} from 'react';
 import {useMySelector} from "../../hooks/_redux/useMySelector.hook";
 import MiniCartProductItem from "./mini-cart-product-item/MiniCartProductItem";
 import css from './MiniCart.module.scss';
+import Vertical from "../_ui/_containers/vertical/Vertical";
 
 const MiniCart = () => {
-    const auth = useMySelector((state) => state.auth);
-    const cart = useMemo(() => {
-        return auth?.user?.cart ?? [];
-    }, [auth.user]);
+    const cart = useMySelector((state) => state.cart);
+
+    console.log(cart);
+    console.log(cart.cart);
 
     return (
-        <div className={css.container}>
+        <Vertical offset={10} className={css.container}>
             {
-                cart.map((item) => {
+                cart.cart.map((item) => {
                     return <MiniCartProductItem key={item.product._id} {...item}/>
                 })
             }
-        </div>
+        </Vertical>
     );
 };
 

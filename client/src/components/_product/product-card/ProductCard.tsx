@@ -1,30 +1,14 @@
 import React from 'react';
 import css from './ProductCard.module.scss';
 import ProductCardSlider from "./product-card-slider/ProductCardSlider";
-import Button from "../../_ui/_buttons/button/Button";
 import ProductPrice from "../product-price/ProductPrice";
-import {Link} from "react-router-dom";
 import DefaultLink from "../../_ui/_links/default-link/DefaultLink";
 import {ROUTE_CATALOGUE, ROUTE_PRODUCT} from "../../../cfg/links.config";
+import AddToCartButton from "../../_buttons/add-to-cart-button/AddToCartButton";
+import {IProduct} from "../../../store/products/products.types";
 
-export interface IProductCardData {
-    _id: string;
-    article: string;
-    generalImage: string;
-    images?: string[];
-    title: string;
-    brand: {
-        title: string;
-        description: string;
-        image: string;
-    };
-    price: number;
-    priceCurrency?: string;
-    discount?: number;
-    discountType?: string;
-}
 
-const ProductCard: React.FC<IProductCardData> = (props) => {
+const ProductCard: React.FC<IProduct> = (props) => {
     return (
         <div className={css.container}>
             <ProductCardSlider slides={[props.generalImage, ...(props.images || [])]}/>
@@ -34,11 +18,10 @@ const ProductCard: React.FC<IProductCardData> = (props) => {
             </div>
             <DefaultLink to={`${ROUTE_PRODUCT}/${ props._id }`} className={css.title}>{ props.title }</DefaultLink>
             <ProductPrice {...props} className={css.price}/>
-            <Button
-                onClick={() => {}}
-                active
+            <AddToCartButton
+                product={props}
                 className={css.addToCardButton}
-            >В корзину</Button>
+            >В корзину</AddToCartButton>
         </div>
     );
 };

@@ -1,3 +1,9 @@
-.container {
+@import "src/styles/sizes";
 
+.container {
+    align-items: center;
+
+    .image {
+        border-radius: $mediumOffset;
+    }
 }
