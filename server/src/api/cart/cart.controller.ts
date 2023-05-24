@@ -42,4 +42,15 @@ export class CartController {
         })
     }
 
+    @Post('/change')
+    @UseGuards(AccessTokenGuard)
+    changeCart(@UserVerified() userAccess: IUserVerifiedData,
+               @Body('productId') productId: string,
+               @Body('amount') amount: string = '0') {
+        return this.cartService.changeCart(userAccess.user._id.toString(), {
+            product: productId,
+            amount: Number(amount)
+        })
+    }
+
 }
