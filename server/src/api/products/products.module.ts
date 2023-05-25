@@ -5,10 +5,8 @@ import {MongooseModule} from "@nestjs/mongoose";
 import {Product, ProductSchema} from "./schemas/product.schema";
 import {UsersModule} from "../users/users.module";
 import {TokensModule} from "../tokens/tokens.module";
-import {FileSystemModule} from "../../fileSystem/file-system.module";
 import {Brand, BrandSchema} from "../brands/schemas/brand.schema";
-import {SharpModule} from "../../sharp/sharp.module";
-import {FileServiceModule} from "../../file-service/file-service.module";
+import {ImageModule} from "../../image-service/image.module";
 
 @Module({
     controllers: [ ProductsController ],
@@ -18,8 +16,7 @@ import {FileServiceModule} from "../../file-service/file-service.module";
         MongooseModule.forFeature([ { name: Brand.name, schema: BrandSchema } ]),
         UsersModule,
         TokensModule,
-        SharpModule,
-        FileServiceModule
+        ImageModule,
     ],
     exports: [ ProductsService ]
 })

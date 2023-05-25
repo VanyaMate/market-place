@@ -11,8 +11,10 @@ export enum FolderType {
 @Injectable()
 export class FileServiceService {
 
-    getUserFolder (userId: string, folderType: FolderType): string {
-        return path.resolve(__dirname, '../..', 'public', 'customers', userId, folderType);
+    getUserFolder (userId: string, folderType: FolderType): { public: string, server: string } {
+        const publicPath = ['customers', userId, folderType].join('/');
+        const serverPath = path.resolve(__dirname, '../..', 'public', publicPath);
+        return { public: publicPath, server: serverPath };
     }
 
 }

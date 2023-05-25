@@ -1,6 +1,7 @@
 import {BACKEND_HOST} from "../cfg/links.config";
 
 export enum ImageLinkSize {
+    TINY,
     SMALL,
     MEDIUM,
     BIG,
@@ -8,7 +9,7 @@ export enum ImageLinkSize {
 }
 
 export const getProductImageLink = function (path: string, type: ImageLinkSize): string {
-    const commonPath = BACKEND_HOST + '/image/product/' + path;
+    const commonPath = BACKEND_HOST + '/' + path;
     switch (type) {
         case ImageLinkSize.BIG:
             return commonPath + '-800x800.jpeg';
@@ -16,6 +17,8 @@ export const getProductImageLink = function (path: string, type: ImageLinkSize):
             return commonPath + '-400x400.jpeg';
         case ImageLinkSize.SMALL:
             return commonPath + '-200x200.jpeg';
+        case ImageLinkSize.TINY:
+            return commonPath + '-100x100.jpeg';
         case ImageLinkSize.ORIGINAL:
             return commonPath + '.jpeg';
     }

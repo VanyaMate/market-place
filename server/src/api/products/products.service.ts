@@ -3,13 +3,13 @@ import {ProductDto} from "./dto/product.dto";
 import {InjectModel} from "@nestjs/mongoose";
 import {Product} from "./schemas/product.schema";
 import {Model, Types} from "mongoose";
-import {FileSystemService} from "../../fileSystem/file-system.service";
 import {IProductSearchProps} from "../../interfaces/products.interface";
 import {ISearchOptions} from "../../interfaces/search.interfaces";
 import {Brand, BrandDocument} from "../brands/schemas/brand.schema";
-import {ImageSize, SharpService} from "../../sharp/sharp.service";
+import {ImageSize} from "../../sharp-service/sharp.service";
 import {randomUUID} from "crypto";
-import {FileServiceService, FolderType} from "../../file-service/file-service.service";
+import {FolderType} from "../../file-service/file-service.service";
+import {ImageService} from "../../image-service/image.service";
 
 @Injectable()
 export class ProductsService {
@@ -23,8 +23,7 @@ export class ProductsService {
 
     constructor(@InjectModel(Product.name) private productModel: Model<Product>,
                 @InjectModel(Brand.name) private brandModel: Model<Brand>,
-                private sharpService: SharpService,
-                private fileService: FileServiceService) {}
+                private imageService: ImageService) {}
 
     async create (productDto: ProductDto, files: { [key: string]: Express.Multer.File[] }, userId: Types.ObjectId) {
         try {
@@ -35,23 +34,20 @@ export class ProductsService {
                 throw {message: 'Неверно указан бренд товара'};
             }
 
-            const userImageFolder = this.fileService.getUserFolder(userId.toString(), FolderType.PRODUCT);
-
-            const generalImagePath = await this.sharpService.saveOptimizeImage(
+            const generalImagePath = await this.imageService.saveOptimizedImage(
                 generalImage[0].buffer,
-                userImageFolder,
-                randomUUID(),
+                FolderType.PRODUCT,
+                userId.toString(),
                 this.defaultOptimizedImageSizes
-            );
-            const imagesPaths = await Promise.all((images || []).map(async (image) => {
-                const imageName = randomUUID();
-                await this.sharpService.saveOptimizeImage(
+            )
+
+            const imagesPaths = await Promise.all((images || []).map((image) => {
+                return this.imageService.saveOptimizedImage(
                     image.buffer,
-                    userImageFolder,
-                    imageName,
+                    FolderType.PRODUCT,
+                    userId.toString(),
                     this.defaultOptimizedImageSizes
-                );
-                return imageName;
+                )
             }))
 
             const product = (await this.productModel.create({

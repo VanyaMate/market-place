@@ -4,7 +4,8 @@ import {ApiModule} from "./api/api.module";
 import {MongooseModule} from "@nestjs/mongoose";
 import {ServeStaticModule} from "@nestjs/serve-static";
 import * as path from "path";
-import {SharpModule} from "./sharp/sharp.module";
+import {SharpModule} from "./sharp-service/sharp.module";
+import {ImageModule} from "./image-service/image.module";
 
 @Module({
     imports: [
@@ -18,6 +19,7 @@ import {SharpModule} from "./sharp/sharp.module";
         MongooseModule.forRoot(process.env.MONGO_DB_URL),
         ApiModule,
         SharpModule,
+        ImageModule,
     ],
     controllers: [],
     providers: [],
