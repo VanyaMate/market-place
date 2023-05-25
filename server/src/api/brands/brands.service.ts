@@ -24,6 +24,10 @@ export class BrandsService {
                 private imageService: ImageService) {}
 
     async create (brandDdo: BrandDto, image: Express.Multer.File, userId: Types.ObjectId) {
+        /**
+         * TODO: Сделать невозможным делать одинаковые имена
+         */
+
         try {
             if (!image) throw { message: 'Не загружена фотография' }
             const generalImagePath = await this.imageService.saveOptimizedImage(
