@@ -3,52 +3,39 @@ import * as path from "path";
 import * as fs from "fs";
 import * as sharp from "sharp";
 
+export interface ImageSize {
+    width?: number;
+    height?: number;
+}
+
 @Injectable()
 export class SharpService {
 
-    async saveProductImage (buffer, writePath: string, fileName: string) {
-        const folderPath = path.join(__dirname, '../..', 'public', 'image', 'product', writePath);
-        const filePath = path.resolve(folderPath, fileName);
+    async saveOptimizeImage (buffer: Buffer, savePath: string, fileName: string, sizes: ImageSize[]): Promise<void> {
+        const fullFilePath = path.resolve(savePath, fileName);
 
-        if (!fs.existsSync(folderPath)) {
-            fs.mkdirSync(folderPath, { recursive: true });
+        // Если такой папки не существует -> создаем
+        if (!fs.existsSync(savePath)) {
+            fs.mkdirSync(savePath, { recursive: true });
         }
+
         const prepare = sharp(buffer)
             .jpeg({
-                progressive: true,
+                progressive: true
             });
 
-        await prepare
-            .resize({
-                width: 200,
-                height: 200,
-                fit: 'inside'
-            })
-            .toFile(filePath + '-200x200.jpeg');
+        // Сохраняю оригинал
+        await prepare.toFile(`${ fullFilePath }.jpeg`);
 
-        await prepare
-            .resize({
-                width: 400,
-                height: 400,
-                fit: 'inside'
-            })
-            .toFile(filePath + '-400x400.jpeg');
-
-        await prepare
-            .resize({
-                width: 800,
-                height: 800,
-                fit: 'inside'
-            })
-            .toFile(filePath + '-800x800.jpeg');
-
-        await prepare.toFile(filePath + '.jpeg');
-
-        return writePath + '/' + fileName;
-    }
-
-    saveAvatarImage () {
-
+        // Сохраняю размеры
+        for (let i = 0; i < sizes.length; i++) {
+            const size = sizes[i];
+            const sizeName = `${ size.width ?? size.height }x${ size.height ?? size.width }`;
+            const fullFileName = `${ fullFilePath }-${ sizeName }.jpeg`
+            await prepare
+                .resize({...size, fit: 'inside'})
+                .toFile(fullFileName);
+        }
     }
 
 }

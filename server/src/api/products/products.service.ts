@@ -1,34 +1,58 @@
 import {BadRequestException, Injectable} from "@nestjs/common";
 import {ProductDto} from "./dto/product.dto";
 import {InjectModel} from "@nestjs/mongoose";
-import {Product, ProductDocument} from "./schemas/product.schema";
+import {Product} from "./schemas/product.schema";
 import {Model, Types} from "mongoose";
-import {FileSystemService, FileType} from "../../fileSystem/file-system.service";
+import {FileSystemService} from "../../fileSystem/file-system.service";
 import {IProductSearchProps} from "../../interfaces/products.interface";
 import {ISearchOptions} from "../../interfaces/search.interfaces";
 import {Brand, BrandDocument} from "../brands/schemas/brand.schema";
-import {SharpService} from "../../sharp/sharp.service";
+import {ImageSize, SharpService} from "../../sharp/sharp.service";
 import {randomUUID} from "crypto";
+import {FileServiceService, FolderType} from "../../file-service/file-service.service";
 
 @Injectable()
 export class ProductsService {
 
+    private defaultOptimizedImageSizes: ImageSize[] = [
+        { width: 100, height: 100 },
+        { width: 200, height: 200 },
+        { width: 400, height: 400 },
+        { width: 800, height: 800 },
+    ];
+
     constructor(@InjectModel(Product.name) private productModel: Model<Product>,
                 @InjectModel(Brand.name) private brandModel: Model<Brand>,
-                private fileSystemService: FileSystemService,
-                private sharpService: SharpService) {}
+                private sharpService: SharpService,
+                private fileService: FileServiceService) {}
 
     async create (productDto: ProductDto, files: { [key: string]: Express.Multer.File[] }, userId: Types.ObjectId) {
         try {
             const { generalImage, images } = files;
-            const generalImagePath = await this.sharpService.saveProductImage(generalImage[0].buffer, userId.toString(), randomUUID());
-            const imagesPaths = await Promise.all((images || []).map((image) => {
-                return this.sharpService.saveProductImage(image.buffer, userId.toString(), randomUUID())
-            }))
+
             const brand = await this.brandModel.findOne({ title: productDto.brand });
             if (!brand) {
                 throw {message: 'Неверно указан бренд товара'};
             }
+
+            const userImageFolder = this.fileService.getUserFolder(userId.toString(), FolderType.PRODUCT);
+
+            const generalImagePath = await this.sharpService.saveOptimizeImage(
+                generalImage[0].buffer,
+                userImageFolder,
+                randomUUID(),
+                this.defaultOptimizedImageSizes
+            );
+            const imagesPaths = await Promise.all((images || []).map(async (image) => {
+                const imageName = randomUUID();
+                await this.sharpService.saveOptimizeImage(
+                    image.buffer,
+                    userImageFolder,
+                    imageName,
+                    this.defaultOptimizedImageSizes
+                );
+                return imageName;
+            }))
 
             const product = (await this.productModel.create({
                 ...productDto,

@@ -8,6 +8,7 @@ import {TokensModule} from "../tokens/tokens.module";
 import {FileSystemModule} from "../../fileSystem/file-system.module";
 import {Brand, BrandSchema} from "../brands/schemas/brand.schema";
 import {SharpModule} from "../../sharp/sharp.module";
+import {FileServiceModule} from "../../file-service/file-service.module";
 
 @Module({
     controllers: [ ProductsController ],
@@ -17,8 +18,8 @@ import {SharpModule} from "../../sharp/sharp.module";
         MongooseModule.forFeature([ { name: Brand.name, schema: BrandSchema } ]),
         UsersModule,
         TokensModule,
-        FileSystemModule,
         SharpModule,
+        FileServiceModule
     ],
     exports: [ ProductsService ]
 })
