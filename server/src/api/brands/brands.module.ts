@@ -6,6 +6,7 @@ import {TokensModule} from "../tokens/tokens.module";
 import {MongooseModule} from "@nestjs/mongoose";
 import {Brand, BrandSchema} from "./schemas/brand.schema";
 import {FileSystemModule} from "../../fileSystem/file-system.module";
+import {ImageModule} from "../../image-service/image.module";
 
 @Module({
     controllers: [ BrandsController ],
@@ -14,7 +15,8 @@ import {FileSystemModule} from "../../fileSystem/file-system.module";
         TokensModule,
         UsersModule,
         FileSystemModule,
-        MongooseModule.forFeature([{ name: Brand.name, schema: BrandSchema }])
+        MongooseModule.forFeature([{ name: Brand.name, schema: BrandSchema }]),
+        ImageModule,
     ]
 })
 export class BrandsModule {}

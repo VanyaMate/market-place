@@ -1,21 +1,37 @@
-import {BadRequestException, HttpException, HttpStatus, Injectable} from "@nestjs/common";
+import {BadRequestException, Injectable} from "@nestjs/common";
 import {BrandDto} from "./dto/brand.dto";
 import {Model, Types} from "mongoose";
 import {FileSystemService, FileType} from "../../fileSystem/file-system.service";
 import {InjectModel} from "@nestjs/mongoose";
 import {Brand, BrandDocument} from "./schemas/brand.schema";
 import {ISearchOptions} from "../../interfaces/search.interfaces";
+import {ImageService} from "../../image-service/image.service";
+import {FolderType} from "../../file-service/file-service.service";
+import {ImageSize} from "../../sharp-service/sharp.service";
 
 @Injectable()
 export class BrandsService {
 
+    private defaultBrandSizes: ImageSize[] = [
+        { width: 50, height: 50 },
+        { width: 100, height: 100 },
+        { width: 200, height: 200 },
+        { width: 400, height: 400 },
+    ];
+
     constructor(@InjectModel(Brand.name) private brandModel: Model<Brand>,
-                private fileSystemService: FileSystemService) {}
+                private fileSystemService: FileSystemService,
+                private imageService: ImageService) {}
 
     async create (brandDdo: BrandDto, image: Express.Multer.File, userId: Types.ObjectId) {
         try {
             if (!image) throw { message: 'Не загружена фотография' }
-            const generalImagePath = this.fileSystemService.writeFile(FileType.IMAGE, image);
+            const generalImagePath = await this.imageService.saveOptimizedImage(
+                image.buffer,
+                FolderType.BRAND,
+                userId.toString(),
+                this.defaultBrandSizes
+            );
             const brand = await this.brandModel.create({
                 ...brandDdo,
                 author: userId,
