@@ -23,13 +23,19 @@ export const authApi = createApi({
                 method: 'post',
             })
         }),
-        logout: build.query<any, any>({
-            query: (props) => ({
+        logout: build.query<void, void>({
+            query: () => ({
                 url: '/logout',
+                method: 'post',
+            })
+        }),
+        token: build.query<IUser, void>({
+            query: () => ({
+                url: '/token',
                 method: 'post',
             })
         }),
     })
 })
 
-export const {useLazyLogoutQuery, useLazyLoginQuery, useLazyRegistrationQuery} = authApi;
+export const {useLazyLogoutQuery, useLazyLoginQuery, useLazyRegistrationQuery, useTokenQuery} = authApi;

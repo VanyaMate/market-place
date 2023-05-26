@@ -5,12 +5,14 @@ import {AUTH_STORAGE_NAME} from "../../cfg/storage.config";
 interface AuthData {
     user: IUser | null;
     authDate: number;
+    updateByToken: boolean;
 }
 
 const authData = JSON.parse(sessionStorage.getItem(AUTH_STORAGE_NAME) || '{}');
 const initialState: AuthData = {
     user: authData.user ?? null,
     authDate: authData.authDate ?? 0,
+    updateByToken: !authData.user,
 };
 
 const authSlice = createSlice({
@@ -20,6 +22,7 @@ const authSlice = createSlice({
         setUser: (state, action: PayloadAction<IUser>) => {
             state.user = action.payload;
             state.authDate = Date.now();
+            state.updateByToken = false;
             sessionStorage.setItem(AUTH_STORAGE_NAME, JSON.stringify(state));
         },
         resetUser: (state) => {
