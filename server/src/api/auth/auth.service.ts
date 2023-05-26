@@ -6,6 +6,8 @@ import {UsersService} from "../users/users.service";
 import * as bcrypt from 'bcrypt';
 import {UserPrivateDataDto} from "../user/dto/user-private-data.dto";
 import {CartService} from "../cart/cart.service";
+import {IUserVerifiedData} from "../../decorators/user-verified.decorator";
+import {UserDocument} from "../user/schemas/user.schema";
 
 @Injectable()
 export class AuthService {
@@ -35,9 +37,7 @@ export class AuthService {
         try {
             const candidate = (await this.usersService.findByEmail(userLoginDto.email)).users[0];
             if (candidate && await bcrypt.compare(userLoginDto.password, candidate.password)) {
-                const token = await this.tokenService.generateTokenToUser(candidate);
-                const cart = await this.cartService.getCart(candidate._id.toString());
-                return [ new UserPrivateDataDto({...candidate.toObject(), cart}), token ];
+                return this.returnPrivateUserData(candidate);
             }
 
             throw { message: 'Ошибка авторизации' }
@@ -50,6 +50,17 @@ export class AuthService {
 
     async logout (accessToken: string) {
 
+    }
+
+    async returnPrivateUserData (user: UserDocument): Promise<[UserPrivateDataDto, string]> {
+        try {
+            const token = await this.tokenService.generateTokenToUser(user);
+            const cart = await this.cartService.getCart(user._id.toString());
+            return [ new UserPrivateDataDto({...user.toObject(), cart}), token ];
+        }
+        catch (e) {
+            throw new UnauthorizedException(e);
+        }
     }
 
 }

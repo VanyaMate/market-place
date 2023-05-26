@@ -6,6 +6,7 @@ import {Response} from 'express';
 import {AccessTokenGuard} from "../../guards/access-token-guard.service";
 import {ACCESS_TOKEN_NAME} from "../../.constants";
 import {getMSDays} from "../../methods.utils";
+import {IUserVerifiedData, UserVerified} from "../../decorators/user-verified.decorator";
 
 @Controller('/api/auth')
 export class AuthController {
@@ -43,6 +44,12 @@ export class AuthController {
     logout (@Res() res: Response) {
         res.clearCookie(ACCESS_TOKEN_NAME);
         res.json({ logout: true })
+    }
+
+    @Post('/token')
+    @UseGuards(AccessTokenGuard)
+    token (@UserVerified() userData: IUserVerifiedData) {
+        return this.authService.returnPrivateUserData(userData.user);
     }
 
 }
