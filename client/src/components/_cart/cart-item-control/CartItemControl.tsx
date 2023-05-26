@@ -9,7 +9,7 @@ const CartItemControl: React.FC<ICartItem> = (props) => {
     const {addToCart, fetching, removeFromCart} = useCart();
 
     const _addToCart = () => {
-        addToCart({ product: props.product, amount: 1 });
+        addToCart({ product: props.product, amount: 1});
     }
 
     const _removeFromCart = () => {

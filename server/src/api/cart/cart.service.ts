@@ -61,7 +61,7 @@ export class CartService {
 
     private _updateCartItem (cart, product: { product: string, amount: number }) {
         cart.products.forEach((cartProduct, index) => {
-            if (cartProduct.product.toString() === product.product) {
+            if (cartProduct.product._id.toString() === product.product) {
                 if (product.amount) {
                     cartProduct.amount = product.amount;
                 } else {

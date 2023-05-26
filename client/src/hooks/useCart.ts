@@ -22,7 +22,7 @@ export const useCart = function () {
                     removeFromCart(props);
                 }
             })
-    }, []);
+    }, [cart.cart]);
 
     const removeFromCartMethod = useCallback((props: ICartItem) => {
         const currentAmount = cart.cart.filter((item) => item.product._id === props.product._id)[0]?.amount;
@@ -33,7 +33,7 @@ export const useCart = function () {
                     addToCart(props);
                 }
             })
-    }, []);
+    }, [cart.cart]);
 
     const changeCartMethod = useCallback((props: ICartItem) => {
         const previousAmount = cart.cart.filter((item) => item.product._id === props.product._id)[0]?.amount;
@@ -46,20 +46,19 @@ export const useCart = function () {
                     }
                 })
         }
-    }, [])
+    }, [cart.cart])
 
     const resetCartMethod = useCallback(() => {
         const previousCart = [...cart.cart].splice(0, cart.cart.length);
         if (previousCart.length) {
             resetCart();
             dispatchResetCart().then((response) => {
-                console.log(response);
                 if (!response.data) {
                     updateCart(previousCart);
                 }
             })
         }
-    }, [])
+    }, [cart.cart])
 
     return {
         addToCart: addToCartMethod,
