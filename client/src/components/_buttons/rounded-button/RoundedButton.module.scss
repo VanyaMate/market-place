@@ -1,0 +1,14 @@
+@import "src/styles/sizes";
+
+.container {
+    border-radius: 50%;
+    width: $mediumSmallHeight;
+    height: $mediumSmallHeight;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .icon {
+        width: 60%;
+    }
+}

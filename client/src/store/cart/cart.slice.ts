@@ -30,6 +30,18 @@ export const cartSlice = createSlice({
             state.cart = action.payload;
             sessionStorage.setItem(CART_STORAGE_NAME, JSON.stringify(state.cart));
         },
+        updateItemCart: (state: Draft<ICartInitialState>, action: PayloadAction<ICartItem>) => {
+            state.cart.forEach((cartItem, index) => {
+                if (cartItem.product._id === action.payload.product._id) {
+                    cartItem.amount = action.payload.amount ?? cartItem.amount;
+                    if (cartItem.amount <= 0) {
+                        state.cart.splice(index, 1);
+                    }
+                    return;
+                }
+            })
+            sessionStorage.setItem(CART_STORAGE_NAME, JSON.stringify(state.cart));
+        },
         removeFromCart: (state: Draft<ICartInitialState>, action: PayloadAction<{ product: IProduct, amount?: number }>) => {
             state.cart.forEach((cartItem, index) => {
                 if (cartItem.product._id === action.payload.product._id) {

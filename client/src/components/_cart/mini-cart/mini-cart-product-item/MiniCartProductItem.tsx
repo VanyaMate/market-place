@@ -1,12 +1,12 @@
 import React from 'react';
 import css from './MiniCartProductItem.module.scss';
-import {ICartItem} from "../../../store/auth/auth.types";
-import Row from "../../_ui/_containers/row/Row";
-import AnimatedImageContainer from "../../_ui/_images/animated-image-container/AnimatedImageContainer";
-import ProductPrice from "../../_product/product-price/ProductPrice";
-import {BACKEND_HOST} from "../../../cfg/links.config";
-import Vertical from "../../_ui/_containers/vertical/Vertical";
-import {getProductImageLink, ImageLinkSize} from "../../../utils/links.methods";
+import {ICartItem} from "../../../../store/auth/auth.types";
+import Row from "../../../_ui/_containers/row/Row";
+import AnimatedImageContainer from "../../../_ui/_images/animated-image-container/AnimatedImageContainer";
+import ProductPrice from "../../../_product/product-price/ProductPrice";
+import Vertical from "../../../_ui/_containers/vertical/Vertical";
+import {getProductImageLink, ImageLinkSize} from "../../../../utils/links.methods";
+import CartItemControl from "../../cart-item-control/CartItemControl";
 
 const MiniCartProductItem: React.FC<ICartItem> = (props) => {
     return (
@@ -16,7 +16,7 @@ const MiniCartProductItem: React.FC<ICartItem> = (props) => {
                 <div>{ props.product.title } [ {props.amount} ]</div>
                 <ProductPrice {...props.product}/>
             </Vertical>
-            <div>Controll</div>
+            <CartItemControl {...props}/>
         </Row>
     );
 };

@@ -12,13 +12,12 @@ export interface IAddToCartButton extends IDefaultComponent {
 
 const AddToCartButton: React.FC<IAddToCartButton> = (props) => {
     const [dispatchAddToCart, {isFetching, isError, data}] = useLazyAddToCartQuery();
-    const {updateCart, addToCart: addToLocalCart} = useActions();
+    const {addToCart: addToLocalCart, removeFromCart} = useActions();
     const addToCart = useCallback(() => {
         addToLocalCart({ product: props.product, amount: 1 })
         dispatchAddToCart({ productId: props.product._id }).then((response) => {
-            console.log(response);
-            if (response.data) {
-                updateCart(response.data);
+            if (!response.data) {
+                removeFromCart({ product: props.product, amount: 1 });
             }
         });
     }, [props.product]);
@@ -27,7 +26,7 @@ const AddToCartButton: React.FC<IAddToCartButton> = (props) => {
         <div className={[css.container].join(' ')}>
             <Button
                 onClick={addToCart}
-                active
+                active={!isFetching}
                 className={[props.className, css.button].join(' ')}
             >{ props.children }</Button>
         </div>

@@ -30,7 +30,13 @@ export const cartApi = createApi({
                 }
             })
         }),
+        resetCart: build.query<void, void>({
+            query: () => ({
+                url: '/reset',
+                method: 'post'
+            })
+        })
     })
 })
 
-export const {useLazyAddToCartQuery, useLazyChangeCartQuery} = cartApi;
+export const {useLazyAddToCartQuery, useLazyChangeCartQuery, useLazyResetCartQuery} = cartApi;

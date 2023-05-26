@@ -1,7 +1,7 @@
 import React from 'react';
 import ContainedPopup from "../../../../../_ui/_popups/contained-popup/ContainedPopup";
 import TitleIcon from "../../../../../title-icon/TitleIcon";
-import MiniCart from "../../../../../mini-cart/MiniCart";
+import MiniCart from "../../../../../_cart/mini-cart/MiniCart";
 
 const CartTitleIcon = () => {
     return (
