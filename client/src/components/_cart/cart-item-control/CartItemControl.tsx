@@ -21,7 +21,6 @@ const CartItemControl: React.FC<ICartItem> = (props) => {
 
     const _changeAmountCart = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
-            console.log('enter');
             const amount = (e.target as HTMLInputElement).value;
             amountHook.setValue(amount);
             changeCart({ product: props.product, amount: +amount })
@@ -30,9 +29,9 @@ const CartItemControl: React.FC<ICartItem> = (props) => {
 
     return (
         <Row offset={5} className={css.container}>
-            <RoundedButton icon={'/icons/delete.png'} onClick={_removeFromCart} active={!fetching}/>
-            <Input inputHook={amountHook} className={css.amount} onKeyDown={_changeAmountCart}/>
-            <RoundedButton icon={'/icons/editing.png'} onClick={_addToCart} active={!fetching}/>
+            <RoundedButton icon={'/icons/minus.png'} onClick={_removeFromCart} active={!fetching}/>
+            <Input inputHook={amountHook} className={css.amount} onKeyDown={_changeAmountCart} type={"number"}/>
+            <RoundedButton icon={'/icons/plus.png'} onClick={_addToCart} active={!fetching}/>
         </Row>
     );
 };

@@ -5,6 +5,10 @@
     align-items: center;
     justify-content: space-between;
 
+    .info {
+        align-items: center;
+    }
+
     .image {
         border-radius: $mediumOffset;
     }

@@ -20,6 +20,8 @@ export const useCart = function () {
             .then((response) => {
                 if (!response.data) {
                     removeFromCart(props);
+                } else {
+                    updateCart(response.data);
                 }
             })
     }, [cart.cart]);
@@ -31,6 +33,8 @@ export const useCart = function () {
             .then((response) => {
                 if (!response.data) {
                     addToCart(props);
+                } else {
+                    updateCart(response.data);
                 }
             })
     }, [cart.cart]);
@@ -43,6 +47,8 @@ export const useCart = function () {
                 .then((response) => {
                     if (!response.data) {
                         updateItemCart({ product: props.product, amount: previousAmount });
+                    } else {
+                        updateCart(response.data);
                     }
                 })
         }

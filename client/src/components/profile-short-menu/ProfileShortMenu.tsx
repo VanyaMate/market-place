@@ -13,7 +13,7 @@ const ProfileShortMenu = () => {
     const {resetUser} = useActions();
 
     const logout = function () {
-        dispatchLogout({}).then(() => {
+        dispatchLogout().then(() => {
             resetUser();
         })
     }
