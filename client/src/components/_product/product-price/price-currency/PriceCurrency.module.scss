@@ -1,0 +1,12 @@
+@import "src/styles/colors";
+@import "src/styles/sizes";
+
+.container {
+    font-size: 1em;
+
+    span {
+        font-size: .7em;
+        color: $lightGray;
+        padding: 0 $smallOffset;
+    }
+}

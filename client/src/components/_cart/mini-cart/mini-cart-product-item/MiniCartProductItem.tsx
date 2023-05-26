@@ -7,8 +7,11 @@ import ProductPrice from "../../../_product/product-price/ProductPrice";
 import Vertical from "../../../_ui/_containers/vertical/Vertical";
 import {getProductImageLink, ImageLinkSize} from "../../../../utils/links.methods";
 import CartItemControl from "../../cart-item-control/CartItemControl";
+import PriceCurrency from "../../../_product/product-price/price-currency/PriceCurrency";
+import {IUsePrice, usePrice} from "../../../../hooks/usePrice";
 
 const MiniCartProductItem: React.FC<ICartItem> = (props) => {
+    const price = usePrice(props.product as IUsePrice);
     return (
         <div className={css.container}>
             <Row offset={10} className={css.info}>
@@ -18,7 +21,10 @@ const MiniCartProductItem: React.FC<ICartItem> = (props) => {
                     <ProductPrice {...props.product}/>
                 </Vertical>
             </Row>
-            <CartItemControl {...props}/>
+            <Vertical offset={5} className={css.control}>
+                <CartItemControl {...props}/>
+                <PriceCurrency price={price * props.amount} currency={props.product.priceCurrency}/>
+            </Vertical>
         </div>
     );
 };

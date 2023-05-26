@@ -1,6 +1,8 @@
 import React from 'react';
 import {IDefaultComponent} from "../../../interfaces/default-component.interface";
 import css from './ProductPrice.module.scss';
+import {DiscountType, IUsePrice, usePrice} from "../../../hooks/usePrice";
+import PriceCurrency from "./price-currency/PriceCurrency";
 
 export interface IProductPrice extends IDefaultComponent {
     price: number;
@@ -10,8 +12,8 @@ export interface IProductPrice extends IDefaultComponent {
 }
 
 const ProductPrice: React.FC<IProductPrice> = (props) => {
-    const discountValue = props.discountType === 'FIX' ? (props.priceCurrency ?? 'руб.') : '%';
-    const priceWithDiscount = props.discountType === 'FIX' ? props.price - props.discount! : (props.price - props.price / 100 * props.discount!).toFixed(0);
+    const discountValue = props.discountType === DiscountType.FIX ? (props.priceCurrency ?? 'руб.') : '%';
+    const price = usePrice(props as IUsePrice);
 
     return (
         <div className={[css.container, props.className].join(' ')}>
@@ -26,16 +28,11 @@ const ProductPrice: React.FC<IProductPrice> = (props) => {
                                 <span>{discountValue}</span>
                             </div>
                         </div>
-                        <div className={css.price}>
-                            {priceWithDiscount}
-                            <span>{props.priceCurrency ?? 'руб.'}</span>
-                        </div>
+
+                        <PriceCurrency price={price} currency={props.priceCurrency}/>
                     </div>
                     :
-                    <div className={css.price}>
-                        {props.price}
-                        <span>{props.priceCurrency ?? 'руб.'}</span>
-                    </div>
+                    <PriceCurrency price={price} currency={props.priceCurrency}/>
             }
         </div>
     );
