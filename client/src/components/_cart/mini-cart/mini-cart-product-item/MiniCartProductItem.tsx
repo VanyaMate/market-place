@@ -10,15 +10,17 @@ import CartItemControl from "../../cart-item-control/CartItemControl";
 
 const MiniCartProductItem: React.FC<ICartItem> = (props) => {
     return (
-        <Row className={css.container} offset={10}>
-            <AnimatedImageContainer src={getProductImageLink(props.product.generalImage, ImageLinkSize.SMALL)} w={60} h={60} seconds={5} className={css.image}/>
-            <Vertical offset={5}>
-                <div>{ props.product.title } [ {props.amount} ]</div>
-                <ProductPrice {...props.product}/>
-            </Vertical>
+        <div className={css.container}>
+            <Row offset={10}>
+                <AnimatedImageContainer src={getProductImageLink(props.product.generalImage, ImageLinkSize.SMALL)} w={60} h={60} seconds={5} className={css.image}/>
+                <Vertical offset={5}>
+                    <div>{ props.product.title }</div>
+                    <ProductPrice {...props.product}/>
+                </Vertical>
+            </Row>
             <CartItemControl {...props}/>
-        </Row>
+        </div>
     );
 };
 
-export default MiniCartProductItem;
+export default React.memo(MiniCartProductItem);

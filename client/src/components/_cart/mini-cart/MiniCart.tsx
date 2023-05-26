@@ -18,4 +18,4 @@ const MiniCart = () => {
     );
 };
 
-export default MiniCart;
+export default React.memo(MiniCart);

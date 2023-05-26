@@ -1,7 +1,9 @@
 @import "../../../../styles/sizes";
 
 .container {
+    display: flex;
     align-items: center;
+    justify-content: space-between;
 
     .image {
         border-radius: $mediumOffset;

@@ -1,0 +1,11 @@
+@import "src/styles/sizes";
+
+.container {
+    display: flex;
+
+    .amount {
+        width: 40px;
+        padding: $smallOffset;
+        text-align: center;
+    }
+}

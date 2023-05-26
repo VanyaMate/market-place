@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 export interface IUseInput {
     value: string;
@@ -7,5 +7,10 @@ export interface IUseInput {
 
 export const useInput = function (defaultValue: string): IUseInput {
     const [value, setValue] = useState<string>(defaultValue);
+
+    useEffect(() => {
+        setValue(defaultValue);
+    }, [defaultValue])
+
     return { value, setValue };
 }

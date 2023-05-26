@@ -1,11 +1,9 @@
 import React, {useState} from 'react';
 import css from './Input.module.scss';
 import {IUseInput} from "../../../../hooks/useInput.hook";
+import {IDefaultComponent} from "../../../../interfaces/default-component.interface";
 
-export interface IInput {
-    placeholder?: string;
-    type?: string;
-    className?: string;
+export interface IInput extends React.InputHTMLAttributes<HTMLInputElement> {
     inputHook: IUseInput;
 }
 
@@ -17,6 +15,7 @@ const Input: React.FC<IInput> = (props) => {
             placeholder={props.placeholder ?? ''}
             className={[css.container, props.className ?? ''].join(' ')}
             onChange={({ target }) => props.inputHook.setValue(target.value)}
+            onKeyDown={props.onKeyDown}
         />
     );
 };
