@@ -8,7 +8,7 @@ export interface IProductPrice extends IDefaultComponent {
     price: number;
     priceCurrency?: string;
     discount?: number;
-    discountType?: string;
+    discountType?: DiscountType;
 }
 
 const ProductPrice: React.FC<IProductPrice> = (props) => {

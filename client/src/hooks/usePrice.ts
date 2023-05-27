@@ -20,7 +20,7 @@ export interface IPrice {
 export const usePrice = function (props: IUsePrice): IPrice {
     return useMemo(() => {
         return priceEstimation(props);
-    }, [])
+    }, [props])
 }
 
 export const usePriceCallback = function () {

@@ -1,3 +1,5 @@
+import {DiscountType} from "../../hooks/usePrice";
+
 export interface IProducts {
     products?: (IProduct)[] | null;
     options: IResponseOptions;
@@ -13,7 +15,7 @@ export interface IProduct {
     price: number;
     priceCurrency?: string;
     discount?: number;
-    discountType?: string;
+    discountType?: DiscountType;
     brand: IBrand;
 }
 export interface IBrand {
