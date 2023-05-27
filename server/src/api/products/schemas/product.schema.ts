@@ -36,10 +36,10 @@ export class Product {
     @Prop({ type: Date, default: Date.now })
     date: Date
 
-    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Brand' })
+    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: Brand.name })
     brand: Brand;
 
-    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
+    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: User.name })
     author: User;
 
 }
