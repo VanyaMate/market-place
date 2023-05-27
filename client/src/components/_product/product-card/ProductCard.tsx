@@ -11,7 +11,7 @@ import {IProduct} from "../../../store/products/products.types";
 const ProductCard: React.FC<IProduct> = (props) => {
     return (
         <div className={css.container}>
-            <ProductCardSlider slides={[props.generalImage, ...(props.images || [])]}/>
+            <ProductCardSlider slides={[props.generalImage.path, ...(props.images || []).map((image) => image.path)]}/>
             <div className={css.head}>
                 <div className={css.article}>article: 6893890</div>
                 <DefaultLink to={`${ROUTE_CATALOGUE}/?brand=${props.brand.title}`} className={css.brand}>{ props.brand.title }</DefaultLink>

@@ -49,10 +49,10 @@ export class CompilationsService {
 
         for (let i = 0; i < amount; i++) {
             if (array.length === 0) return randomElements;
-            randomElements.push(array.splice(getRandomInt(0, array.length), 1));
+            randomElements.push(array.splice(getRandomInt(0, array.length), 1)[0]);
         }
 
-        return randomElements.flat(1);
+        return randomElements;
     }
 
 }

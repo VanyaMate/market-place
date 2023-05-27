@@ -6,9 +6,12 @@ import Row from "../../../_ui/_containers/row/Row";
 import ProductPageInfo from "./product-page-info/ProductPageInfo";
 
 const ProductPageGeneralInfo: React.FC<IProduct> = (props) => {
+    /**
+     * TODO: Пока сделано так, что картинки много раз повторяются.
+     */
     return (
         <Row className={css.container} offset={10}>
-            <ProductBigSlider slides={[props.generalImage, ...(props.images ?? []), ...(props.images ?? []), ...(props.images ?? []), ...(props.images ?? [])]}/>
+            <ProductBigSlider slides={[props.generalImage, ...(props.images ?? []), ...(props.images ?? []), ...(props.images ?? []), ...(props.images ?? [])].map((image) => image.path)}/>
             <ProductPageInfo {...props}/>
         </Row>
     );

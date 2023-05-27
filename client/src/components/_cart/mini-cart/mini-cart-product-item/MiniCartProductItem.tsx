@@ -17,7 +17,7 @@ const MiniCartProductItem: React.FC<ICartItem> = (props) => {
     return (
         <div className={css.container}>
             <Row offset={10} className={css.info}>
-                <AnimatedImageContainer src={getProductImageLink(props.product.generalImage, ImageLinkSize.SMALL)} w={60} h={60} seconds={5} className={css.image}/>
+                <AnimatedImageContainer src={getProductImageLink(props.product.generalImage.path, ImageLinkSize.SMALL)} w={60} h={60} seconds={5} className={css.image}/>
                 <Vertical offset={5}>
                     <DefaultLink to={`${ROUTE_PRODUCT}/${ props.product._id }`}>{ props.product.title }</DefaultLink>
                     <ProductPrice {...props.product}/>

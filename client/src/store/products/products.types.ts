@@ -5,13 +5,19 @@ export interface IProducts {
     options: IResponseOptions;
     count: number;
 }
+export interface IImage {
+    title?: string;
+    path: string;
+    type: string;
+}
+
 export interface IProduct {
     _id: string;
     article: string;
     title: string;
     description: string;
-    generalImage: string;
-    images?: string[];
+    generalImage: IImage;
+    images?: IImage[];
     price: number;
     priceCurrency?: string;
     discount?: number;
