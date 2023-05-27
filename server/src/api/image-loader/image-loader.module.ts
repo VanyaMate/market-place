@@ -19,6 +19,9 @@ import {ImageModule} from "../../image-service/image.module";
         UsersModule,
         ImageModule,
         MongooseModule.forFeature([{ name: Image.name, schema: ImageSchema }])
+    ],
+    exports: [
+        ImageLoaderService
     ]
 })
 export class ImageLoaderModule {}

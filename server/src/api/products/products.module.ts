@@ -6,7 +6,7 @@ import {Product, ProductSchema} from "./schemas/product.schema";
 import {UsersModule} from "../users/users.module";
 import {TokensModule} from "../tokens/tokens.module";
 import {Brand, BrandSchema} from "../brands/schemas/brand.schema";
-import {ImageModule} from "../../image-service/image.module";
+import {ImageLoaderModule} from "../image-loader/image-loader.module";
 
 @Module({
     controllers: [ ProductsController ],
@@ -16,7 +16,7 @@ import {ImageModule} from "../../image-service/image.module";
         MongooseModule.forFeature([ { name: Brand.name, schema: BrandSchema } ]),
         UsersModule,
         TokensModule,
-        ImageModule,
+        ImageLoaderModule,
     ],
     exports: [ ProductsService ]
 })

@@ -10,6 +10,7 @@ import {ImageSize} from "../../sharp-service/sharp.service";
 import {randomUUID} from "crypto";
 import {FolderType} from "../../file-service/file-service.service";
 import {ImageService} from "../../image-service/image.service";
+import {ImageLoaderService} from "../image-loader/image-loader.service";
 
 @Injectable()
 export class ProductsService {
@@ -23,7 +24,7 @@ export class ProductsService {
 
     constructor(@InjectModel(Product.name) private productModel: Model<Product>,
                 @InjectModel(Brand.name) private brandModel: Model<Brand>,
-                private imageService: ImageService) {}
+                private imageLoaderService: ImageLoaderService) {}
 
     async create (productDto: ProductDto, files: { [key: string]: Express.Multer.File[] }, userId: Types.ObjectId) {
         try {
@@ -34,30 +35,30 @@ export class ProductsService {
                 throw {message: 'Неверно указан бренд товара'};
             }
 
-            const generalImagePath = await this.imageService.saveOptimizedImage(
-                generalImage[0].buffer,
+            const generalImageDatas = await this.imageLoaderService.load(
+                generalImage,
                 FolderType.PRODUCT,
                 userId.toString(),
                 this.defaultOptimizedImageSizes
             )
 
-            const imagesPaths = await Promise.all((images || []).map((image) => {
-                return this.imageService.saveOptimizedImage(
-                    image.buffer,
-                    FolderType.PRODUCT,
-                    userId.toString(),
-                    this.defaultOptimizedImageSizes
-                )
-            }))
+            const imagesPaths = await this.imageLoaderService.load(
+                images,
+                FolderType.PRODUCT,
+                userId.toString(),
+                this.defaultOptimizedImageSizes
+            );
 
-            const product = (await this.productModel.create({
+            const product = await (await this.productModel.create({
                 ...productDto,
                 author: userId,
-                generalImage: generalImagePath,
-                images: imagesPaths,
+                generalImage: generalImageDatas[0].id,
+                images: imagesPaths.map((image) => image.id),
                 brand: brand,
-            })).populate('brand', ['title', 'description', 'image']);
+            }))
+                .populate([ 'brand', 'generalImage', 'images' ])
 
+            // 'brand', ['title', 'description', 'image']
             return product;
         }
         catch (e) {

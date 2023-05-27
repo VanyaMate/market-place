@@ -3,6 +3,7 @@ import {HydratedDocument} from "mongoose";
 import * as mongoose from "mongoose";
 import {User} from "../../user/schemas/user.schema";
 import {Brand} from "../../brands/schemas/brand.schema";
+import {Image} from "../../image-loader/schemas/image.schema";
 
 export type ProductDocument = HydratedDocument<Product>;
 
@@ -15,11 +16,11 @@ export class Product {
     @Prop({ type: String })
     description: string;
 
-    @Prop({ type: String })
-    generalImage: string;
+    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: Image.name })
+    generalImage: Image;
 
-    @Prop({ type: [String] })
-    images: string[];
+    @Prop({ type: [ { type: mongoose.Schema.Types.ObjectId, ref: Image.name } ] })
+    images: Image[];
 
     @Prop({ type: Number })
     price: number;
@@ -48,6 +49,8 @@ export const ProductSchema = SchemaFactory.createForClass(Product);
 
 ProductSchema.pre(["find", "findOne"], function (next) {
     this.populate('brand', ['title', 'description', 'image']);
+    this.populate('generalImage', ['title', 'path', 'type']);
+    this.populate('images', ['title', 'path', 'type']);
     this.select('-author');
     this.select('-__v');
     next();

@@ -3,6 +3,7 @@ import {FolderType} from "../../../file-service/file-service.service";
 import {User} from "../../user/schemas/user.schema";
 import * as mongoose from "mongoose";
 import {HydratedDocument} from "mongoose";
+import {BrandSchema} from "../../brands/schemas/brand.schema";
 
 export type ImageDocument = HydratedDocument<Image>;
 
@@ -24,3 +25,9 @@ export class Image {
 }
 
 export const ImageSchema = SchemaFactory.createForClass(Image);
+
+ImageSchema.pre(['find', 'findOne'], function (next) {
+    this.select('-user');
+    this.select('-__v');
+    next();
+});
