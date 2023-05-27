@@ -9,6 +9,8 @@ import {getProductImageLink, ImageLinkSize} from "../../../../utils/links.method
 import CartItemControl from "../../cart-item-control/CartItemControl";
 import PriceCurrency from "../../../_product/product-price/price-currency/PriceCurrency";
 import {DiscountType, IUsePrice, usePrice} from "../../../../hooks/usePrice";
+import DefaultLink from "../../../_ui/_links/default-link/DefaultLink";
+import {ROUTE_PRODUCT} from "../../../../cfg/links.config";
 
 const MiniCartProductItem: React.FC<ICartItem> = (props) => {
     const price = usePrice(props.product as IUsePrice);
@@ -17,7 +19,7 @@ const MiniCartProductItem: React.FC<ICartItem> = (props) => {
             <Row offset={10} className={css.info}>
                 <AnimatedImageContainer src={getProductImageLink(props.product.generalImage, ImageLinkSize.SMALL)} w={60} h={60} seconds={5} className={css.image}/>
                 <Vertical offset={5}>
-                    <div>{ props.product.title }</div>
+                    <DefaultLink to={`${ROUTE_PRODUCT}/${ props.product._id }`}>{ props.product.title }</DefaultLink>
                     <ProductPrice {...props.product}/>
                 </Vertical>
             </Row>

@@ -1,15 +1,29 @@
-import React, {useMemo} from 'react';
+import React from 'react';
 import css from './CartSummary.module.scss';
 import {useMySelector} from "../../../../hooks/_redux/useMySelector.hook";
 import {useCart} from "../../../../hooks/useCart";
+import ProductPrice from "../../../_product/product-price/ProductPrice";
+import {DiscountType} from "../../../../hooks/usePrice";
+import TitledBlock from "../../../titled-block/TitledBlock";
 
-const CartSummary = () => {
+
+const CartSummary: React.FC<{ currency: string }> = (props) => {
     const cart = useMySelector(state => state.cart);
     const { summaryPrice } = useCart();
 
+    /**
+     * TODO: Изменить priceCurrency
+     */
     return (
         <div className={css.container}>
-            Итог: { summaryPrice.estimation } ( - { summaryPrice.discount } )
+            <TitledBlock title={'Итоговая сумма'}>
+                <ProductPrice
+                    price={summaryPrice.original}
+                    priceCurrency={props.currency}
+                    discount={summaryPrice.discount}
+                    discountType={DiscountType.FIX}
+                />
+            </TitledBlock>
         </div>
     );
 };
