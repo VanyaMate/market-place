@@ -29,10 +29,10 @@ const ProductPrice: React.FC<IProductPrice> = (props) => {
                             </div>
                         </div>
 
-                        <PriceCurrency price={price} currency={props.priceCurrency}/>
+                        <PriceCurrency price={price.estimation} currency={props.priceCurrency}/>
                     </div>
                     :
-                    <PriceCurrency price={price} currency={props.priceCurrency}/>
+                    <PriceCurrency price={price.estimation} currency={props.priceCurrency}/>
             }
         </div>
     );

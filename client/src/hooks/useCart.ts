@@ -3,6 +3,7 @@ import {useLazyAddToCartQuery, useLazyChangeCartQuery, useLazyResetCartQuery} fr
 import {useCallback, useMemo} from "react";
 import {ICartItem} from "../store/auth/auth.types";
 import {useMySelector} from "./_redux/useMySelector.hook";
+import {IPrice, IUsePrice, usePriceCallback} from "./usePrice";
 
 export const useCart = function () {
     const [dispatchChangeCart, changeCartStatus] = useLazyChangeCartQuery();
@@ -10,9 +11,29 @@ export const useCart = function () {
     const [dispatchResetCart, resetCartStatus] = useLazyResetCartQuery();
     const {addToCart, removeFromCart, updateItemCart, resetCart, updateCart} = useActions();
     const cart = useMySelector((state) => state.cart);
+    const dispatchPriceEstimation = usePriceCallback();
     const fetchingStatus = useMemo(() => {
         return changeCartStatus.isFetching || addToCartStatus.isFetching || resetCartStatus.isFetching;
     }, [changeCartStatus.isFetching, addToCartStatus.isFetching, resetCartStatus.isFetching])
+
+    const summaryPrice: IPrice = useMemo(() => {
+        const summary: IPrice = {
+            original: 0,
+            discount: 0,
+            estimation: 0,
+        };
+
+        for (let i = 0; i < cart.cart.length; i++) {
+            const item = cart.cart[i];
+            const price: IPrice = dispatchPriceEstimation(item.product as IUsePrice);
+
+            summary.original += price.original * item.amount;
+            summary.discount += price.discount * item.amount;
+            summary.estimation += price.estimation * item.amount;
+        }
+
+        return summary;
+    }, [cart.cart]);
 
     const addToCartMethod = useCallback((props: ICartItem) => {
         addToCart(props);
@@ -72,5 +93,6 @@ export const useCart = function () {
         changeCart: changeCartMethod,
         resetCart: resetCartMethod,
         fetching: fetchingStatus,
+        summaryPrice: summaryPrice,
     };
 }

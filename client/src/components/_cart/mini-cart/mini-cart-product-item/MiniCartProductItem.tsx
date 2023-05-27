@@ -23,7 +23,7 @@ const MiniCartProductItem: React.FC<ICartItem> = (props) => {
             </Row>
             <Vertical offset={5} className={css.control}>
                 <CartItemControl {...props}/>
-                <PriceCurrency price={price * props.amount} currency={props.product.priceCurrency}/>
+                <PriceCurrency price={price.estimation * props.amount} currency={props.product.priceCurrency}/>
             </Vertical>
         </div>
     );

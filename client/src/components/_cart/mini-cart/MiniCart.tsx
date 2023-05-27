@@ -3,6 +3,7 @@ import {useMySelector} from "../../../hooks/_redux/useMySelector.hook";
 import MiniCartProductItem from "./mini-cart-product-item/MiniCartProductItem";
 import css from './MiniCart.module.scss';
 import Vertical from "../../_ui/_containers/vertical/Vertical";
+import CartSummary from "./cart-summary/CartSummary";
 
 const MiniCart = () => {
     const cart = useMySelector((state) => state.cart);
@@ -14,6 +15,7 @@ const MiniCart = () => {
                     return <MiniCartProductItem key={item.product._id} {...item}/>
                 })
             }
+            <CartSummary/>
         </Vertical>
     );
 };
