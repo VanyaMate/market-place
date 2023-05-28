@@ -29,11 +29,19 @@ export class CompaniesService {
         const company = (await this.companyModel.create({
             ...companyDto,
             icon: icon.id,
-            user: userId,
+            owner: userId,
         }))
             .populate('icon');
 
         return company;
+    }
+
+    async getAllByUser (userId: string) {
+        console.log(userId);
+        return await this.companyModel
+            .find({ owner: userId })
+            .populate(['icon'])
+            .exec();
     }
 
 }
