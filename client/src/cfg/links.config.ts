@@ -14,3 +14,4 @@ export const ROUTE_PRODUCT = '/product';
 export const ROUTE_PRODUCT_ID = '/product/:id';
 export const ROUTE_PROFILE = '/profile';
 export const ROUTE_CATALOGUE = '/catalogue';
+export const ROUTE_MY_COMPANY = '/my-company';
