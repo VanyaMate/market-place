@@ -6,6 +6,7 @@ export enum FolderType {
     AVATAR = 'avatar',
     IMAGE = 'image',
     BRAND = 'brand',
+    COMPANY = 'company',
 }
 
 @Injectable()

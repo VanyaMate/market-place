@@ -9,6 +9,7 @@ import {BrandsModule} from "./brands/brands.module";
 import {CompilationsModule} from "./compilations/compilations.module";
 import { CartModule } from './cart/cart.module';
 import {ImageLoaderModule} from "./image-loader/image-loader.module";
+import {CompaniesModule} from "./companies/companies.module";
 
 @Module({
     imports: [
@@ -22,6 +23,7 @@ import {ImageLoaderModule} from "./image-loader/image-loader.module";
         CompilationsModule,
         CartModule,
         ImageLoaderModule,
+        CompaniesModule,
     ]
 })
 export class ApiModule {}
