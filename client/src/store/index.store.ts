@@ -6,6 +6,7 @@ import {authReducer} from "./auth/auth.slice";
 import {globalReducer} from "./global/global.slice";
 import {cartApi} from "./cart/cart.api";
 import {cartReducer} from "./cart/cart.slice";
+import {notificationsSlice} from "./notifications/notifications.slice";
 
 export const store = configureStore({
     reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
         auth: authReducer,
         global: globalReducer,
         cart: cartReducer,
+        notifications: notificationsSlice.reducer
     },
     middleware: getDefaultMiddleware => getDefaultMiddleware().concat([
         productsApi.middleware,

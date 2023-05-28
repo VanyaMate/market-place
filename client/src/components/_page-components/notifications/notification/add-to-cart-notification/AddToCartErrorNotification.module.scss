@@ -1,0 +1,27 @@
+@import "src/styles/colors";
+@import "src/styles/sizes";
+
+.container {
+    padding: $mediumOffset;
+    background: rgba($markRedLight, .99);
+    border-radius: $mediumOffset;
+    box-shadow: $defaultBoxShadow;
+    align-items: center;
+
+    .icon {
+        border-radius: 50%;
+    }
+
+    .title {
+        font-size: 16px;
+        font-weight: normal;
+
+        span {
+            color: $black;
+            font-weight: bold;
+        }
+    }
+    .description {
+        font-size: 12px;
+    }
+}

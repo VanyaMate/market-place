@@ -87,6 +87,11 @@ export const useCart = function () {
         }
     }, [cart.cart])
 
+    const getAmountById = useCallback((id: string) => {
+        const product = [...cart.cart].filter((item) => item.product._id === id)[0];
+        return product?.amount;
+    }, [cart.cart]);
+
     return {
         addToCart: addToCartMethod,
         removeFromCart: removeFromCartMethod,
@@ -94,5 +99,6 @@ export const useCart = function () {
         resetCart: resetCartMethod,
         fetching: fetchingStatus,
         summaryPrice: summaryPrice,
+        getAmountById: getAmountById,
     };
 }

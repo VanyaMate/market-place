@@ -36,8 +36,11 @@ export class CompaniesService {
         return company;
     }
 
+    /**
+     * TODO: Добавить лимит, offset и итд
+     * @param userId
+     */
     async getAllByUser (userId: string) {
-        console.log(userId);
         return await this.companyModel
             .find({ owner: userId })
             .populate(['icon'])

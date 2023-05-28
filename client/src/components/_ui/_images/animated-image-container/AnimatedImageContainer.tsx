@@ -15,6 +15,8 @@ export interface IAnimatedImageContainer extends IDefaultComponent {
 const StyledContainer = styled.div`
     width: ${(props: IAnimatedImageContainer) => props.w + 'px'};
     height: ${(props: IAnimatedImageContainer) => props.h + 'px'};
+    min-width: ${(props: IAnimatedImageContainer) => props.w + 'px'};
+    min-height: ${(props: IAnimatedImageContainer) => props.h + 'px'};
     overflow: hidden;
 `;
 

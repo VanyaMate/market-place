@@ -1,0 +1,10 @@
+@import "src/styles/sizes";
+@import "src/styles/colors";
+
+.container {
+    position: fixed;
+    z-index: 10000;
+    bottom: $mediumOffset;
+    right: $mediumOffset;
+    max-width: 300px;
+}

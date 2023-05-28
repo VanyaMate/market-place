@@ -2,6 +2,7 @@
 @import "styles/sizes";
 
 .container {
+    position: relative;
     min-width: 100%;
 
     background: $darkBlack;

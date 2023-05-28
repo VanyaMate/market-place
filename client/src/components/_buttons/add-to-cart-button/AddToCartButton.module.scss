@@ -1,6 +1,20 @@
+@import "src/styles/colors";
+@import "src/styles/sizes";
+
 .container {
+    align-items: end;
+
+    .amount {
+        min-width: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: $markBlueLight;
+        border-radius: $mediumOffset;
+        height: 38px;
+    }
 
     .button {
-
+        height: 38px;
     }
 }
