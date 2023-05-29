@@ -1,11 +1,11 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import {PRODUCTS_API} from "../../cfg/links.config";
+import {API_PRODUCTS} from "../../cfg/links.config";
 import {IProducts, IProduct} from "./products.types";
 
 export const productsApi = createApi({
     reducerPath: 'products/api',
     baseQuery: fetchBaseQuery({
-        baseUrl: PRODUCTS_API
+        baseUrl: API_PRODUCTS
     }),
     endpoints: (build) => ({
         getProducts: build.query<IProducts, any>({

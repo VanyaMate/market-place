@@ -1,11 +1,11 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import {AUTH_API} from "../../cfg/links.config";
+import {API_AUTH} from "../../cfg/links.config";
 import {IUser} from "./auth.types";
 
 export const authApi = createApi({
     reducerPath: 'auth/api',
     baseQuery: fetchBaseQuery({
-        baseUrl: AUTH_API,
+        baseUrl: API_AUTH,
         credentials: 'include'
     }),
     endpoints: (build) => ({

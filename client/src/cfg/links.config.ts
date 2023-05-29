@@ -1,10 +1,11 @@
 export const BACKEND_HOST: string = 'http://localhost:5000';
 //export const BACKEND_HOST: string = 'https://market-place-v1o0.onrender.com';
 export const API: string = `${BACKEND_HOST}/api`;
-export const AUTH_API: string = `${API}/auth`;
-export const PRODUCTS_API: string = `${API}/products`;
-export const COMPILATIONS_API: string = `${API}/compilations`;
-export const CART_API: string = `${API}/cart`;
+export const API_AUTH: string = `${API}/auth`;
+export const API_PRODUCTS: string = `${API}/products`;
+export const API_COMPILATIONS: string = `${API}/compilations`;
+export const API_CART: string = `${API}/cart`;
+export const API_COMPANIES: string = `${API}/companies`;
 
 export const ROUTE_HOME = '/';
 export const ROUTE_LOGIN = '/login';

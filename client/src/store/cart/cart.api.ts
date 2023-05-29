@@ -1,11 +1,11 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import {CART_API} from "../../cfg/links.config";
+import {API_CART} from "../../cfg/links.config";
 import {ICartItem} from "../auth/auth.types";
 
 export const cartApi = createApi({
     reducerPath: 'cart/api',
     baseQuery: fetchBaseQuery({
-        baseUrl: CART_API,
+        baseUrl: API_CART,
         credentials: 'include',
         cache: 'no-cache',
     }),

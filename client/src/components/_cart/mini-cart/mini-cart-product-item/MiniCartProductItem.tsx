@@ -8,7 +8,7 @@ import Vertical from "../../../_ui/_containers/vertical/Vertical";
 import {getProductImageLink, ImageLinkSize} from "../../../../utils/links.methods";
 import CartItemControl from "../../cart-item-control/CartItemControl";
 import PriceCurrency from "../../../_product/product-price/price-currency/PriceCurrency";
-import {DiscountType, IUsePrice, usePrice} from "../../../../hooks/usePrice";
+import {DiscountType, IUsePrice, usePrice} from "../../../../hooks/usePrice.hook";
 import DefaultLink from "../../../_ui/_links/default-link/DefaultLink";
 import {ROUTE_PRODUCT} from "../../../../cfg/links.config";
 

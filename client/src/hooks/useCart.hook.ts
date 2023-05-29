@@ -3,13 +3,16 @@ import {useLazyAddToCartQuery, useLazyChangeCartQuery, useLazyResetCartQuery} fr
 import {useCallback, useMemo} from "react";
 import {ICartItem} from "../store/auth/auth.types";
 import {useMySelector} from "./_redux/useMySelector.hook";
-import {IPrice, IUsePrice, usePriceCallback} from "./usePrice";
+import {IPrice, IUsePrice, usePriceCallback} from "./usePrice.hook";
+import {useNotifications} from "./useNotifications.hook";
+import {NotificationType} from "../store/notifications/notifications.slice";
 
 export const useCart = function () {
     const [dispatchChangeCart, changeCartStatus] = useLazyChangeCartQuery();
     const [dispatchAddToCart, addToCartStatus] = useLazyAddToCartQuery();
     const [dispatchResetCart, resetCartStatus] = useLazyResetCartQuery();
     const {addToCart, removeFromCart, updateItemCart, resetCart, updateCart} = useActions();
+    const addNotification = useNotifications();
     const cart = useMySelector((state) => state.cart);
     const dispatchPriceEstimation = usePriceCallback();
     const fetchingStatus = useMemo(() => {
@@ -41,6 +44,10 @@ export const useCart = function () {
             .then((response) => {
                 if (!response.data) {
                     removeFromCart(props);
+                    addNotification({
+                        type: NotificationType.ADD_TO_CART_ERROR,
+                        data: props.product
+                    }, 3000)
                 } else {
                     updateCart(response.data);
                 }

@@ -16,4 +16,4 @@ const TitledBlock: React.FC<ITitledBlock> = (props) => {
     );
 };
 
-export default TitledBlock;
+export default React.memo(TitledBlock);

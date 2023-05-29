@@ -1,7 +1,7 @@
 import React from 'react';
 import {IDefaultComponent} from "../../../interfaces/default-component.interface";
 import css from './ProductPrice.module.scss';
-import {DiscountType, IUsePrice, usePrice} from "../../../hooks/usePrice";
+import {DiscountType, IUsePrice, usePrice} from "../../../hooks/usePrice.hook";
 import PriceCurrency from "./price-currency/PriceCurrency";
 
 export interface IProductPrice extends IDefaultComponent {

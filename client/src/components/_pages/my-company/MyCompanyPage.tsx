@@ -1,9 +1,10 @@
 import React from 'react';
+import CreateCompanyForm from "../../_forms/create-company-form/CreateCompanyForm";
 
 const MyCompanyPage = () => {
     return (
         <div>
-            <h1>Create company</h1>
+            <CreateCompanyForm/>
             ----
             <h1>My brands</h1>
             <h1>My products</h1>

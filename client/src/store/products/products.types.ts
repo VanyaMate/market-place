@@ -1,4 +1,4 @@
-import {DiscountType} from "../../hooks/usePrice";
+import {DiscountType} from "../../hooks/usePrice.hook";
 
 export interface IProducts {
     products?: (IProduct)[] | null;

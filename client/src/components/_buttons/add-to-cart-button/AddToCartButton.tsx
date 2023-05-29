@@ -3,7 +3,7 @@ import {IDefaultComponent} from "../../../interfaces/default-component.interface
 import Button from "../../_ui/_buttons/button/Button";
 import css from './AddToCartButton.module.scss';
 import {IProduct} from "../../../store/products/products.types";
-import {useCart} from "../../../hooks/useCart";
+import {useCart} from "../../../hooks/useCart.hook";
 import Row from "../../_ui/_containers/row/Row";
 
 export interface IAddToCartButton extends IDefaultComponent {

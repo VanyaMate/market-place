@@ -1,9 +1,9 @@
 import React from 'react';
 import css from './CartSummary.module.scss';
 import {useMySelector} from "../../../../hooks/_redux/useMySelector.hook";
-import {useCart} from "../../../../hooks/useCart";
+import {useCart} from "../../../../hooks/useCart.hook";
 import ProductPrice from "../../../_product/product-price/ProductPrice";
-import {DiscountType} from "../../../../hooks/usePrice";
+import {DiscountType} from "../../../../hooks/usePrice.hook";
 import TitledBlock from "../../../titled-block/TitledBlock";
 
 
