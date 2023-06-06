@@ -82,6 +82,9 @@ export class BrandsService {
         }
     }
 
+    /**
+     * TODO: Требуется рефакторинг ВСЕГО
+     */
     async getByCompany(userId: string, title: string) {
         const company = await this.companiesService.getFullByTitle(userId, title);
         if (!company) {
