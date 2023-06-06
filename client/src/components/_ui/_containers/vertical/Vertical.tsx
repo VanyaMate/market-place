@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {IDefaultComponent} from "../../../../interfaces/default-component.interface";
 
-export interface IVertical extends IDefaultComponent {
+export interface IVertical extends React.HTMLAttributes<HTMLDivElement> {
     offset?: number
 }
 

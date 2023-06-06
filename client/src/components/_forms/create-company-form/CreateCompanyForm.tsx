@@ -7,22 +7,16 @@ import Input from "../../_ui/_inputs/input/Input";
 import Form from "../../_ui/Form";
 import {useForm} from "../../../hooks/useForm.hook";
 import Button from "../../_ui/_buttons/button/Button";
+import Vertical from "../../_ui/_containers/vertical/Vertical";
 
 const CreateCompanyForm = () => {
     const companyNameInput = useInput('');
     const descriptionInput = useInput('');
     const form = useForm();
     const [dispatchCreate, {}] = useLazyCreateCompanyQuery();
-    const [dispatchGetMy, {}] = useLazyGetMyCompaniesQuery();
 
     useEffect(() => {
         if (form.data) {
-            const keys = form.data.keys();
-            let current = keys.next();
-            while (!!current.value) {
-                console.log(current);
-                current = keys.next();
-            }
             dispatchCreate({formData: form.data}).then((response) => console.log(response));
         }
     }, [form.data])
@@ -30,12 +24,27 @@ const CreateCompanyForm = () => {
     return (
         <TitledBlock title={'Создать компанию'} className={css.container}>
             <Form hook={form}>
-                <Input inputHook={companyNameInput} name={'title'}/>
-                <Input inputHook={descriptionInput} name={'description'}/>
-                <input type={'file'} name={'icon'}/>
-                <Button onClick={() => {}} active>Send</Button>
+                <Vertical offset={10}>
+                    <Input
+                        inputHook={companyNameInput}
+                        name={'title'}
+                        placeholder={'Название'}
+                        className={css.input}
+                    />
+                    <Input
+                        inputHook={descriptionInput}
+                        name={'description'}
+                        placeholder={'Описание'}
+                        className={css.input}
+                    />
+                    <input type={'file'} name={'icon'}/>
+                    <Button
+                        onClick={() => {}}
+                        active
+                        className={css.create_button}
+                    >Создать</Button>
+                </Vertical>
             </Form>
-            <Button onClick={() => dispatchGetMy()} active>Getmy</Button>
         </TitledBlock>
     );
 };

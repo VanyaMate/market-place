@@ -1,0 +1,24 @@
+@import "src/styles/colors";
+@import "src/styles/sizes";
+
+.container {
+    border-radius: $mediumOffset;
+    padding: $mediumOffset;
+    background: lighten($darkBlack, 2);
+
+    .content {
+        align-items: center;
+    }
+
+    .icon {
+        border-radius: $mediumOffset;
+    }
+
+    .name {
+        font-size: 30px;
+    }
+
+    .description {
+        font-size: 16px;
+    }
+}
