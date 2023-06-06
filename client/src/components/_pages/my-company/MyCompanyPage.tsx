@@ -10,18 +10,8 @@ const MyCompanyPage = () => {
     return (
         <div>
             <CreateCompanyForm/>
-            ----
             <TitledBlock title={'Мои компании'}>
                 <CompanyList list={data ?? []}/>
-            </TitledBlock>
-
-            <TitledBlock title={'Мои бренды'}>
-            </TitledBlock>
-
-            <TitledBlock title={'Мои продукты'}>
-            </TitledBlock>
-
-            <TitledBlock title={'Статистика'}>
             </TitledBlock>
         </div>
     );
