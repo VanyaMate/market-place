@@ -18,7 +18,8 @@ import {
     ROUTE_PRODUCT_ID,
     ROUTE_PROFILE
 } from "../../../cfg/links.config";
-import BusinessPage from "../../_pages/my-company/BusinessPage";
+import BusinessPage from "../../_pages/business/BusinessPage";
+import BusinessCompanyPage from "../../_pages/business/BusinessCompanyPage";
 
 const PageContent = () => {
     return (
@@ -32,6 +33,7 @@ const PageContent = () => {
                 <Route path={ROUTE_PROFILE} element={<ProfilePage/>}/>
                 <Route path={ROUTE_CATALOGUE} element={<CataloguePage/>}/>
                 <Route path={ROUTE_BUSINESS} element={<BusinessPage/>}/>
+                <Route path={ROUTE_BUSINESS + '/:companyTitle'} element={<BusinessCompanyPage/>}/>
                 <Route path={'*'} element={<Page404/>}/>
             </Routes>
         </div>

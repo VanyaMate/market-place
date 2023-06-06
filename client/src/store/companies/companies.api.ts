@@ -21,6 +21,13 @@ export const companiesApi = createApi({
                 url: 'my',
                 method: "GET",
             })
+        }),
+        getCompany: build.query<any, { title: string }>({
+            query: (props) => ({
+                url: 'getFullByName',
+                params: props,
+                method: 'GET',
+            })
         })
     })
 })

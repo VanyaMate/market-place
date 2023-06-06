@@ -5,6 +5,8 @@ import Vertical from "../../_ui/_containers/vertical/Vertical";
 import Row from "../../_ui/_containers/row/Row";
 import AnimatedImageContainer from "../../_ui/_images/animated-image-container/AnimatedImageContainer";
 import {getCompanyImageLink, ImageLinkSize} from "../../../utils/links.methods";
+import DefaultLink from "../../_ui/_links/default-link/DefaultLink";
+import {ROUTE_BUSINESS} from "../../../cfg/links.config";
 
 export interface ICompanyItemProps extends React.HTMLAttributes<HTMLDivElement> {
     company: ICompany,
@@ -24,7 +26,7 @@ const CompanyItem: React.FC<ICompanyItemProps> = (props) => {
                     seconds={5}
                 />
                 <Vertical offset={5}>
-                    <div className={css.name}>{ company.title }</div>
+                    <DefaultLink to={ROUTE_BUSINESS + '/' + company.title} className={css.name}>{ company.title }</DefaultLink>
                     <div className={css.description}>{ company.description }</div>
                 </Vertical>
             </Row>
