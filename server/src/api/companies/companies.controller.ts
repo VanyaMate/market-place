@@ -1,4 +1,14 @@
-import {Body, Controller, Get, Param, Post, UploadedFiles, UseGuards, UseInterceptors, UsePipes} from "@nestjs/common";
+import {
+    Body,
+    Controller,
+    Get,
+    Post,
+    Query,
+    UploadedFiles,
+    UseGuards,
+    UseInterceptors,
+    UsePipes
+} from "@nestjs/common";
 import {AccessTokenGuard} from "../../guards/access-token-guard.service";
 import {IUserVerifiedData, UserVerified} from "../../decorators/user-verified.decorator";
 import {CreateCompanyDto} from "./dto/create-company.dto";
@@ -32,7 +42,7 @@ export class CompaniesController {
     @Get('/getFullByTitle')
     @UseGuards(AccessTokenGuard)
     getFullByTitle (@UserVerified() userData: IUserVerifiedData,
-                    @Param('title') title: string) {
+                    @Query('title') title: string) {
         return this.companiesService.getFullByTitle(userData.user._id.toString(), title);
     }
 

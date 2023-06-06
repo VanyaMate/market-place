@@ -22,9 +22,9 @@ export const companiesApi = createApi({
                 method: "GET",
             })
         }),
-        getCompany: build.query<any, { title: string }>({
+        getFullDataCompany: build.query<ICompany, { title: string }>({
             query: (props) => ({
-                url: 'getFullByName',
+                url: 'getFullByTitle',
                 params: props,
                 method: 'GET',
             })
@@ -32,4 +32,4 @@ export const companiesApi = createApi({
     })
 })
 
-export const {useLazyCreateCompanyQuery, useLazyGetMyCompaniesQuery, useGetMyCompaniesQuery} = companiesApi;
+export const {useLazyCreateCompanyQuery, useLazyGetMyCompaniesQuery, useGetMyCompaniesQuery, useGetFullDataCompanyQuery} = companiesApi;

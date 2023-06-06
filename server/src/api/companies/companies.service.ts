@@ -49,7 +49,7 @@ export class CompaniesService {
 
     async getFullByTitle (userId: string, title: string) {
         const company = await this.companyModel
-            .find({ owner: userId, title: title })
+            .findOne({ owner: userId, title: title })
             .populate(['icon'])
             .exec();
 
