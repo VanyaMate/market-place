@@ -21,7 +21,7 @@ export const store = configureStore({
         cart: cartReducer,
         notifications: notificationsSlice.reducer
     },
-    middleware: getDefaultMiddleware => getDefaultMiddleware().concat([
+    middleware: getDefaultMiddleware => getDefaultMiddleware({ serializableCheck: false }).concat([
         productsApi.middleware,
         compilationsApi.middleware,
         authApi.middleware,

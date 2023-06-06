@@ -1,15 +1,16 @@
-import React from 'react';
+import React, {FormEvent} from 'react';
 import {IUseFromData} from "../../hooks/useForm.hook";
 
 export interface IForm extends React.FormHTMLAttributes<any> {
-    formHook: IUseFromData;
+    hook: IUseFromData;
 }
 
 const Form: React.FC<IForm> = (props) => {
     return (
-        <form {...props} onSubmit={(e) => {
+        <form {...props} onSubmit={(e: FormEvent<HTMLFormElement>) => {
             e.preventDefault();
-            console.log(new FormData(e.target as HTMLFormElement))
+            const data = new FormData(e.target as HTMLFormElement);
+            props.hook.setData(data);
         }}/>
     );
 };

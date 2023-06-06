@@ -8,11 +8,15 @@ export const companiesApi = createApi({
         credentials: 'include',
     }),
     endpoints: (build) => ({
-        createCompany: build.query<any, any>({
-            query: (props) => ({
-                url: 'create',
-                body: props
-            })
+        createCompany: build.query<{ formData: FormData }, any>({
+            query: (props) => {
+                console.log(props);
+                return {
+                    url: 'create',
+                    body: props.formData,
+                    method: "POST",
+                }
+            }
         })
     })
 })

@@ -8,14 +8,13 @@ export interface IInput extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 const Input: React.FC<IInput> = (props) => {
+    const { inputHook, type, onChange, className, ...other } = props;
     return (
         <input
-            type={ props.type ?? "text" }
-            value={props.inputHook.value}
-            placeholder={props.placeholder ?? ''}
-            className={[css.container, props.className ?? ''].join(' ')}
+            type={ type ?? "text" }
+            className={[css.container, className ?? ''].join(' ')}
             onChange={({ target }) => props.inputHook.setValue(target.value)}
-            onKeyDown={props.onKeyDown}
+            {...other}
         />
     );
 };
