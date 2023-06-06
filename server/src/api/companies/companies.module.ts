@@ -20,6 +20,9 @@ import {Company, CompanySchema} from "./schemas/company.schema";
         UsersModule,
         ImageLoaderModule,
         MongooseModule.forFeature([{ name: Company.name, schema: CompanySchema }])
+    ],
+    exports: [
+        CompaniesService,
     ]
 })
 export class CompaniesModule {}

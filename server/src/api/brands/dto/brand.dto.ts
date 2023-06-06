@@ -12,4 +12,7 @@ export class BrandDto {
     @IsString({ message: 'Описание бренда должно быть строкой' })
     readonly description: string;
 
+    @IsString({ message: 'Название компании должно быть строкой' })
+    readonly companyTitle: string;
+
 }

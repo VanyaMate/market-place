@@ -8,6 +8,7 @@ import {ISearchOptions} from "../../interfaces/search.interfaces";
 import {FolderType} from "../../file-service/file-service.service";
 import {ImageSize} from "../../sharp-service/sharp.service";
 import {ImageLoaderService} from "../image-loader/image-loader.service";
+import {CompaniesService} from "../companies/companies.service";
 
 @Injectable()
 export class BrandsService {
@@ -21,15 +22,20 @@ export class BrandsService {
 
     constructor(@InjectModel(Brand.name) private brandModel: Model<Brand>,
                 private fileSystemService: FileSystemService,
-                private imageLoaderService: ImageLoaderService) {}
+                private imageLoaderService: ImageLoaderService,
+                private companiesService: CompaniesService) {}
 
     async create (brandDdo: BrandDto, image: Express.Multer.File, userId: Types.ObjectId) {
         /**
          * TODO: Сделать невозможным делать одинаковые имена
          */
 
+        const { companyTitle, ...brandData } = brandDdo;
+
         try {
             if (!image) throw { message: 'Не загружена фотография' }
+            const company = await this.companiesService.getFullByTitle(userId.toString(), companyTitle);
+
             const [ icon ] = await this.imageLoaderService.load(
                 [image],
                 FolderType.BRAND,
@@ -38,11 +44,12 @@ export class BrandsService {
             )
 
             const brand = (await this.brandModel.create({
-                ...brandDdo,
+                ...brandData,
                 author: userId,
                 image: icon.id,
+                company: company._id
             }))
-                .populate('image')
+                .populate(['image', 'company'])
 
             return brand;
         }
