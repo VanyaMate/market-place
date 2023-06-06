@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import css from './CreateCompanyForm.module.scss';
 import TitledBlock from "../../titled-block/TitledBlock";
 import {useInput} from "../../../hooks/useInput.hook";
-import {useLazyCreateCompanyQuery} from "../../../store/companies/companies.api";
+import {useLazyCreateCompanyQuery, useLazyGetMyCompaniesQuery} from "../../../store/companies/companies.api";
 import Input from "../../_ui/_inputs/input/Input";
 import Form from "../../_ui/Form";
 import {useForm} from "../../../hooks/useForm.hook";
@@ -13,6 +13,7 @@ const CreateCompanyForm = () => {
     const descriptionInput = useInput('');
     const form = useForm();
     const [dispatchCreate, {}] = useLazyCreateCompanyQuery();
+    const [dispatchGetMy, {}] = useLazyGetMyCompaniesQuery();
 
     useEffect(() => {
         if (form.data) {
@@ -34,6 +35,7 @@ const CreateCompanyForm = () => {
                 <input type={'file'} name={'icon'}/>
                 <Button onClick={() => {}} active>Send</Button>
             </Form>
+            <Button onClick={() => dispatchGetMy()} active>Getmy</Button>
         </TitledBlock>
     );
 };
