@@ -1,0 +1,9 @@
+@import "src/styles/sizes";
+
+.container {
+    width: 300px;
+
+    .create_button {
+        height: $mediumHeight;
+    }
+}
