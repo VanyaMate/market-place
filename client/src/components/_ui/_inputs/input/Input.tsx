@@ -12,8 +12,9 @@ const Input: React.FC<IInput> = (props) => {
     return (
         <input
             type={ type ?? "text" }
+            value={inputHook.value}
             className={[css.container, className ?? ''].join(' ')}
-            onChange={({ target }) => props.inputHook.setValue(target.value)}
+            onChange={({ target }) => inputHook.setValue(target.value)}
             {...other}
         />
     );

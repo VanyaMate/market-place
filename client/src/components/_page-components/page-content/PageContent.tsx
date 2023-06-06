@@ -10,14 +10,15 @@ import ProfilePage from "../../_pages/profile/ProfilePage";
 import CataloguePage from "../../_pages/catalogue/CataloguePage";
 import css from './PageContent.module.scss';
 import {
+    ROUTE_BUSINESS,
     ROUTE_CART, ROUTE_CATALOGUE,
     ROUTE_HOME,
-    ROUTE_LOGIN, ROUTE_MY_COMPANY,
+    ROUTE_LOGIN,
     ROUTE_ORDER,
     ROUTE_PRODUCT_ID,
     ROUTE_PROFILE
 } from "../../../cfg/links.config";
-import MyCompanyPage from "../../_pages/my-company/MyCompanyPage";
+import BusinessPage from "../../_pages/my-company/BusinessPage";
 
 const PageContent = () => {
     return (
@@ -30,7 +31,7 @@ const PageContent = () => {
                 <Route path={ROUTE_PRODUCT_ID} element={<ProductPage/>}/>
                 <Route path={ROUTE_PROFILE} element={<ProfilePage/>}/>
                 <Route path={ROUTE_CATALOGUE} element={<CataloguePage/>}/>
-                <Route path={ROUTE_MY_COMPANY} element={<MyCompanyPage/>}/>
+                <Route path={ROUTE_BUSINESS} element={<BusinessPage/>}/>
                 <Route path={'*'} element={<Page404/>}/>
             </Routes>
         </div>

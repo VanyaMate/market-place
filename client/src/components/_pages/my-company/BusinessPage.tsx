@@ -4,7 +4,7 @@ import CompanyList from "../../_companies/company-list/CompanyList";
 import {useGetMyCompaniesQuery} from "../../../store/companies/companies.api";
 import TitledBlock from "../../titled-block/TitledBlock";
 
-const MyCompanyPage = () => {
+const BusinessPage = () => {
     const {isFetching, isError, data} = useGetMyCompaniesQuery();
 
     return (
@@ -17,4 +17,4 @@ const MyCompanyPage = () => {
     );
 };
 
-export default MyCompanyPage;
+export default BusinessPage;
