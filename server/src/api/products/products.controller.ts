@@ -19,6 +19,10 @@ export class ProductsController {
 
     constructor(private productsService: ProductsService) {}
 
+    /**
+     * TODO: Проверять на доступ к бренду
+     *
+     */
     @Post('/create')
     @UseGuards(AccessTokenGuard)
     @UsePipes(ValidationPipe)

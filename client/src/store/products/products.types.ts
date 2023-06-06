@@ -29,7 +29,7 @@ export interface IBrand {
     _id: string;
     title: string;
     description: string;
-    image: string;
+    image: IImage;
 }
 export interface IResponseOptions {
     limit: number;

@@ -26,6 +26,7 @@ export class Brand {
 export const BrandSchema = SchemaFactory.createForClass(Brand);
 
 BrandSchema.pre(['find', 'findOne'], function (next) {
+    this.populate('image')
     this.select('-author');
     this.select('-__v');
     next();

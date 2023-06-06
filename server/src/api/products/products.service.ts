@@ -56,7 +56,9 @@ export class ProductsService {
                 images: imagesPaths.map((image) => image.id),
                 brand: brand,
             }))
-                .populate([ 'brand', 'generalImage', 'images' ])
+                .populate([ 'brand', 'brand.image', 'generalImage', 'images' ])
+
+            console.log('product', product);
 
             // 'brand', ['title', 'description', 'image']
             return product;
@@ -132,7 +134,8 @@ export class ProductsService {
     }
 
     async getById (id: string) {
-        return this.productModel.findById(id);
+        const product = this.productModel.findById(id)
+        return product;
     }
 
     private _getSortParams (sort: string[]) {

@@ -4,7 +4,6 @@ import Vertical from "../../../../_ui/_containers/vertical/Vertical";
 import BrandWithLogo from "../../../../_brand/brand-with-logo/BrandWithLogo";
 import css from './ProductPageInfo.module.scss';
 import ProductPrice from "../../../../_product/product-price/ProductPrice";
-import Button from "../../../../_ui/_buttons/button/Button";
 import AddToCartButton from "../../../../_buttons/add-to-cart-button/AddToCartButton";
 
 const ProductPageInfo: React.FC<IProduct> = (props) => {
