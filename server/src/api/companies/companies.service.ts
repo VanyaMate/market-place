@@ -1,4 +1,4 @@
-import {Injectable} from "@nestjs/common";
+import {BadRequestException, Injectable} from "@nestjs/common";
 import {CreateCompanyDto} from "./dto/create-company.dto";
 import {InjectModel} from "@nestjs/mongoose";
 import {Image} from "../image-loader/schemas/image.schema";
@@ -45,6 +45,19 @@ export class CompaniesService {
             .find({ owner: userId })
             .populate(['icon'])
             .exec();
+    }
+
+    async getFullByTitle (userId: string, title: string) {
+        const company = await this.companyModel
+            .find({ owner: userId, title: title })
+            .populate(['icon'])
+            .exec();
+
+        if (company) {
+            return company;
+        } else {
+            throw new BadRequestException('Нету доступа')
+        }
     }
 
 }
