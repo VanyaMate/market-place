@@ -6,6 +6,7 @@ export interface IProducts {
     count: number;
 }
 export interface IImage {
+    _id?: string;
     title?: string;
     path: string;
     type: string;
