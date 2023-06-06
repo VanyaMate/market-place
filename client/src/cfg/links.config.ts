@@ -6,6 +6,7 @@ export const API_PRODUCTS: string = `${API}/products`;
 export const API_COMPILATIONS: string = `${API}/compilations`;
 export const API_CART: string = `${API}/cart`;
 export const API_COMPANIES: string = `${API}/companies`;
+export const API_BRANDS: string = `${API}/brands`;
 
 export const ROUTE_HOME = '/';
 export const ROUTE_LOGIN = '/login';
