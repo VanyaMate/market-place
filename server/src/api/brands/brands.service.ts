@@ -1,13 +1,13 @@
 import {BadRequestException, Injectable} from "@nestjs/common";
 import {BrandDto} from "./dto/brand.dto";
 import {Model, Types} from "mongoose";
-import {FileSystemService, FileType} from "../../fileSystem/file-system.service";
+import {FileSystemService} from "../../fileSystem/file-system.service";
 import {InjectModel} from "@nestjs/mongoose";
 import {Brand, BrandDocument} from "./schemas/brand.schema";
 import {ISearchOptions} from "../../interfaces/search.interfaces";
-import {ImageService} from "../../image-service/image.service";
 import {FolderType} from "../../file-service/file-service.service";
 import {ImageSize} from "../../sharp-service/sharp.service";
+import {ImageLoaderService} from "../image-loader/image-loader.service";
 
 @Injectable()
 export class BrandsService {
@@ -21,7 +21,7 @@ export class BrandsService {
 
     constructor(@InjectModel(Brand.name) private brandModel: Model<Brand>,
                 private fileSystemService: FileSystemService,
-                private imageService: ImageService) {}
+                private imageLoaderService: ImageLoaderService) {}
 
     async create (brandDdo: BrandDto, image: Express.Multer.File, userId: Types.ObjectId) {
         /**
@@ -30,17 +30,19 @@ export class BrandsService {
 
         try {
             if (!image) throw { message: 'Не загружена фотография' }
-            const generalImagePath = await this.imageService.saveOptimizedImage(
-                image.buffer,
+            const [ icon ] = await this.imageLoaderService.load(
+                [image],
                 FolderType.BRAND,
                 userId.toString(),
-                this.defaultBrandSizes
-            );
-            const brand = await this.brandModel.create({
+                this.defaultBrandSizes,
+            )
+
+            const brand = (await this.brandModel.create({
                 ...brandDdo,
                 author: userId,
-                image: generalImagePath,
-            })
+                image: icon.id,
+            }))
+                .populate('image')
 
             return brand;
         }

@@ -2,12 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7db735f3-e9ce-4c73-8cce-5a3fcf56b2e9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/client/src/store/brands/brands.interfaces.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/cfg/links.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/cfg/links.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/_forms/create-brand-form/CreateBrandForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/_forms/create-brand-form/CreateBrandForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/store/brands/brands.api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/brands/brands.api.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/store/index.store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/index.store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/api/brands/brands.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/brands/brands.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/api/brands/brands.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/brands/brands.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/api/brands/schemas/brand.schema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/brands/schemas/brand.schema.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +45,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1686072787779</updated>
-      <workItem from="1686072791226" duration="2964000" />
+      <workItem from="1686072791226" duration="3349000" />
     </task>
     <servers />
   </component>
