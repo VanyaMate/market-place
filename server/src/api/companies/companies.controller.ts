@@ -2,7 +2,7 @@ import {Body, Controller, Get, Post, UploadedFiles, UseGuards, UseInterceptors, 
 import {AccessTokenGuard} from "../../guards/access-token-guard.service";
 import {IUserVerifiedData, UserVerified} from "../../decorators/user-verified.decorator";
 import {CreateCompanyDto} from "./dto/create-company.dto";
-import {FileFieldsInterceptor} from "@nestjs/platform-express";
+import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import {CompaniesService} from "./companies.service";
 import {ValidationPipe} from "../../pipes/validation.pipe";
 
@@ -28,5 +28,4 @@ export class CompaniesController {
     getAllByUser (@UserVerified() userData: IUserVerifiedData) {
         return this.companiesService.getAllByUser(userData.user._id.toString());
     }
-
 }

@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7db735f3-e9ce-4c73-8cce-5a3fcf56b2e9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/client/src/components/_pages/business/BusinessCompanyPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/_companies/company-item/CompanyItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/_companies/company-item/CompanyItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/_page-components/page-content/PageContent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/_page-components/page-content/PageContent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/_pages/my-company/BusinessPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/_pages/business/BusinessPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/store/companies/companies.api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/companies/companies.api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/api/companies/companies.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/companies/companies.controller.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +28,9 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.standard" value="" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="settings.typescriptcompiler" />
     <property name="ts.external.directory.path" value="C:\Users\SSD Ivan\Desktop\market-place\server\node_modules\typescript\lib" />
@@ -44,7 +44,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1686072787779</updated>
-      <workItem from="1686072791226" duration="835000" />
+      <workItem from="1686072791226" duration="1066000" />
     </task>
     <servers />
   </component>
