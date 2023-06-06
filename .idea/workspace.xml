@@ -4,9 +4,6 @@
     <list default="true" id="7db735f3-e9ce-4c73-8cce-5a3fcf56b2e9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/_pages/business/BusinessCompanyPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/_pages/business/BusinessCompanyPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/store/companies/companies.api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/companies/companies.api.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/api/companies/companies.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/companies/companies.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/api/companies/companies.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/companies/companies.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +43,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1686072787779</updated>
-      <workItem from="1686072791226" duration="1665000" />
+      <workItem from="1686072791226" duration="1849000" />
     </task>
     <servers />
   </component>
