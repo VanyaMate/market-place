@@ -81,4 +81,18 @@ export class BrandsService {
             throw new BadRequestException(e);
         }
     }
+
+    async getByCompany(userId: string, title: string) {
+        const company = await this.companiesService.getFullByTitle(userId, title);
+        if (!company) {
+            throw new BadRequestException('Компания не найдена');
+        }
+        const brands = await this.brandModel.find({
+            company: company._id
+        })
+            .populate('company')
+            .exec();
+
+        return brands;
+    }
 }

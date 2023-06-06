@@ -7,12 +7,14 @@ import {useInput} from "../../../hooks/useInput.hook";
 import Button from "../../_ui/_buttons/button/Button";
 import css from './CreateBrandForm.module.scss';
 import {useLazyCreateBrandQuery} from "../../../store/brands/brands.api";
+import {useGetMyCompaniesQuery} from "../../../store/companies/companies.api";
 
 const CreateBrandForm = () => {
     const form = useForm();
     const brandTitle = useInput('');
     const brandDescription = useInput('');
     const [dispatchCreate] = useLazyCreateBrandQuery();
+    const {isFetching, isError, data} = useGetMyCompaniesQuery();
 
     useEffect(() => {
         if (form.data) {
@@ -23,6 +25,11 @@ const CreateBrandForm = () => {
     return (
         <Form hook={form} className={css.container}>
             <Vertical offset={10}>
+                <select name={'companyTitle'}>
+                    {
+                        data ? data.map((company) => <option key={company.title} value={company.title}>{company.title}</option>) : ''
+                    }
+                </select>
                 <Input
                     inputHook={brandTitle}
                     name={'title'}

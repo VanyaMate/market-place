@@ -15,8 +15,15 @@ export const brandsApi = createApi({
                 method: 'post',
                 body: props.formData
             })
+        }),
+        getBrandsByCompanyName: build.query<IBrand[], { title: string }>({
+            query: (props) => ({
+                url: 'byCompany',
+                method: 'get',
+                params: props
+            })
         })
     })
 })
 
-export const {useLazyCreateBrandQuery} = brandsApi;
+export const {useLazyCreateBrandQuery, useGetBrandsByCompanyNameQuery} = brandsApi;

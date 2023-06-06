@@ -44,4 +44,11 @@ export class BrandsController {
         return this.brandsService.getAll({ limit: Number(limit), offset: Number(offset) })
     }
 
+    @Get('/byCompany')
+    @UseGuards(AccessTokenGuard)
+    getByCompany(@Query('title') title: string,
+                 @UserVerified() userData: IUserVerifiedData) {
+        return this.brandsService.getByCompany(userData.user._id.toString(), title);
+    }
+
 }
