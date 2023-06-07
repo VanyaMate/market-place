@@ -25,6 +25,9 @@
   - [ ] Products
   - [ ] Users
 
+### Гуарды
+- [ ] **Возможно** создать гвард для доступа к Company
+
 - [ ] Изменить AccessGuard
   - [ ] Добавить новые импорты/заменить
     - [X] Auth
@@ -51,13 +54,14 @@
 - [ ] Разделить cart и userModel
 - [ ] Сделать схему связей в БД
 
-- [ ] Заменить icon/image/generalImage на что-то одно 
+- [X] Заменить icon/image на что-то одно 
 
 ### Сервисы
-- [ ] Создать сервис SessionService
+- [X] Создать сервис SessionService
 - [ ] Создать сервис OrdersService
+- [X] Создать сервис CompanyAccess
 
-- [ ] Добавить доступы к компаниям с модификаторами
+- [X] Добавить доступы к компаниям с модификаторами
 
 - [ ] Добавить { [GET], count, options } 
   - [ ] Brands
@@ -68,7 +72,7 @@
   - [ ] Users
   
 - [ ] Добавить delete методы
-  - [ ] Brands
+  - [X] Brands
   - [ ] Cart
   - [ ] Categories
   - [ ] Companies
@@ -97,6 +101,8 @@
     - [ ] FileSystem
     - [ ] ImageService
     - [ ] SharpService
+    - [ ] CompanyAccess
+    - [ ] SessionService
   - [ ] Гварды
     - [ ] AccessTokenGuard
   - [ ] Валидаторы
