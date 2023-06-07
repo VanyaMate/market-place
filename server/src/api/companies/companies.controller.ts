@@ -35,6 +35,10 @@ export class CompaniesController {
         return this.companiesService.create({ ...createCompanyDto, icon: files['icon'][0] }, user.id)
     }
 
+    delete () {
+
+    }
+
     @Get('/my')
     @UseGuards(AccessTokenGuard)
     getAllByUser (@UserVerified() user: IUserVerifiedData) {

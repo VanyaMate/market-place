@@ -40,7 +40,6 @@ export class BrandsController {
     }
 
     @Get('/all')
-    @UseGuards(AccessTokenGuard)
     getAll (@Query('limit') limit: number = 10,
             @Query('offset') offset: number = 0,
             @Query('sort') sort: string = '') {
@@ -48,9 +47,7 @@ export class BrandsController {
     }
 
     @Get('/byCompany')
-    @UseGuards(AccessTokenGuard)
     getByCompany(@Query('title') title: string,
-                 @UserVerified() user: IUserVerifiedData,
                  @Query('limit') limit: number = 10,
                  @Query('offset') offset: number = 0,
                  @Query('sort') sort: string = '') {
