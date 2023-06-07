@@ -5,7 +5,7 @@ import {TokensModule} from "../tokens/tokens.module";
 import {UsersModule} from "../users/users.module";
 import {MongooseModule} from "@nestjs/mongoose";
 import {ImageSchema, Image} from "./schemas/image.schema";
-import {ImageModule} from "../../image-service/image.module";
+import {ImageModule} from "../../services/image-service/image.module";
 
 @Module({
     controllers: [

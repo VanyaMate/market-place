@@ -1,7 +1,7 @@
 import {Body, Controller, Post, UploadedFiles, UseGuards, UseInterceptors} from "@nestjs/common";
 import {AccessTokenGuard} from "../../guards/access-token-guard.service";
 import {FileFieldsInterceptor} from "@nestjs/platform-express";
-import {FolderType} from "../../file-service/file-service.service";
+import {FolderType} from "../../services/file-service/file-service.service";
 import {ImageLoaderService} from "./image-loader.service";
 import {IUserVerifiedData, UserVerified} from "../../decorators/user-verified.decorator";
 

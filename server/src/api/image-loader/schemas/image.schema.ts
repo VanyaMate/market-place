@@ -1,5 +1,5 @@
 import {Prop, Schema, SchemaFactory} from "@nestjs/mongoose";
-import {FolderType} from "../../../file-service/file-service.service";
+import {FolderType} from "../../../services/file-service/file-service.service";
 import {User} from "../../user/schemas/user.schema";
 import * as mongoose from "mongoose";
 import {HydratedDocument} from "mongoose";

@@ -1,12 +1,12 @@
 import {BadRequestException, Injectable} from "@nestjs/common";
 import {BrandDto} from "./dto/brand.dto";
 import {Model, Types} from "mongoose";
-import {FileSystemService} from "../../fileSystem/file-system.service";
+import {FileSystemService} from "../../services/fileSystem/file-system.service";
 import {InjectModel} from "@nestjs/mongoose";
 import {Brand, BrandDocument} from "./schemas/brand.schema";
 import {ISearchOptions} from "../../interfaces/search.interfaces";
-import {FolderType} from "../../file-service/file-service.service";
-import {ImageSize} from "../../sharp-service/sharp.service";
+import {FolderType} from "../../services/file-service/file-service.service";
+import {ImageSize} from "../../services/sharp-service/sharp.service";
 import {ImageLoaderService} from "../image-loader/image-loader.service";
 import {CompaniesService} from "../companies/companies.service";
 

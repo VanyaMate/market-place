@@ -3,8 +3,8 @@ import {CreateCompanyDto} from "./dto/create-company.dto";
 import {InjectModel} from "@nestjs/mongoose";
 import {Image} from "../image-loader/schemas/image.schema";
 import {Model} from "mongoose";
-import {FolderType} from "../../file-service/file-service.service";
-import {ImageSize} from "../../sharp-service/sharp.service";
+import {FolderType} from "../../services/file-service/file-service.service";
+import {ImageSize} from "../../services/sharp-service/sharp.service";
 import {ImageLoaderService} from "../image-loader/image-loader.service";
 import {Company} from "./schemas/company.schema";
 

@@ -4,8 +4,8 @@ import {ApiModule} from "./api/api.module";
 import {MongooseModule} from "@nestjs/mongoose";
 import {ServeStaticModule} from "@nestjs/serve-static";
 import * as path from "path";
-import {SharpModule} from "./sharp-service/sharp.module";
-import {ImageModule} from "./image-service/image.module";
+import {SharpModule} from "./services/sharp-service/sharp.module";
+import {ImageModule} from "./services/image-service/image.module";
 
 @Module({
     imports: [

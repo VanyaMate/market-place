@@ -6,10 +6,10 @@ import {Model, Types} from "mongoose";
 import {IProductSearchProps} from "../../interfaces/products.interface";
 import {ISearchOptions} from "../../interfaces/search.interfaces";
 import {Brand, BrandDocument} from "../brands/schemas/brand.schema";
-import {ImageSize} from "../../sharp-service/sharp.service";
+import {ImageSize} from "../../services/sharp-service/sharp.service";
 import {randomUUID} from "crypto";
-import {FolderType} from "../../file-service/file-service.service";
-import {ImageService} from "../../image-service/image.service";
+import {FolderType} from "../../services/file-service/file-service.service";
+import {ImageService} from "../../services/image-service/image.service";
 import {ImageLoaderService} from "../image-loader/image-loader.service";
 
 @Injectable()

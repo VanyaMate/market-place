@@ -2,8 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7db735f3-e9ce-4c73-8cce-5a3fcf56b2e9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/refactoring.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/interfaces/repository.interface.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/refactoring.md" beforeDir="false" afterPath="$PROJECT_DIR$/refactoring.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/api/auth/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/auth/auth.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/api/brands/brands.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/brands/brands.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/api/brands/brands.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/brands/brands.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/api/companies/companies.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/companies/companies.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/api/image-loader/image-loader.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/image-loader/image-loader.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/api/image-loader/image-loader.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/image-loader/image-loader.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/api/image-loader/image-loader.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/image-loader/image-loader.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/api/image-loader/schemas/image.schema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/image-loader/schemas/image.schema.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/api/products/products.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/products/products.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/fake-products-maker/fake-products-maker.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/_WIP_fake-products-maker/fake-products-maker.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/fake-products-maker/fake-products-maker.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/_WIP_fake-products-maker/fake-products-maker.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/file-service/file-service.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/services/file-service/file-service.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/file-service/file-service.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/services/file-service/file-service.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/fileSystem/file-system.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/services/fileSystem/file-system.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/fileSystem/file-system.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/services/fileSystem/file-system.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/image-service/image.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/services/image-service/image.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/image-service/image.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/services/image-service/image.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/sharp-service/sharp.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/services/sharp-service/sharp.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/sharp-service/sharp.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/services/sharp-service/sharp.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +56,11 @@
     <property name="ts.external.directory.path" value="C:\Users\SSD Ivan\Desktop\market-place\server\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\SSD Ivan\Desktop\market-place\server\src\services" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -43,7 +69,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1686072787779</updated>
-      <workItem from="1686072791226" duration="7958000" />
+      <workItem from="1686072791226" duration="7989000" />
+      <workItem from="1686139622913" duration="1162000" />
     </task>
     <servers />
   </component>

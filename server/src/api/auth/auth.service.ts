@@ -6,7 +6,6 @@ import {UsersService} from "../users/users.service";
 import * as bcrypt from 'bcrypt';
 import {UserPrivateDataDto} from "../user/dto/user-private-data.dto";
 import {CartService} from "../cart/cart.service";
-import {IUserVerifiedData} from "../../decorators/user-verified.decorator";
 import {UserDocument} from "../user/schemas/user.schema";
 
 @Injectable()

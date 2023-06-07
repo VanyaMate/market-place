@@ -5,8 +5,8 @@ import {UsersModule} from "../users/users.module";
 import {TokensModule} from "../tokens/tokens.module";
 import {MongooseModule} from "@nestjs/mongoose";
 import {Brand, BrandSchema} from "./schemas/brand.schema";
-import {FileSystemModule} from "../../fileSystem/file-system.module";
-import {ImageModule} from "../../image-service/image.module";
+import {FileSystemModule} from "../../services/fileSystem/file-system.module";
+import {ImageModule} from "../../services/image-service/image.module";
 import {ImageLoaderModule} from "../image-loader/image-loader.module";
 import {CompaniesModule} from "../companies/companies.module";
 

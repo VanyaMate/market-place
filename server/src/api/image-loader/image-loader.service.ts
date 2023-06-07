@@ -1,6 +1,6 @@
-import {FolderType} from "../../file-service/file-service.service";
-import {ImageService} from "../../image-service/image.service";
-import {ImageSize} from "../../sharp-service/sharp.service";
+import {FolderType} from "../../services/file-service/file-service.service";
+import {ImageService} from "../../services/image-service/image.service";
+import {ImageSize} from "../../services/sharp-service/sharp.service";
 import {InjectModel} from "@nestjs/mongoose";
 import {Image, ImageDocument} from "./schemas/image.schema";
 import {Model, Types} from "mongoose";
