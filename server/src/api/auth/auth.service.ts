@@ -19,7 +19,7 @@ export class AuthService {
 
     async registration (userLoginDto: UserLoginDto): Promise<[UserPrivateDataDto, string]> {
         try {
-            const candidate = (await this.usersService.findByEmail(userLoginDto.email)).users[0];
+            const candidate = (await this.usersService.findByEmail(userLoginDto.email)).list[0];
             if (candidate) {
                 throw { message: 'Эта почта уже занята' }
             }
@@ -36,7 +36,7 @@ export class AuthService {
 
     async login (userLoginDto: UserLoginDto): Promise<[UserPrivateDataDto, string]> {
         try {
-            const candidate = (await this.usersService.findByEmail(userLoginDto.email)).users[0];
+            const candidate = (await this.usersService.findByEmail(userLoginDto.email)).list[0];
             if (candidate && await bcrypt.compare(userLoginDto.password, candidate.password)) {
                 return this.getPrivateUserData(candidate._id.toString());
             }

@@ -41,6 +41,13 @@ export class CompaniesService {
                 .then((company) => {
                     return company.populate('icon');
                 })
+                .catch((error) => {
+                    throw {
+                        message: error.code === 11000 ?
+                            'Компания с таким названием уже существует' :
+                            'Ошибка создания компании'
+                    }
+                })
 
             await this.companyAccessService.create(userId, company._id.toString())
             return company;

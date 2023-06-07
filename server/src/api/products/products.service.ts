@@ -1,16 +1,18 @@
 import {BadRequestException, Injectable} from "@nestjs/common";
 import {ProductDto} from "./dto/product.dto";
 import {InjectModel} from "@nestjs/mongoose";
-import {Product} from "./schemas/product.schema";
+import {Product, ProductDocument} from "./schemas/product.schema";
 import {Model, Types} from "mongoose";
 import {IProductSearchProps} from "../../interfaces/products.interface";
-import {ISearchOptions} from "../../interfaces/search.interfaces";
+import {ISearchOptions, Projections} from "../../interfaces/search.interfaces";
 import {Brand, BrandDocument} from "../brands/schemas/brand.schema";
 import {ImageSize} from "../../services/sharp-service/sharp.service";
 import {randomUUID} from "crypto";
 import {FolderType} from "../../services/file-service/file-service.service";
 import {ImageService} from "../../services/image-service/image.service";
 import {ImageLoaderService} from "../image-loader/image-loader.service";
+import {IMultiResponse} from "../../interfaces/responses.interface";
+import {getSortParams} from "../../helpers/utils";
 
 @Injectable()
 export class ProductsService {
@@ -26,7 +28,7 @@ export class ProductsService {
                 @InjectModel(Brand.name) private brandModel: Model<Brand>,
                 private imageLoaderService: ImageLoaderService) {}
 
-    async create (userId: string, productDto: ProductDto, files: { [key: string]: Express.Multer.File[] }) {
+    async create (userId: string, productDto: ProductDto, files: { [key: string]: Express.Multer.File[] }): Promise<ProductDocument> {
         try {
             const { generalImage, images } = files;
 
@@ -49,7 +51,7 @@ export class ProductsService {
                 this.defaultOptimizedImageSizes
             );
 
-            const product = await (await this.productModel.create({
+            return await (await this.productModel.create({
                 ...productDto,
                 author: userId,
                 generalImage: generalImageDatas[0].id,
@@ -57,14 +59,8 @@ export class ProductsService {
                 brand: brand,
             }))
                 .populate([ 'brand', 'brand.image', 'generalImage', 'images' ])
-
-            console.log('product', product);
-
-            // 'brand', ['title', 'description', 'image']
-            return product;
         }
         catch (e) {
-            console.log(e);
             throw new BadRequestException(e);
         }
     }
@@ -73,7 +69,7 @@ export class ProductsService {
 
     }
 
-    async getAll (options: ISearchOptions, projections: { [key: string]: boolean } = {}) {
+    async getAll (options: ISearchOptions, projections: Projections<ProductDocument> = {}): Promise<IMultiResponse<ProductDocument>> {
         try {
             const count = await this.productModel
                 .find({}, projections)
@@ -83,21 +79,20 @@ export class ProductsService {
                 .find({}, projections)
                 .skip(options.offset)
                 .limit(options.limit)
-                .sort(this._getSortParams(options.sort))
+                .sort(getSortParams(options.sort))
 
             return {
-                products,
+                list: products,
                 options,
                 count
             }
         }
         catch (e) {
-            console.log(e);
             throw new BadRequestException({ message: 'Ошибка поиска' });
         }
     }
 
-    async findBy (props: IProductSearchProps, options: ISearchOptions, projections: { [key: string]: boolean } = {}) {
+    async findBy (props: IProductSearchProps, options: ISearchOptions, projections: Projections<ProductDocument> = {}): Promise<IMultiResponse<ProductDocument>> {
         try {
             /**
              * TODO: Сделать поиск не только в начале по title
@@ -117,37 +112,23 @@ export class ProductsService {
                 .find(filter, projections)
                 .skip(options.offset)
                 .limit(options.limit)
-                .sort(this._getSortParams(options.sort))
+                .sort(getSortParams(options.sort))
 
             const products = await productsQuery.exec();
 
             return {
-                products,
+                list: products,
                 options,
                 count,
             }
         }
         catch (e) {
-            console.log(e);
             throw new BadRequestException({ message: 'Ошибка поиска' });
         }
     }
 
-    async getById (id: string) {
-        const product = this.productModel.findById(id)
-        return product;
-    }
-
-    private _getSortParams (sort: string[]) {
-        const sortParams = {};
-
-        for (let i = 0; i < sort.length; i++) {
-            const [key, sortType] = sort[i].split(':');
-            if (!key) continue;
-            sortParams[key] = sortType ?? 'asc';
-        }
-
-        return sortParams;
+    async getById (id: string): Promise<ProductDocument> {
+        return await this.productModel.findById(id).exec();
     }
 
 }

@@ -45,10 +45,12 @@ export class CompanyAccessService {
 
     async getAllCompaniesAccessByUserId (userId: string) {
         try {
-            return await this.accessModel.find({
+            const accesses = await this.accessModel.find({
                 user: userId
             })
-                .populate('company');
+                .populate('company')
+
+            return accesses.map((access) => access.company);
         }
         catch (e) {
             throw new BadRequestException(e);

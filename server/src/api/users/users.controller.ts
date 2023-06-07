@@ -11,14 +11,13 @@ export class UsersController {
     @Get('/all')
     @UseGuards(AccessTokenGuard)
     getAll (@Query('limit') limit: number = 10,
-            @Query('offset') offset: number = 0) {
-        return this.usersService.getAll(Number(limit), Number(offset), {
+            @Query('offset') offset: number = 0,
+            @Query('sort') sort: string = '') {
+        return this.usersService.getAll({ offset: Number(offset), limit: Number(limit), sort: sort.split(',') }, {
             email: true,
             firstName: true,
             lastName: true,
             telephone: true,
-            orders: true,
-            cart: true,
         });
     }
 
@@ -26,14 +25,13 @@ export class UsersController {
     @UseGuards(AccessTokenGuard)
     getByEmail (@Query('email') email: string,
                 @Query('limit') limit: number = 10,
-                @Query('offset') offset: number = 0) {
-        return this.usersService.findByEmail(email, Number(limit), Number(offset), {
+                @Query('offset') offset: number = 0,
+                @Query('sort') sort: string = '') {
+        return this.usersService.findByEmail(email, { offset: Number(offset), limit: Number(limit), sort: sort.split(',') }, {
             email: true,
             firstName: true,
             lastName: true,
             telephone: true,
-            orders: true,
-            cart: true,
         });
     }
 

@@ -11,7 +11,7 @@ export class CompilationsService {
         const products = await this.productsService
             .getAll({ limit: limit * 3, offset: 0, sort: ['date:desc']})
 
-        return this._getRandomArrayElements(products.products, limit);
+        return this._getRandomArrayElements(products.list, limit);
     }
 
     async getUserRecommendations (userId: string, limit: number) {
@@ -21,7 +21,7 @@ export class CompilationsService {
         const products = await this.productsService
             .getAll({ limit: limit * 3, offset: 0, sort: ['createdAt']})
 
-        return this._getRandomArrayElements(products.products, limit);
+        return this._getRandomArrayElements(products.list, limit);
     }
 
     async getProductRecommendations (productId: string, limit: number) {
@@ -31,7 +31,7 @@ export class CompilationsService {
         const products = await this.productsService
             .getAll({ limit: limit * 3, offset: 0, sort: ['createdAt']})
 
-        return this._getRandomArrayElements(products.products, limit);
+        return this._getRandomArrayElements(products.list, limit);
     }
 
     async getSales (limit: number) {
@@ -41,7 +41,7 @@ export class CompilationsService {
         const products = await this.productsService
             .getAll({ limit: limit * 3, offset: 0, sort: ['discount:desc'] })
 
-        return this._getRandomArrayElements(products.products, limit);
+        return this._getRandomArrayElements(products.list, limit);
     }
 
     private _getRandomArrayElements (array: any[], amount: number): any[] {

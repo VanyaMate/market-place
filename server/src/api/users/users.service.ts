@@ -2,56 +2,59 @@ import {InjectModel} from "@nestjs/mongoose";
 import {User, UserDocument} from "../user/schemas/user.schema";
 import {Model} from "mongoose";
 import {HttpException, HttpStatus, Injectable} from "@nestjs/common";
+import {ISearchOptions, Projections} from "../../interfaces/search.interfaces";
+import {IMultiResponse} from "../../interfaces/responses.interface";
+import {getSortParams} from "../../helpers/utils";
 
 @Injectable()
 export class UsersService {
 
     constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
-    async getAll (limit: number = 10, offset: number = 0, projections: { [key: string]: boolean } = {}): Promise<{
-        users: UserDocument[],
-        count: number,
-        limit: number,
-        offset: number
-    }>  {
+    async getAll (options: ISearchOptions = {}, projections: Projections<UserDocument> = {}): Promise<IMultiResponse<UserDocument>>  {
         try {
             const users: UserDocument[] = await this.userModel
                 .find({}, projections)
-                .skip(offset)
-                .limit(limit) as UserDocument[];
+                .skip(options.offset)
+                .limit(options.limit)
+                .sort(getSortParams(options.sort))
 
             const count: number = await this.userModel.count() as number;
 
-            return { users, count, limit, offset };
+            return {
+                list: users,
+                count: count,
+                options: options
+            }
         }
         catch (e) {
             throw new HttpException(e.message, HttpStatus.BAD_REQUEST);
         }
     }
 
-    async findByEmail (email: string, limit: number = 10, offset: number = 0, projections: { [key: string]: boolean } = {}): Promise<{
-        users: UserDocument[],
-        count: number,
-        limit: number,
-        offset: number
-    }> {
+    async findByEmail (email: string, options: ISearchOptions = {}, projections: Projections<UserDocument> = {}): Promise<IMultiResponse<UserDocument>> {
         try {
             const users: UserDocument[] = await this.userModel
                 .find({ email: { "$regex": `^${email}`, "$options": "i" } }, projections)
-                .skip(offset)
-                .limit(limit) as UserDocument[];
+                .skip(options.offset)
+                .limit(options.limit)
+                .sort(getSortParams(options.sort));
 
             const count: number = await this.userModel
                 .count({ email: { "$regex": `^${email}`, "$options": "i" } }) as number;
 
-            return { users, count, limit, offset };
+            return {
+                list: users,
+                count: count,
+                options: options,
+            };
         }
         catch (e) {
             throw new HttpException(e.message, HttpStatus.BAD_REQUEST);
         }
     }
 
-    async findById (id: string, projections: { [key: string]: boolean } = {}) {
+    async findById (id: string, projections: Projections<UserDocument> = {}): Promise<UserDocument> {
         try {
             return await this.userModel.findById(id, projections);
         }

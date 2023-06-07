@@ -1,15 +1,17 @@
 import {BadRequestException, Injectable} from "@nestjs/common";
 import {BrandDto} from "./dto/brand.dto";
-import {Model, Types} from "mongoose";
+import {Model} from "mongoose";
 import {FileSystemService} from "../../services/fileSystem/file-system.service";
 import {InjectModel} from "@nestjs/mongoose";
 import {Brand, BrandDocument} from "./schemas/brand.schema";
-import {ISearchOptions} from "../../interfaces/search.interfaces";
+import {ISearchOptions, Projections} from "../../interfaces/search.interfaces";
 import {FolderType} from "../../services/file-service/file-service.service";
 import {ImageSize} from "../../services/sharp-service/sharp.service";
 import {ImageLoaderService} from "../image-loader/image-loader.service";
 import {CompaniesService} from "../companies/companies.service";
 import {CompanyAccessService} from "../companyAccess/company-access.service";
+import {getSortParams} from "../../helpers/utils";
+import {IMultiResponse} from "../../interfaces/responses.interface";
 
 @Injectable()
 export class BrandsService {
@@ -27,7 +29,7 @@ export class BrandsService {
                 private companiesService: CompaniesService,
                 private companyAccessService: CompanyAccessService) {}
 
-    async create (userId: string, brandDdo: BrandDto, image: Express.Multer.File) {
+    async create (userId: string, brandDdo: BrandDto, image: Express.Multer.File): Promise<BrandDocument> {
         try {
             const { companyTitle, ...brandData } = brandDdo;
             if (!image) throw { message: 'Не загружена фотография' };
@@ -51,14 +53,12 @@ export class BrandsService {
                 this.defaultBrandSizes,
             )
 
-            const brand = (await this.brandModel.create({
+            return (await this.brandModel.create({
                 ...brandData,
                 icon: icon.id,
                 company: company._id
             }))
                 .populate(['icon', 'company']);
-
-            return brand;
         }
         catch (e) {
             throw new BadRequestException(e).getResponse();
@@ -83,16 +83,17 @@ export class BrandsService {
         }
     }
 
-    async getAll (options: ISearchOptions, projections: { [key: string]: boolean } = {}) {
+    async getAll (options: ISearchOptions, projections: Projections<BrandDocument> = {}): Promise<IMultiResponse<BrandDocument>> {
         try {
             const count: number = await this.brandModel.count() as number;
             const brands: BrandDocument[] = await this.brandModel
                 .find({}, projections)
                 .skip(options.offset)
-                .limit(options.limit) as BrandDocument[];
+                .limit(options.limit)
+                .sort(getSortParams(options.sort));
 
             return {
-                brands,
+                list: brands,
                 count,
                 options
             }
@@ -102,19 +103,30 @@ export class BrandsService {
         }
     }
 
-    async getByCompany(title: string) {
+    async getByCompany(title: string, options: ISearchOptions = {}, projections: Projections<BrandDocument> = {}): Promise<IMultiResponse<BrandDocument>> {
         try {
             const company = await this.companiesService.getByTitle(title);
             if (!company) {
                 throw { message: 'Компания не найдена' };
             }
+            const count: number = await this.brandModel.find({
+                company: company._id
+            }).count();
+
             const brands = await this.brandModel.find({
                 company: company._id
-            })
+            }, projections)
+                .skip(options.offset)
+                .limit(options.limit)
+                .sort(getSortParams(options.sort))
                 .populate(['company', 'icon'])
                 .exec();
 
-            return brands;
+            return {
+                list: brands,
+                count,
+                options
+            }
         }
         catch (e) {
             throw new BadRequestException(e).getResponse();

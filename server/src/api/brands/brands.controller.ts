@@ -42,15 +42,19 @@ export class BrandsController {
     @Get('/all')
     @UseGuards(AccessTokenGuard)
     getAll (@Query('limit') limit: number = 10,
-            @Query('offset') offset: number = 0) {
-        return this.brandsService.getAll({ limit: Number(limit), offset: Number(offset) })
+            @Query('offset') offset: number = 0,
+            @Query('sort') sort: string = '') {
+        return this.brandsService.getAll({ limit: Number(limit), offset: Number(offset), sort: sort.split(',') })
     }
 
     @Get('/byCompany')
     @UseGuards(AccessTokenGuard)
     getByCompany(@Query('title') title: string,
-                 @UserVerified() user: IUserVerifiedData) {
-        return this.brandsService.getByCompany(title);
+                 @UserVerified() user: IUserVerifiedData,
+                 @Query('limit') limit: number = 10,
+                 @Query('offset') offset: number = 0,
+                 @Query('sort') sort: string = '') {
+        return this.brandsService.getByCompany(title, { limit: Number(limit), offset: Number(offset), sort: sort.split(',')});
     }
 
 }

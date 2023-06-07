@@ -3,3 +3,7 @@ export interface ISearchOptions {
     offset?: number;
     sort?: string[];
 }
+
+export type Projections<T> = {
+    [key in keyof Partial<T>]: boolean;
+};

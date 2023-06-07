@@ -15,11 +15,13 @@ import {CreateCompanyDto} from "./dto/create-company.dto";
 import {FileFieldsInterceptor} from "@nestjs/platform-express";
 import {CompaniesService} from "./companies.service";
 import {ValidationPipe} from "../../pipes/validation.pipe";
+import {CompanyAccessService} from "../companyAccess/company-access.service";
 
 @Controller('/api/companies')
 export class CompaniesController {
 
-    constructor(private companiesService: CompaniesService) {}
+    constructor(private companiesService: CompaniesService,
+                private companyAccessService: CompanyAccessService) {}
 
     @Post('/create')
     @UseGuards(AccessTokenGuard)
@@ -44,6 +46,12 @@ export class CompaniesController {
     getFullByTitle (@UserVerified() user: IUserVerifiedData,
                     @Query('title') title: string) {
         return this.companiesService.getFullByTitle(user.id, title);
+    }
+
+    @Get('/getByAccess')
+    @UseGuards(AccessTokenGuard)
+    getByAccess(@UserVerified() user: IUserVerifiedData) {
+        return this.companyAccessService.getAllCompaniesAccessByUserId(user.id);
     }
 
 }

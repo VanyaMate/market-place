@@ -2,8 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7db735f3-e9ce-4c73-8cce-5a3fcf56b2e9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/server/src/interfaces/responses.interface.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/refactoring.md" beforeDir="false" afterPath="$PROJECT_DIR$/refactoring.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/api/auth/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/auth/auth.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/api/brands/brands.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/brands/brands.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/api/brands/brands.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/brands/brands.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/api/companies/companies.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/companies/companies.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/api/companies/companies.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/companies/companies.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/api/companyAccess/company-access.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/companyAccess/company-access.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/api/compilations/compilations.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/compilations/compilations.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/api/products/products.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/products/products.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/api/users/users.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/users/users.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/api/users/users.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/users/users.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/helpers/utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/helpers/utils.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/interfaces/search.interfaces.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/interfaces/search.interfaces.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +66,8 @@
       <updated>1686072787779</updated>
       <workItem from="1686072791226" duration="7989000" />
       <workItem from="1686139622913" duration="1816000" />
-      <workItem from="1686141467453" duration="13165000" />
+      <workItem from="1686141467453" duration="13777000" />
+      <workItem from="1686162448031" duration="3964000" />
     </task>
     <servers />
   </component>
