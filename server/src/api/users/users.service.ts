@@ -53,8 +53,7 @@ export class UsersService {
 
     async findById (id: string, projections: { [key: string]: boolean } = {}) {
         try {
-            const user = await this.userModel.findById(id, projections);
-            return { users: [user] };
+            return await this.userModel.findById(id, projections);
         }
         catch (e) {
             throw new HttpException(e.message, HttpStatus.BAD_REQUEST);

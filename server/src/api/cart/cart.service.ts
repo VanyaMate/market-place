@@ -14,7 +14,7 @@ export class CartService {
         return cart.save().then((cart) => cart.products);
     }
 
-    async createCart (userId: string) {
+    async create (userId: string) {
         const cart = await this.cartModel.create({
             user: userId,
             products: []

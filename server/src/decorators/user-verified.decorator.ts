@@ -1,19 +1,15 @@
 import {createParamDecorator, ExecutionContext} from "@nestjs/common";
-import {ACCESS_TOKEN_NAME, USER} from "../.constants";
-import {UserDocument} from "../api/user/schemas/user.schema";
-import {ITokenData} from "../api/tokens/tokens.service";
+import {USER_ID} from "../.constants";
 
 export interface IUserVerifiedData {
-    user: UserDocument,
-    tokenData: ITokenData
+    id: string,
 }
 
 export const UserVerified = createParamDecorator(
     (data: string, ctx: ExecutionContext) => {
         const request = ctx.switchToHttp().getRequest();
-        const userVerifiedData = {
-            user: request[USER],
-            tokenData: request[ACCESS_TOKEN_NAME],
+        const userVerifiedData: IUserVerifiedData = {
+            id: request[USER_ID],
         };
 
         return userVerifiedData;

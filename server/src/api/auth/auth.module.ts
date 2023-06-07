@@ -5,6 +5,7 @@ import {TokensModule} from "../tokens/tokens.module";
 import {UserModule} from "../user/user.module";
 import {UsersModule} from "../users/users.module";
 import {CartModule} from "../cart/cart.module";
+import {SessionModule} from "../session/session.module";
 
 @Module({
     controllers: [ AuthController ],
@@ -14,6 +15,7 @@ import {CartModule} from "../cart/cart.module";
         UserModule,
         UsersModule,
         CartModule,
+        SessionModule,
     ],
 })
 export class AuthModule {}

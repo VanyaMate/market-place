@@ -1,9 +1,7 @@
 import {Body, Controller, Get, Post, UseGuards} from '@nestjs/common';
 import {AccessTokenGuard} from "../../guards/access-token-guard.service";
 import {IUserVerifiedData, UserVerified} from "../../decorators/user-verified.decorator";
-import {Schema} from "mongoose";
 import {CartService} from "./cart.service";
-import * as mongoose from "mongoose";
 
 @Controller('api/cart')
 export class CartController {
@@ -11,32 +9,32 @@ export class CartController {
     constructor (private cartService: CartService) {}
 
     /**
-     * Временный метод. В дальнейшем корзина будет создаваться при создании пользователя.
+     * TODO: Временный метод. В дальнейшем корзина будет создаваться при создании пользователя.
      */
     @Post('/create')
     @UseGuards(AccessTokenGuard)
-    createCart (@UserVerified() userAccess: IUserVerifiedData) {
-        return this.cartService.createCart(userAccess.user._id.toString());
+    createCart (@UserVerified() user: IUserVerifiedData) {
+        return this.cartService.create(user.id);
     }
 
     @Post('/reset')
     @UseGuards(AccessTokenGuard)
-    resetCart (@UserVerified() userAccess: IUserVerifiedData) {
-        return this.cartService.resetCart(userAccess.user._id.toString());
+    resetCart (@UserVerified() user: IUserVerifiedData) {
+        return this.cartService.resetCart(user.id);
     }
 
     @Get('')
     @UseGuards(AccessTokenGuard)
-    getCart (@UserVerified() userAccess: IUserVerifiedData) {
-        return this.cartService.getCart(userAccess.user._id.toString());
+    getCart (@UserVerified() user: IUserVerifiedData) {
+        return this.cartService.getCart(user.id);
     }
 
     @Post('/add')
     @UseGuards(AccessTokenGuard)
-    addToCart(@UserVerified() userAccess: IUserVerifiedData,
+    addToCart(@UserVerified() user: IUserVerifiedData,
               @Body('productId') productId: string,
               @Body('amount') amount: string = '1') {
-        return this.cartService.addToCart(userAccess.user._id.toString(), {
+        return this.cartService.addToCart(user.id, {
             product: productId,
             amount: Number(amount)
         })
@@ -44,10 +42,10 @@ export class CartController {
 
     @Post('/change')
     @UseGuards(AccessTokenGuard)
-    changeCart(@UserVerified() userAccess: IUserVerifiedData,
+    changeCart(@UserVerified() user: IUserVerifiedData,
                @Body('productId') productId: string,
                @Body('amount') amount: string = '0') {
-        return this.cartService.changeCart(userAccess.user._id.toString(), {
+        return this.cartService.changeCart(user.id, {
             product: productId,
             amount: Number(amount)
         })

@@ -7,6 +7,8 @@ import {UsersModule} from "../users/users.module";
 import {ImageLoaderModule} from "../image-loader/image-loader.module";
 import {MongooseModule} from "@nestjs/mongoose";
 import {Company, CompanySchema} from "./schemas/company.schema";
+import {SessionModule} from "../session/session.module";
+import {CompanyAccessModule} from "../companyAccess/company-access.module";
 
 @Module({
     controllers: [
@@ -19,7 +21,9 @@ import {Company, CompanySchema} from "./schemas/company.schema";
         TokensModule,
         UsersModule,
         ImageLoaderModule,
-        MongooseModule.forFeature([{ name: Company.name, schema: CompanySchema }])
+        MongooseModule.forFeature([{ name: Company.name, schema: CompanySchema }]),
+        SessionModule,
+        CompanyAccessModule,
     ],
     exports: [
         CompaniesService,

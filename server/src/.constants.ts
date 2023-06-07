@@ -1,2 +1,2 @@
 export const ACCESS_TOKEN_NAME = 'accessToken';
-export const USER = 'user';
+export const USER_ID = 'userId';

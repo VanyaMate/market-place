@@ -1,14 +1,15 @@
 import {CanActivate, ExecutionContext, Injectable, UnauthorizedException} from "@nestjs/common";
-import {catchError, Observable} from "rxjs";
 import {Request} from 'express';
 import {TokensService} from "../api/tokens/tokens.service";
-import {ACCESS_TOKEN_NAME, USER} from "../.constants";
+import {ACCESS_TOKEN_NAME, USER_ID} from "../.constants";
 import {UsersService} from "../api/users/users.service";
+import {SessionService} from "../api/session/session.service";
 
 @Injectable()
 export class AccessTokenGuard implements CanActivate {
     constructor(private tokenService: TokensService,
-                private usersService: UsersService) {}
+                private usersService: UsersService,
+                private sessionService: SessionService,) {}
 
     async canActivate(context: ExecutionContext): Promise<boolean> {
         const req: Request = context.switchToHttp().getRequest();
@@ -24,15 +25,13 @@ export class AccessTokenGuard implements CanActivate {
             }
 
             const { id, sessionKey } = verified;
-            const { users } = await this.usersService.findById(id);
-            const [ user ] = users;
+            const key = await this.sessionService.findByUserId(id);
 
-            if (!user || user.sessionKey !== sessionKey) {
+            if (!key || sessionKey !== key) {
                 throw { message: 'Ошибка авторизации' };
             }
 
-            req[ACCESS_TOKEN_NAME] = verified;
-            req[USER] = user;
+            req[USER_ID] = id;
 
             return true;
         }

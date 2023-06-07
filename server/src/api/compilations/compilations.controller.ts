@@ -16,9 +16,9 @@ export class CompilationsController {
     @Get('/user-recommendations')
     @UseGuards(AccessTokenGuard)
     getUserRecommendations(@Query('limit') limit: number = 10,
-                           @UserVerified() userData: IUserVerifiedData) {
+                           @UserVerified() user: IUserVerifiedData) {
         return this.compilationsService.getUserRecommendations(
-            userData.user._id.toString(),
+            user.id,
             limit
         )
     }

@@ -9,6 +9,7 @@ import {FolderType} from "../../services/file-service/file-service.service";
 import {ImageSize} from "../../services/sharp-service/sharp.service";
 import {ImageLoaderService} from "../image-loader/image-loader.service";
 import {CompaniesService} from "../companies/companies.service";
+import {CompanyAccessService} from "../companyAccess/company-access.service";
 
 @Injectable()
 export class BrandsService {
@@ -23,18 +24,25 @@ export class BrandsService {
     constructor(@InjectModel(Brand.name) private brandModel: Model<Brand>,
                 private fileSystemService: FileSystemService,
                 private imageLoaderService: ImageLoaderService,
-                private companiesService: CompaniesService) {}
+                private companiesService: CompaniesService,
+                private companyAccessService: CompanyAccessService) {}
 
-    async create (brandDdo: BrandDto, image: Express.Multer.File, userId: Types.ObjectId) {
-        /**
-         * TODO: Сделать невозможным делать одинаковые имена
-         */
-
-        const { companyTitle, ...brandData } = brandDdo;
-
+    async create (userId: string, brandDdo: BrandDto, image: Express.Multer.File) {
         try {
-            if (!image) throw { message: 'Не загружена фотография' }
-            const company = await this.companiesService.getFullByTitle(userId.toString(), companyTitle);
+            const { companyTitle, ...brandData } = brandDdo;
+            if (!image) throw { message: 'Не загружена фотография' };
+
+            const company = await this.companiesService.getFullByTitle(userId, companyTitle);
+            if (!company) throw { message: 'Компания не найдена' };
+
+            const access = await this.companyAccessService.checkAccess(userId, company._id.toString());
+            if (!access) throw { message: 'Нет доступа'};
+
+            const sameBrand = await this.brandModel.findOne({
+                title: brandDdo.title,
+                company: company._id,
+            });
+            if (sameBrand) throw { message: 'Такой бренд уже существует' };
 
             const [ icon ] = await this.imageLoaderService.load(
                 [image],
@@ -45,22 +53,34 @@ export class BrandsService {
 
             const brand = (await this.brandModel.create({
                 ...brandData,
-                author: userId,
-                image: icon.id,
+                icon: icon.id,
                 company: company._id
             }))
-                .populate(['image', 'company'])
+                .populate(['icon', 'company']);
 
             return brand;
         }
         catch (e) {
-            console.log(e);
-            throw new BadRequestException(e);
+            throw new BadRequestException(e).getResponse();
         }
     }
 
-    async delete () {
+    async delete (userId: string, brandId: string) {
+        try {
+            const brand: BrandDocument = await this.brandModel
+                .findOne({ _id: brandId })
+                .populate('company')
+                .exec();
 
+            if (!brand) { throw {message: 'Такого бренда не существует'} }
+            const access = await this.companyAccessService.checkAccess(userId, brand.company._id.toString());
+            if (!access) { throw {message: 'Нету доступа'} }
+
+            return this.brandModel.deleteOne({ _id: brandId });
+        }
+        catch (e) {
+            throw new BadRequestException(e).getResponse();
+        }
     }
 
     async getAll (options: ISearchOptions, projections: { [key: string]: boolean } = {}) {
@@ -78,24 +98,26 @@ export class BrandsService {
             }
         }
         catch (e) {
-            throw new BadRequestException(e);
+            throw new BadRequestException(e).getResponse();
         }
     }
 
-    /**
-     * TODO: Требуется рефакторинг ВСЕГО
-     */
-    async getByCompany(userId: string, title: string) {
-        const company = await this.companiesService.getFullByTitle(userId, title);
-        if (!company) {
-            throw new BadRequestException('Компания не найдена');
-        }
-        const brands = await this.brandModel.find({
-            company: company._id
-        })
-            .populate('company')
-            .exec();
+    async getByCompany(title: string) {
+        try {
+            const company = await this.companiesService.getByTitle(title);
+            if (!company) {
+                throw { message: 'Компания не найдена' };
+            }
+            const brands = await this.brandModel.find({
+                company: company._id
+            })
+                .populate(['company', 'icon'])
+                .exec();
 
-        return brands;
+            return brands;
+        }
+        catch (e) {
+            throw new BadRequestException(e).getResponse();
+        }
     }
 }

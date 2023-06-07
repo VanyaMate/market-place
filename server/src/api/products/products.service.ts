@@ -26,7 +26,7 @@ export class ProductsService {
                 @InjectModel(Brand.name) private brandModel: Model<Brand>,
                 private imageLoaderService: ImageLoaderService) {}
 
-    async create (productDto: ProductDto, files: { [key: string]: Express.Multer.File[] }, userId: Types.ObjectId) {
+    async create (userId: string, productDto: ProductDto, files: { [key: string]: Express.Multer.File[] }) {
         try {
             const { generalImage, images } = files;
 

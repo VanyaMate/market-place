@@ -18,14 +18,14 @@ export class ImageLoaderController {
     ])))
     async load (@UploadedFiles() files: { [key: string]: Express.Multer.File[] },
           @Body() folderType: { type: FolderType },
-          @UserVerified() userData: IUserVerifiedData) {
+          @UserVerified() user: IUserVerifiedData) {
         /**
          * TODO: Безопасность
          */
         await this.imageLoaderService.load(
             files['image'],
             folderType.type,
-            userData.user._id.toString(),
+            user.id,
             []
         );
     }

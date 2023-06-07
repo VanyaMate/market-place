@@ -18,13 +18,8 @@ export class TokensService {
     constructor(private config: ConfigService,
                 @InjectModel(Token.name) private tokenModel: Model<Token>) {}
 
-    async generateTokenToUser (user: UserDocument): Promise<string> {
-        const token = new this.tokenModel({
-            token: jwt.sign({id: user._id, sessionKey: user.sessionKey}, this.config.get<string>(JWT_SECRET_KEY), { expiresIn: '7d' }),
-            user: user._id
-        })
-
-        return token.token;
+    async generateTokenToUser (userId: string, sessionKey: string): Promise<string> {
+        return jwt.sign({id: userId, sessionKey: sessionKey}, this.config.get<string>(JWT_SECRET_KEY), { expiresIn: '7d' });
     }
 
     verifyToken (token: string): ITokenData {

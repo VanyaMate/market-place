@@ -32,8 +32,8 @@ export class ProductsController {
     ])))
     create (@UploadedFiles() files: { [key: string]: Express.Multer.File[] },
             @Body() productDto: ProductDto,
-            @UserVerified() userVerified: IUserVerifiedData) {
-        return this.productsService.create(productDto, files, userVerified.user._id);
+            @UserVerified() user: IUserVerifiedData) {
+        return this.productsService.create(user.id, productDto, files);
     }
 
     @Post('/delete')

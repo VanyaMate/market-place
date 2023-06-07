@@ -6,7 +6,7 @@ import {UsersService} from "../users/users.service";
 import * as bcrypt from 'bcrypt';
 import {UserPrivateDataDto} from "../user/dto/user-private-data.dto";
 import {CartService} from "../cart/cart.service";
-import {UserDocument} from "../user/schemas/user.schema";
+import {SessionService} from "../session/session.service";
 
 @Injectable()
 export class AuthService {
@@ -14,7 +14,8 @@ export class AuthService {
     constructor (private tokenService: TokensService,
                  private userService: UserService,
                  private usersService: UsersService,
-                 private cartService: CartService) {}
+                 private cartService: CartService,
+                 private sessionService: SessionService) {}
 
     async registration (userLoginDto: UserLoginDto): Promise<[UserPrivateDataDto, string]> {
         try {
@@ -23,8 +24,9 @@ export class AuthService {
                 throw { message: 'Эта почта уже занята' }
             }
             const user = await this.userService.create(userLoginDto);
-            const cart = await this.cartService.createCart(user._id.toString());
-            const token = await this.tokenService.generateTokenToUser(user);
+            const cart = await this.cartService.create(user._id.toString());
+            const sessionKey = await this.sessionService.create(user._id.toString());
+            const token = await this.tokenService.generateTokenToUser(user._id.toString(), sessionKey);
             return [ new UserPrivateDataDto({...user.toObject(), cart}), token ];
         }
         catch (e) {
@@ -36,7 +38,7 @@ export class AuthService {
         try {
             const candidate = (await this.usersService.findByEmail(userLoginDto.email)).users[0];
             if (candidate && await bcrypt.compare(userLoginDto.password, candidate.password)) {
-                return this.returnPrivateUserData(candidate);
+                return this.getPrivateUserData(candidate._id.toString());
             }
 
             throw { message: 'Ошибка авторизации' }
@@ -51,10 +53,12 @@ export class AuthService {
 
     }
 
-    async returnPrivateUserData (user: UserDocument): Promise<[UserPrivateDataDto, string]> {
+    async getPrivateUserData (userId: string): Promise<[UserPrivateDataDto, string]> {
         try {
-            const token = await this.tokenService.generateTokenToUser(user);
-            const cart = await this.cartService.getCart(user._id.toString());
+            const user = await this.usersService.findById(userId);
+            const sessionKey = await this.sessionService.findByUserId(userId);
+            const token = await this.tokenService.generateTokenToUser(userId, sessionKey);
+            const cart = await this.cartService.getCart(userId);
             return [ new UserPrivateDataDto({...user.toObject(), cart}), token ];
         }
         catch (e) {

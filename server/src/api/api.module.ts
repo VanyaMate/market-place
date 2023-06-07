@@ -10,20 +10,22 @@ import {CompilationsModule} from "./compilations/compilations.module";
 import { CartModule } from './cart/cart.module';
 import {ImageLoaderModule} from "./image-loader/image-loader.module";
 import {CompaniesModule} from "./companies/companies.module";
+import {CompanyAccessModule} from "./companyAccess/company-access.module";
 
 @Module({
     imports: [
-        OrdersModule,
+        // OrdersModule,
         AuthModule,
         TokensModule,
         UserModule,
         UsersModule,
         ProductsModule,
         BrandsModule,
-        CompilationsModule,
-        CartModule,
-        ImageLoaderModule,
         CompaniesModule,
+        // CompilationsModule,
+        // CartModule,
+        // ImageLoaderModule,
+        CompanyAccessModule,
     ]
 })
 export class ApiModule {}

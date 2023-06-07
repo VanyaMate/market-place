@@ -7,6 +7,7 @@ import {FolderType} from "../../services/file-service/file-service.service";
 import {ImageSize} from "../../services/sharp-service/sharp.service";
 import {ImageLoaderService} from "../image-loader/image-loader.service";
 import {Company} from "./schemas/company.schema";
+import {CompanyAccessService} from "../companyAccess/company-access.service";
 
 @Injectable()
 export class CompaniesService {
@@ -17,23 +18,36 @@ export class CompaniesService {
     ]
 
     constructor(private imageLoaderService: ImageLoaderService,
+                private companyAccessService: CompanyAccessService,
                 @InjectModel(Company.name) private companyModel: Model<Company>) {}
 
     async create (companyDto: CreateCompanyDto & { icon: Express.Multer.File }, userId: string) {
-        const [ icon ] = await this.imageLoaderService.load(
-            [companyDto.icon],
-            FolderType.COMPANY,
-            userId,
-            this.defaultCompanyIconSizes
-        );
-        const company = (await this.companyModel.create({
-            ...companyDto,
-            icon: icon.id,
-            owner: userId,
-        }))
-            .populate('icon');
+        try {
+            /**
+             * TODO: Сделать так, что картинки загружаются от имени компании
+             */
+            const [ icon ] = await this.imageLoaderService.load(
+                [companyDto.icon],
+                FolderType.COMPANY,
+                userId,
+                this.defaultCompanyIconSizes
+            );
 
-        return company;
+            const company = await this.companyModel
+                .create({
+                    ...companyDto,
+                    icon: icon.id
+                })
+                .then((company) => {
+                    return company.populate('icon');
+                })
+
+            await this.companyAccessService.create(userId, company._id.toString())
+            return company;
+        }
+        catch (e) {
+            throw new BadRequestException(e);
+        }
     }
 
     /**
@@ -41,19 +55,31 @@ export class CompaniesService {
      * @param userId
      */
     async getAllByUser (userId: string) {
-        return await this.companyModel
-            .find({ owner: userId })
-            .populate(['icon'])
-            .exec();
+        return await this.companyAccessService
+            .getAllCompaniesAccessByUserId(userId);
     }
 
-    async getFullByTitle (userId: string, title: string) {
+    async getByTitle (title: string) {
         const company = await this.companyModel
-            .findOne({ owner: userId, title: title })
+            .findOne({ title })
             .populate(['icon'])
             .exec();
 
         if (company) {
+            return company;
+        } else {
+            throw new BadRequestException('Нету доступа')
+        }
+    }
+
+    async getFullByTitle (userId: string, title: string) {
+        const company = await this.companyModel
+            .findOne({ title: title })
+            .populate(['icon'])
+            .exec();
+        const access = await this.companyAccessService.checkAccess(userId, company._id.toString());
+
+        if (company && access) {
             return company;
         } else {
             throw new BadRequestException('Нету доступа')

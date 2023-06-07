@@ -5,6 +5,7 @@ import {TokensModule} from "../tokens/tokens.module";
 import {MongooseModule} from "@nestjs/mongoose";
 import {Cart, CartSchema} from "./schema/cart.schema";
 import {UsersModule} from "../users/users.module";
+import {SessionModule} from "../session/session.module";
 
 @Module({
     controllers: [CartController],
@@ -15,6 +16,7 @@ import {UsersModule} from "../users/users.module";
         MongooseModule.forFeature([ { name: Cart.name, schema: CartSchema } ]),
         TokensModule,
         UsersModule,
+        SessionModule,
     ],
     exports: [
         CartService

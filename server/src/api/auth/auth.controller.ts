@@ -48,14 +48,14 @@ export class AuthController {
 
     @Post('/token')
     @UseGuards(AccessTokenGuard)
-    async token (@UserVerified() userData: IUserVerifiedData,
+    async token (@UserVerified() user: IUserVerifiedData,
                  @Res() res: Response) {
-        const [user, token] = await this.authService.returnPrivateUserData(userData.user);
+        const [userData, token] = await this.authService.getPrivateUserData(user.id);
         res.cookie(ACCESS_TOKEN_NAME, token, {
             httpOnly: true,
             maxAge: getMSDays(7),
         })
-        res.status(200).json(user);
+        res.status(200).json(userData);
     }
 
 }

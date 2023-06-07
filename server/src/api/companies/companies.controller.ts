@@ -27,23 +27,23 @@ export class CompaniesController {
     @UseInterceptors(new (FileFieldsInterceptor([
         { name: 'icon', maxCount: 1 }
     ])))
-    create (@UserVerified() userData: IUserVerifiedData,
+    create (@UserVerified() user: IUserVerifiedData,
             @Body() createCompanyDto: CreateCompanyDto,
             @UploadedFiles() files: { [key: string]: Express.Multer.File[] }) {
-        return this.companiesService.create({ ...createCompanyDto, icon: files['icon'][0] }, userData.user._id.toString())
+        return this.companiesService.create({ ...createCompanyDto, icon: files['icon'][0] }, user.id)
     }
 
     @Get('/my')
     @UseGuards(AccessTokenGuard)
-    getAllByUser (@UserVerified() userData: IUserVerifiedData) {
-        return this.companiesService.getAllByUser(userData.user._id.toString());
+    getAllByUser (@UserVerified() user: IUserVerifiedData) {
+        return this.companiesService.getAllByUser(user.id);
     }
 
     @Get('/getFullByTitle')
     @UseGuards(AccessTokenGuard)
-    getFullByTitle (@UserVerified() userData: IUserVerifiedData,
+    getFullByTitle (@UserVerified() user: IUserVerifiedData,
                     @Query('title') title: string) {
-        return this.companiesService.getFullByTitle(userData.user._id.toString(), title);
+        return this.companiesService.getFullByTitle(user.id, title);
     }
 
 }

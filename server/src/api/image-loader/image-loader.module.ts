@@ -6,6 +6,7 @@ import {UsersModule} from "../users/users.module";
 import {MongooseModule} from "@nestjs/mongoose";
 import {ImageSchema, Image} from "./schemas/image.schema";
 import {ImageModule} from "../../services/image-service/image.module";
+import {SessionModule} from "../session/session.module";
 
 @Module({
     controllers: [
@@ -18,7 +19,8 @@ import {ImageModule} from "../../services/image-service/image.module";
         TokensModule,
         UsersModule,
         ImageModule,
-        MongooseModule.forFeature([{ name: Image.name, schema: ImageSchema }])
+        MongooseModule.forFeature([{ name: Image.name, schema: ImageSchema }]),
+        SessionModule,
     ],
     exports: [
         ImageLoaderService

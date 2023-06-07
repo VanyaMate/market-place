@@ -28,13 +28,15 @@ export class BrandsController {
     ])))
     create (@UploadedFiles() files: { [key: string]: Express.Multer.File[] },
             @Body() brandDto: BrandDto,
-            @UserVerified() userVerified: IUserVerifiedData) {
-        return this.brandsService.create(brandDto, files['image']?.[0], userVerified.user._id);
+            @UserVerified() user: IUserVerifiedData) {
+        return this.brandsService.create(user.id, brandDto, files['image']?.[0]);
     }
 
     @Post('/delete')
-    delete () {
-        return this.brandsService.delete();
+    @UseGuards(AccessTokenGuard)
+    delete (@UserVerified() user: IUserVerifiedData,
+            @Body() body: { brandId: string }) {
+        return this.brandsService.delete(user.id, body.brandId);
     }
 
     @Get('/all')
@@ -47,8 +49,8 @@ export class BrandsController {
     @Get('/byCompany')
     @UseGuards(AccessTokenGuard)
     getByCompany(@Query('title') title: string,
-                 @UserVerified() userData: IUserVerifiedData) {
-        return this.brandsService.getByCompany(userData.user._id.toString(), title);
+                 @UserVerified() user: IUserVerifiedData) {
+        return this.brandsService.getByCompany(title);
     }
 
 }

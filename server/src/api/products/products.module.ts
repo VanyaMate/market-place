@@ -7,6 +7,7 @@ import {UsersModule} from "../users/users.module";
 import {TokensModule} from "../tokens/tokens.module";
 import {Brand, BrandSchema} from "../brands/schemas/brand.schema";
 import {ImageLoaderModule} from "../image-loader/image-loader.module";
+import {SessionModule} from "../session/session.module";
 
 @Module({
     controllers: [ ProductsController ],
@@ -17,6 +18,7 @@ import {ImageLoaderModule} from "../image-loader/image-loader.module";
         UsersModule,
         TokensModule,
         ImageLoaderModule,
+        SessionModule,
     ],
     exports: [ ProductsService ]
 })
