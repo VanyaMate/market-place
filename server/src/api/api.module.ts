@@ -12,7 +12,7 @@ import {ImageLoaderModule} from "./image-loader/image-loader.module";
 import {CompaniesModule} from "./companies/companies.module";
 import {CompanyAccessModule} from "./company-access/company-access.module";
 
-import {UserModule as UserModuleV2} from './v2/user/user.module';
+import {ApiV2Module} from "./v2/api-v2.module";
 
 @Module({
     imports: [
@@ -28,7 +28,7 @@ import {UserModule as UserModuleV2} from './v2/user/user.module';
         CartModule,
         ImageLoaderModule,
         CompanyAccessModule,
-        UserModuleV2,
+        ApiV2Module,
     ]
 })
 export class ApiModule {}
