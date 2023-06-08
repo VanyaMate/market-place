@@ -1,4 +1,4 @@
-import {Module} from "@nestjs/common";
+import {forwardRef, Module} from "@nestjs/common";
 import {BrandsController} from "./brands.controller";
 import {BrandsService} from "./brands.service";
 import {UsersModule} from "../users/users.module";
@@ -10,7 +10,7 @@ import {ImageModule} from "../../services/image-service/image.module";
 import {ImageLoaderModule} from "../image-loader/image-loader.module";
 import {CompaniesModule} from "../companies/companies.module";
 import {SessionModule} from "../session/session.module";
-import {CompanyAccessModule} from "../companyAccess/company-access.module";
+import {CompanyAccessModule} from "../company-access/company-access.module";
 
 @Module({
     controllers: [ BrandsController ],
@@ -22,9 +22,12 @@ import {CompanyAccessModule} from "../companyAccess/company-access.module";
         MongooseModule.forFeature([{ name: Brand.name, schema: BrandSchema }]),
         ImageModule,
         ImageLoaderModule,
-        CompaniesModule,
+        forwardRef(() => CompaniesModule),
         SessionModule,
         CompanyAccessModule,
+    ],
+    exports: [
+        BrandsService,
     ]
 })
 export class BrandsModule {}

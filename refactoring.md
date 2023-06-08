@@ -44,16 +44,17 @@
         - [X] Tokens
         - [ ] [Еще не готов] User
         - [X] Users
-        - [ ] FileService
-        - [ ] FileSystem
-        - [ ] ImageService
-        - [ ] SharpService
+        - [ ] [Системный сервис] FileService
+        - [ ] [Системный сервис] FileSystem
+        - [ ] [Системный сервис] ImageService
+        - [ ] [Системный сервис] SharpService
 
 ### База данных
 - [X] Разделить sessionKey и userModel
 - [ ] Разделить orders и userModel
-- [ ] Разделить cart и userModel
+- [X] Разделить cart и userModel
 - [ ] Сделать схему связей в БД
+- [ ] Сделать базы для хранения картинок компании/пользователя раздельно
 
 - [X] Заменить icon/image на что-то одно
 
@@ -74,7 +75,7 @@
 
 - [ ] Добавить delete методы
     - [X] Brands
-    - [ ] Cart
+    - [X] Cart
     - [ ] Categories
     - [ ] Companies
     - [ ] ImageLoader
@@ -87,7 +88,7 @@
     - [ ] Сервисы
         - [X] Auth
         - [ ] Brands
-        - [ ] Cart
+        - [X] Cart
         - [ ] Categories
         - [ ] Companies
         - [ ] Compilations

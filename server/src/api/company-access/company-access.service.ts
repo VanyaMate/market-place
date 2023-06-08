@@ -2,6 +2,10 @@ import {BadRequestException, Injectable} from "@nestjs/common";
 import {InjectModel} from "@nestjs/mongoose";
 import {CompanyAccess} from "./schemas/company-access.schema";
 import {Model} from "mongoose";
+import {ISearchOptions, Projections} from "../../interfaces/search.interfaces";
+import {CompanyDocument} from "../companies/schemas/company.schema";
+import {getSortParams} from "../../helpers/utils";
+import {IMultiResponse} from "../../interfaces/responses.interface";
 
 @Injectable()
 export class CompanyAccessService {
@@ -16,7 +20,7 @@ export class CompanyAccessService {
             });
         }
         catch (e) {
-            throw new BadRequestException(e);
+            throw new BadRequestException(e).getResponse();
         }
     }
 
@@ -28,7 +32,18 @@ export class CompanyAccessService {
             })
         }
         catch (e) {
-            throw new BadRequestException(e);
+            throw new BadRequestException(e).getResponse();
+        }
+    }
+
+    async deleteAllByCompanyId (companyId: string) {
+        try {
+            return await this.accessModel.deleteMany({
+                company: companyId,
+            })
+        }
+        catch (e) {
+            throw new BadRequestException(e).getResponse();
         }
     }
 
@@ -39,21 +54,33 @@ export class CompanyAccessService {
             })
         }
         catch (e) {
-            throw new BadRequestException(e);
+            throw new BadRequestException(e).getResponse();
         }
     }
 
-    async getAllCompaniesAccessByUserId (userId: string) {
+    async getAllCompaniesAccessByUserId (
+        userId: string,
+        options: Omit<ISearchOptions, keyof { sort: string[] }> = {},
+        projections: Projections<CompanyDocument> = {}
+    ): Promise<IMultiResponse<CompanyDocument>> {
         try {
+            const count = await this.accessModel.find({ user: userId }).count();
             const accesses = await this.accessModel.find({
                 user: userId
-            })
+            }, projections)
+                .skip(options.offset)
+                .limit(options.limit)
                 .populate('company')
+                .exec();
 
-            return accesses.map((access) => access.company);
+            return {
+                list: accesses.map((access) => access.company as CompanyDocument),
+                options: options,
+                count: count
+            };
         }
         catch (e) {
-            throw new BadRequestException(e);
+            throw new BadRequestException(e).getResponse();
         }
     }
 
@@ -65,7 +92,7 @@ export class CompanyAccessService {
                 .populate('user');
         }
         catch (e) {
-            throw new BadRequestException(e);
+            throw new BadRequestException(e).getResponse();
         }
     }
 
@@ -79,7 +106,7 @@ export class CompanyAccessService {
             return !!access;
         }
         catch (e) {
-            throw new BadRequestException(e);
+            throw new BadRequestException(e).getResponse();
         }
     }
 

@@ -1,6 +1,6 @@
 import {
     Body,
-    Controller,
+    Controller, Delete,
     Get,
     Post,
     Query,
@@ -15,7 +15,7 @@ import {CreateCompanyDto} from "./dto/create-company.dto";
 import {FileFieldsInterceptor} from "@nestjs/platform-express";
 import {CompaniesService} from "./companies.service";
 import {ValidationPipe} from "../../pipes/validation.pipe";
-import {CompanyAccessService} from "../companyAccess/company-access.service";
+import {CompanyAccessService} from "../company-access/company-access.service";
 
 @Controller('/api/companies')
 export class CompaniesController {
@@ -35,27 +35,43 @@ export class CompaniesController {
         return this.companiesService.create({ ...createCompanyDto, icon: files['icon'][0] }, user.id)
     }
 
-    delete () {
-
+    @Delete('/delete')
+    @UseGuards(AccessTokenGuard)
+    delete (@UserVerified() user: IUserVerifiedData,
+            @Body() body: { title: string }) {
+        return this.companiesService.delete(user.id, body.title);
     }
 
     @Get('/my')
     @UseGuards(AccessTokenGuard)
-    getAllByUser (@UserVerified() user: IUserVerifiedData) {
-        return this.companiesService.getAllByUser(user.id);
+    getMy (@UserVerified() user: IUserVerifiedData,
+           @Query('limit') limit: number = 10,
+           @Query('offset') offset: number = 0,
+           @Query('sort') sort: string = '') {
+        return this.companiesService.getAllByUser(user.id, { limit: Number(limit), offset: Number(offset), sort: sort.split(',')});
     }
 
     @Get('/getFullByTitle')
     @UseGuards(AccessTokenGuard)
     getFullByTitle (@UserVerified() user: IUserVerifiedData,
                     @Query('title') title: string) {
-        return this.companiesService.getFullByTitle(user.id, title);
+        return this.companiesService.getFullOneByTitle(user.id, title);
     }
 
+    /**
+     * Либо убрать либо переделать под админа в будущем
+     * @param user
+     * @param limit
+     * @param offset
+     * @param sort
+     */
     @Get('/getByAccess')
     @UseGuards(AccessTokenGuard)
-    getByAccess(@UserVerified() user: IUserVerifiedData) {
-        return this.companyAccessService.getAllCompaniesAccessByUserId(user.id);
+    getByAccess(@UserVerified() user: IUserVerifiedData,
+                @Query('limit') limit: number = 10,
+                @Query('offset') offset: number = 0,
+                @Query('sort') sort: string = '') {
+        return this.companiesService.getAllByUser(user.id, { limit: Number(limit), offset: Number(offset), sort: sort.split(',')});
     }
 
 }

@@ -10,11 +10,11 @@ import {CompilationsModule} from "./compilations/compilations.module";
 import { CartModule } from './cart/cart.module';
 import {ImageLoaderModule} from "./image-loader/image-loader.module";
 import {CompaniesModule} from "./companies/companies.module";
-import {CompanyAccessModule} from "./companyAccess/company-access.module";
+import {CompanyAccessModule} from "./company-access/company-access.module";
 
 @Module({
     imports: [
-        // OrdersModule,
+        OrdersModule,
         AuthModule,
         TokensModule,
         UserModule,
@@ -22,9 +22,9 @@ import {CompanyAccessModule} from "./companyAccess/company-access.module";
         ProductsModule,
         BrandsModule,
         CompaniesModule,
-        // CompilationsModule,
-        // CartModule,
-        // ImageLoaderModule,
+        CompilationsModule,
+        CartModule,
+        ImageLoaderModule,
         CompanyAccessModule,
     ]
 })

@@ -1,6 +1,6 @@
 import {BadRequestException, Injectable} from '@nestjs/common';
 import {InjectModel} from "@nestjs/mongoose";
-import {Cart, CartDocument, CartSchema, ICartProduct} from "./schema/cart.schema";
+import {Cart, ICartProduct} from "./schema/cart.schema";
 import {Model} from "mongoose";
 
 @Injectable()
@@ -8,58 +8,105 @@ export class CartService {
 
     constructor(@InjectModel(Cart.name) private cartModel: Model<Cart>) {}
 
-    async resetCart (userId: string) {
-        const cart = await this.cartModel.findOne({ user: userId }).exec();
-        cart.products = [];
-        return cart.save().then((cart) => cart.products);
+    async resetCart (userId: string): Promise<ICartProduct[]> {
+        try {
+            const cart = await this.cartModel.findOne({ user: userId }).exec();
+            if (!cart) { throw { message: 'Корзины для этого пользователя не найдено' } }
+
+            cart.products = [];
+            return cart.save().then((cart) => cart.products);
+        }
+        catch (e) {
+            throw new BadRequestException(e).getResponse();
+        }
     }
 
-    async create (userId: string) {
-        const cart = await this.cartModel.create({
-            user: userId,
-            products: []
-        });
+    async create (userId: string): Promise<ICartProduct[]> {
+        try {
+            const cart = await this.cartModel.create({
+                user: userId,
+                products: []
+            });
 
-        return cart;
+            return cart.products;
+        }
+        catch (e) {
+            throw new BadRequestException(e).getResponse();
+        }
     }
 
-    async getCart (userId: string) {
+    async delete (userId: string): Promise<boolean> {
+        try {
+            const deleted = await this.cartModel.deleteOne({
+                user: userId
+            });
+
+            return deleted.deletedCount > 0;
+        }
+        catch (e) {
+            throw new BadRequestException(e).getResponse();
+        }
+    }
+
+    async getCart (userId: string): Promise<ICartProduct[]> {
         try {
             const cart = await this.cartModel
                 .findOne({ user: userId }, ['products.product', 'products.amount'])
                 .populate('products.product')
                 .exec();
-            return cart.products;
+
+            if (cart.products) {
+                return cart.products;
+            } else {
+                throw { message: 'Корзины для этого пользователя не найдено' };
+            }
         }
         catch (e) {
-            return new BadRequestException(e)
+            throw new BadRequestException(e).getResponse();
         }
     }
 
-    async addToCart (userId: string, product: { product: string, amount: number }) {
-        const cart = await this.cartModel
-            .findOne({ user: userId })
-            .exec();
-        const cartItem = cart.products.filter((cartProduct) => cartProduct.product.toString() === product.product)[0];
+    async addToCart (userId: string, product: ICartProduct): Promise<ICartProduct[]> {
+        try {
+            const cart = await this.cartModel
+                .findOne({ user: userId })
+                .exec();
 
-        if (cartItem) {
-            cartItem.amount += product.amount;
-        } else {
-            cart.products.push(product);
+            if (!cart) { throw { message: 'Корзины для этого пользователя не найдено' } }
+
+            const cartItem = cart.products.filter((cartProduct) => cartProduct.product.toString() === product.product)[0];
+
+            if (cartItem) {
+                cartItem.amount += product.amount;
+            } else {
+                cart.products.push(product);
+            }
+
+            return cart.save().then(doc => doc.populate('products.product')).then((data) => data.products);
         }
-        return cart.save().then(doc => doc.populate('products.product')).then((data) => data.products);
+        catch (e) {
+            throw new BadRequestException(e).getResponse();
+        }
     }
 
-    async changeCart (userId: string, product: { product: string, amount: number }) {
-        const cart = await this.cartModel
-            .findOne({ user: userId })
-            .populate('products.product')
-            .exec();
-        this._updateCartItem(cart, product);
-        return cart.save().then(doc => doc.populate('products.product')).then((data) => data.products);
+    async changeCart (userId: string, product: ICartProduct): Promise<ICartProduct[]> {
+        try {
+            const cart = await this.cartModel
+                .findOne({ user: userId })
+                .populate('products.product')
+                .exec();
+
+            if (!cart) { throw { message: 'Корзины для этого пользователя не найдено' } }
+
+            this._updateCartItem(cart, product);
+            return cart.save().then(doc => doc.populate('products.product')).then((data) => data.products);
+        }
+        catch (e) {
+            throw new BadRequestException(e).getResponse();
+        }
     }
 
-    private _updateCartItem (cart, product: { product: string, amount: number }) {
+    private _updateCartItem (cart, product: ICartProduct): void {
         cart.products.forEach((cartProduct, index) => {
             if (cartProduct.product._id.toString() === product.product) {
                 if (product.amount) {

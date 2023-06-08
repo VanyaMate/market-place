@@ -1,4 +1,4 @@
-import {BadRequestException, Injectable} from "@nestjs/common";
+import {BadRequestException, forwardRef, Inject, Injectable} from "@nestjs/common";
 import {BrandDto} from "./dto/brand.dto";
 import {Model} from "mongoose";
 import {FileSystemService} from "../../services/fileSystem/file-system.service";
@@ -9,7 +9,7 @@ import {FolderType} from "../../services/file-service/file-service.service";
 import {ImageSize} from "../../services/sharp-service/sharp.service";
 import {ImageLoaderService} from "../image-loader/image-loader.service";
 import {CompaniesService} from "../companies/companies.service";
-import {CompanyAccessService} from "../companyAccess/company-access.service";
+import {CompanyAccessService} from "../company-access/company-access.service";
 import {getSortParams} from "../../helpers/utils";
 import {IMultiResponse} from "../../interfaces/responses.interface";
 
@@ -24,9 +24,9 @@ export class BrandsService {
     ];
 
     constructor(@InjectModel(Brand.name) private brandModel: Model<Brand>,
+                @Inject(forwardRef(() => CompaniesService)) private companiesService: CompaniesService,
                 private fileSystemService: FileSystemService,
                 private imageLoaderService: ImageLoaderService,
-                private companiesService: CompaniesService,
                 private companyAccessService: CompanyAccessService) {}
 
     async create (userId: string, brandDdo: BrandDto, image: Express.Multer.File): Promise<BrandDocument> {
@@ -34,7 +34,7 @@ export class BrandsService {
             const { companyTitle, ...brandData } = brandDdo;
             if (!image) throw { message: 'Не загружена фотография' };
 
-            const company = await this.companiesService.getFullByTitle(userId, companyTitle);
+            const company = await this.companiesService.getOneByTitle(companyTitle);
             if (!company) throw { message: 'Компания не найдена' };
 
             const access = await this.companyAccessService.checkAccess(userId, company._id.toString());
@@ -83,6 +83,16 @@ export class BrandsService {
         }
     }
 
+    async deleteManyWithoutAccessCheckByCompanyId (companyId: string) {
+        try {
+            const deleted = await this.brandModel.deleteMany({ company: companyId });
+            return deleted;
+        }
+        catch (e) {
+            throw new BadRequestException(e).getResponse();
+        }
+    }
+
     async getAll (options: ISearchOptions, projections: Projections<BrandDocument> = {}): Promise<IMultiResponse<BrandDocument>> {
         try {
             const count: number = await this.brandModel.count() as number;
@@ -105,7 +115,7 @@ export class BrandsService {
 
     async getByCompany(title: string, options: ISearchOptions = {}, projections: Projections<BrandDocument> = {}): Promise<IMultiResponse<BrandDocument>> {
         try {
-            const company = await this.companiesService.getByTitle(title);
+            const company = await this.companiesService.getOneByTitle(title);
             if (!company) {
                 throw { message: 'Компания не найдена' };
             }
