@@ -1,11 +1,11 @@
-import {IDeletedItem, IMultiResponse, IServiceMiddleware} from "../service-middleware.interface";
+import {IDeletedItem, IMultiResponse, IServiceMiddleware} from "../../service-middleware.interface";
 import {Injectable} from "@nestjs/common";
 
 @Injectable()
-export class UserServiceMongoose implements IServiceMiddleware<User, UserDto> {
+export class UserServiceSequelize implements IServiceMiddleware<User, UserDto> {
 
     create(data: UserDto): Promise<User> {
-        return Promise.resolve({ id: 'MongooseID', name: data.name, createdAt: new Date() });
+        return Promise.resolve({ id: 'SequelizeID', name: data.name, createdAt: new Date() });
     }
 
     delete(filter: Partial<User>): Promise<IDeletedItem> {
