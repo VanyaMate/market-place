@@ -1,23 +1,17 @@
 import {Module} from "@nestjs/common";
-import {UserServiceSequelize} from "./user/user.service-sequelize";
-import {UserServiceMongoose} from "./user/user.service-mongoose";
-import {DbModule} from "../test_db/db.module";
-
-/**
- * Так же сюда импортировать BD и подключать их в сервисах
- */
+import {UserMongooseService} from "./mongoose/user/user-mongoose.service";
+import {MongooseModule} from "@nestjs/mongoose";
+import {User, UserSchema} from "./mongoose/user/schemas/user-mongoose.schema";
 
 @Module({
     providers: [
-        UserServiceSequelize,
-        UserServiceMongoose,
+        UserMongooseService
     ],
     exports: [
-        UserServiceSequelize,
-        UserServiceMongoose,
+        UserMongooseService
     ],
     imports: [
-        DbModule,
+        MongooseModule.forFeature([{ name: User.name, schema: UserSchema }])
     ]
 })
 export class ServiceMiddlewareModule {}

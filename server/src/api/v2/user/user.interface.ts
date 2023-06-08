@@ -1,9 +1,12 @@
-interface User {
+export interface IUser {
     id: string;
-    name: string;
-    createdAt: Date;
-}
 
-interface UserDto {
-    name: string;
+    firstName: string;
+    telephone: string;
+    lastName: string;
+
+    email: string;
+    password: string;
+
+    createdAt: Date;
 }

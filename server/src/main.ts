@@ -1,4 +1,4 @@
-import { NestFactory } from '@nestjs/core';
+import {NestFactory} from '@nestjs/core';
 import { AppModule } from './app.module';
 import * as cookieParser from "cookie-parser";
 
@@ -13,6 +13,7 @@ async function bootstrap() {
                 credentials: true
             }
         });
+
     const port = process.env.port || 5000;
 
     app.use(cookieParser())

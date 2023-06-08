@@ -1,9 +1,9 @@
 import {CanActivate, ExecutionContext, Injectable, UnauthorizedException} from "@nestjs/common";
 import {Request} from 'express';
-import {TokensService} from "../api/tokens/tokens.service";
+import {TokensService} from "../api/v1/tokens/tokens.service";
 import {ACCESS_TOKEN_NAME, USER_ID} from "../.constants";
-import {UsersService} from "../api/users/users.service";
-import {SessionService} from "../api/session/session.service";
+import {UsersService} from "../api/v1/users/users.service";
+import {SessionService} from "../api/v1/session/session.service";
 
 @Injectable()
 export class AccessTokenGuard implements CanActivate {

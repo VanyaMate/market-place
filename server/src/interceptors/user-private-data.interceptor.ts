@@ -1,7 +1,7 @@
 import {CallHandler, ExecutionContext, Injectable, NestInterceptor} from "@nestjs/common";
 import {map, Observable, tap} from "rxjs";
-import {UserPublicDataDto} from "../api/user/dto/user-public-data.dto";
-import {UserPrivateDataDto} from "../api/user/dto/user-private-data.dto";
+import {UserPublicDataDto} from "../api/v1/user/dto/user-public-data.dto";
+import {UserPrivateDataDto} from "../api/v1/user/dto/user-private-data.dto";
 
 @Injectable()
 export class UserPrivateDataInterceptor implements NestInterceptor {

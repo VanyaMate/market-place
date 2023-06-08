@@ -6,6 +6,7 @@ import {ServeStaticModule} from "@nestjs/serve-static";
 import * as path from "path";
 import {SharpModule} from "./services/sharp-service/sharp.module";
 import {ImageModule} from "./services/image-service/image.module";
+import {ApiV2Module} from "./api/api-v2.module";
 
 @Module({
     imports: [
@@ -17,9 +18,10 @@ import {ImageModule} from "./services/image-service/image.module";
             rootPath: path.resolve(__dirname, '..', 'public'),
         }),
         MongooseModule.forRoot(process.env.MONGO_DB_URL),
-        ApiModule,
+        // ApiModule,
         SharpModule,
         ImageModule,
+        ApiV2Module,
     ],
     controllers: [],
     providers: [],

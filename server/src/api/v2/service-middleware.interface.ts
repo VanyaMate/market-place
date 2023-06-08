@@ -1,3 +1,5 @@
+import {SortOrder} from "mongoose";
+
 export interface IMultiResponse<T> {
     list: T[];
     count: number;
@@ -13,12 +15,7 @@ export interface IDeletedItem {
     deleted: boolean;
 }
 
-export enum SortType {
-    ACS = 'acs',
-    DESC = 'desc',
-}
-
-export type ISortOption<T> = { [key in keyof T]: SortType };
+export type ISortOption<T> = { [key in keyof T]: SortOrder };
 
 export interface ISearchOptions<T> {
     limit?: number;
@@ -26,12 +23,14 @@ export interface ISearchOptions<T> {
     sort?: ISortOption<T>;
 }
 
+export type ISearchFilter<T> = Partial<T>;
+
 export interface IServiceMiddleware<T,C> {
     create: (data: C) => Promise<T>;
-    delete: (filter: Partial<T>) => Promise<IDeletedItem>;
-    findById: (id: string) => Promise<T>;
-    findMany: (filter: Partial<T>) => Promise<IMultiResponse<T>>;
-    update: (params: Partial<C>) => Promise<T>;
+    delete: (filter: ISearchFilter<T>) => Promise<boolean>;
+    findById: (id: string, projections?: Projections<T>) => Promise<T>;
+    find: (filter?: ISearchFilter<T>, searchOptions?: ISearchOptions<T>, projections?: Projections<T>) => Promise<IMultiResponse<T>>;
+    update: (filter: ISearchFilter<T>, params: Partial<C>) => Promise<boolean>;
 }
 
 export abstract class Service<T, C> {

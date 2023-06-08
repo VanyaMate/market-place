@@ -1,5 +1,5 @@
 import {Injectable} from "@nestjs/common";
-import {BrandsService} from "../api/brands/brands.service";
+import {BrandsService} from "../api/v1/brands/brands.service";
 
 @Injectable()
 export class FakeProductsMakerService {
