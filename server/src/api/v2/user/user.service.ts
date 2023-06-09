@@ -22,4 +22,8 @@ export class UserService extends Service<IUser, UserDto> {
         return await this.middleware.find(filter, searchOptions, projections);
     }
 
+    async update (filter: ISearchFilter<IUser> = {}, params: Partial<UserDto>) {
+        return await this.middleware.update(filter, params);
+    }
+
 }
