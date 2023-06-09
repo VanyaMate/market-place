@@ -32,7 +32,3 @@ export interface IServiceMiddleware<T,C> {
     find: (filter?: ISearchFilter<T>, searchOptions?: ISearchOptions<T>, projections?: Projections<T>) => Promise<IMultiResponse<T>>;
     update: (filter: ISearchFilter<T>, params: Partial<C>) => Promise<boolean>;
 }
-
-export abstract class Service<T, C> {
-    protected constructor(protected middleware: IServiceMiddleware<T, C>) {}
-}
