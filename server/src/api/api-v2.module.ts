@@ -1,9 +1,11 @@
 import {Module} from "@nestjs/common";
-import {UserModule} from "./v2/user/user.module";
+import {UserManagerModule} from "./v2/managers/user/user-manager.module";
+import {TokenManagerModule} from "./v2/managers/token/token-manager.module";
 
 @Module({
     imports: [
-        UserModule
+        UserManagerModule,
+        TokenManagerModule,
     ],
 })
 export class ApiV2Module {}

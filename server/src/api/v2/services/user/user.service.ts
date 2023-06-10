@@ -1,6 +1,6 @@
 import {Injectable} from "@nestjs/common";
-import {ISearchFilter, ISearchOptions, Projections} from "../service-middleware.interface";
-import {UserMongooseService} from "../service-middlewares/mongoose/user/user-mongoose.service";
+import {ISearchFilter, ISearchOptions, Projections} from "../../service-middleware.interface";
+import {UserMongooseService} from "../../service-middlewares/mongoose/user/user-mongoose.service";
 import {IUser} from "./user.interface";
 import {UserDto} from "./dto/user.dto";
 
@@ -12,10 +12,8 @@ export class UserService {
         return await this.userService.create(userDto);
     }
 
-    async delete () {
-        return await this.userService.delete({
-            email: 'admin@google.com'
-        })
+    async delete (filter: ISearchFilter<IUser> = {}) {
+        return await this.userService.delete(filter);
     }
 
     async find (filter: ISearchFilter<IUser> = {}, searchOptions: ISearchOptions<IUser> = {}, projections: Projections<IUser> = {}) {

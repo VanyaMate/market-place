@@ -5,11 +5,11 @@ import {
     IServiceMiddleware,
     Projections
 } from "../../../service-middleware.interface";
-import {IUser} from "../../../user/user.interface";
+import {IUser} from "../../../services/user/user.interface";
 import {InjectModel} from "@nestjs/mongoose";
 import {UserDocument, User} from "./schemas/user-mongoose.schema";
 import {FilterQuery, Model, Types, UpdateWriteOpResult} from "mongoose";
-import {UserDto} from "../../../user/dto/user.dto";
+import {UserDto} from "../../../services/user/dto/user.dto";
 import {ObjectModel} from "../mongoose.interface";
 import {DeleteResult} from "mongodb";
 
