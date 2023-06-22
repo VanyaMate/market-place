@@ -27,7 +27,7 @@ const CreateBrandForm = () => {
             <Vertical offset={10}>
                 <select name={'companyTitle'}>
                     {
-                        data ? data.map((company) => <option key={company.title} value={company.title}>{company.title}</option>) : ''
+                        data ? data.list.map((company) => <option key={company.title} value={company.title}>{company.title}</option>) : ''
                     }
                 </select>
                 <Input

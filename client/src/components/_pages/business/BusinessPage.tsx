@@ -11,7 +11,7 @@ const BusinessPage = () => {
         <div>
             <CreateCompanyForm/>
             <TitledBlock title={'Мои компании'}>
-                <CompanyList list={data ?? []}/>
+                <CompanyList list={data?.list ?? []}/>
             </TitledBlock>
         </div>
     );

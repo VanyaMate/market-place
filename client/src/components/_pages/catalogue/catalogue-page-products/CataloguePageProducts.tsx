@@ -16,7 +16,7 @@ const CataloguePageProducts = () => {
     return (
         <div className={css.container}>
             {
-                data?.products?.map((product) => {
+                data?.list.map((product) => {
                     return <ProductCard {...product} key={product._id} article={'83478324'}/>
                 })
             }

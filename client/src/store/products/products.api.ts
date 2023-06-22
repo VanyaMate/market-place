@@ -1,6 +1,7 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {API_PRODUCTS} from "../../cfg/links.config";
-import {IProducts, IProduct} from "./products.types";
+import {IProduct} from "./products.types";
+import {IMultiResponse} from "../response.interfaces";
 
 export const productsApi = createApi({
     reducerPath: 'products/api',
@@ -8,13 +9,13 @@ export const productsApi = createApi({
         baseUrl: API_PRODUCTS
     }),
     endpoints: (build) => ({
-        getProducts: build.query<IProducts, any>({
+        getProducts: build.query<IMultiResponse<IProduct>, any>({
             query: () => ({
                 url: '/all',
                 method: 'get',
             })
         }),
-        getProductsBy: build.query<IProducts, any>({
+        getProductsBy: build.query<IMultiResponse<IProduct>, any>({
             query: (params) => ({
                 url: '/findBy',
                 method: 'get',

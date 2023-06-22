@@ -17,45 +17,49 @@ export class AuthController {
     @UsePipes(ValidationPipe)
     async registration (
         @Body() userDto: UserLoginDto,
-        @Res() res: Response,
+        @Res({ passthrough: true }) res: Response,
     ) {
         const [user, token] = await this.authService.registration(userDto);
         res.cookie(ACCESS_TOKEN_NAME, token, {
             httpOnly: true,
             maxAge: getMSDays(7),
         })
-        res.status(201).json(user);
+
+        return user;
     }
 
     @Post('/login')
     @UsePipes(ValidationPipe)
     async login (@Body() userDto: UserLoginDto,
-                 @Res() res: Response) {
+                 @Res({ passthrough: true }) res: Response) {
         const [user, token] = await this.authService.login(userDto);
         res.cookie(ACCESS_TOKEN_NAME, token, {
             httpOnly: true,
             maxAge: getMSDays(7),
         })
-        res.status(200).json(user);
+
+        return user;
     }
 
     @Post('/logout')
     @UseGuards(AccessTokenGuard)
-    logout (@Res() res: Response) {
+    logout (@Res({ passthrough: true }) res: Response) {
         res.clearCookie(ACCESS_TOKEN_NAME);
-        res.json({ logout: true })
+
+        return { logout: true };
     }
 
     @Post('/token')
     @UseGuards(AccessTokenGuard)
     async token (@UserVerified() user: IUserVerifiedData,
-                 @Res() res: Response) {
+                 @Res({ passthrough: true }) res: Response) {
         const [userData, token] = await this.authService.getPrivateUserData(user.id);
         res.cookie(ACCESS_TOKEN_NAME, token, {
             httpOnly: true,
             maxAge: getMSDays(7),
         })
-        res.status(200).json(userData);
+
+        return userData;
     }
 
 }

@@ -1,10 +1,6 @@
 import {DiscountType} from "../../hooks/usePrice.hook";
+import {IBrand} from "../brands/brands.interfaces";
 
-export interface IProducts {
-    products?: (IProduct)[] | null;
-    options: IResponseOptions;
-    count: number;
-}
 export interface IImage {
     _id?: string;
     title?: string;
@@ -25,12 +21,7 @@ export interface IProduct {
     discountType?: DiscountType;
     brand: IBrand;
 }
-export interface IBrand {
-    _id: string;
-    title: string;
-    description: string;
-    image: IImage;
-}
+
 export interface IResponseOptions {
     limit: number;
     offset: number;

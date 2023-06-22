@@ -96,6 +96,9 @@ export class CartService {
                 .populate('products.product')
                 .exec();
 
+            /**
+             *  Если пользователь существует -> можно создать.
+             */
             if (!cart) { throw { message: 'Корзины для этого пользователя не найдено' } }
 
             this._updateCartItem(cart, product);
@@ -108,7 +111,7 @@ export class CartService {
 
     private _updateCartItem (cart, product: ICartProduct): void {
         cart.products.forEach((cartProduct, index) => {
-            if (cartProduct.product._id.toString() === product.product) {
+            if (cartProduct.product?._id.toString() === product.product) {
                 if (product.amount) {
                     cartProduct.amount = product.amount;
                 } else {
@@ -117,6 +120,7 @@ export class CartService {
                 return;
             }
         })
+        cart.products = cart.products.filter((cartProduct) => cartProduct.product);
     }
 
 }

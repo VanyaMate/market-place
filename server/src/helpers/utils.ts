@@ -6,6 +6,7 @@ export const getRandomInt = function (min: number, max: number): number {
 
 export const getSortParams = function (sort: string[]) {
     const sortParams = {};
+    if (!sort) return sortParams;
 
     for (let i = 0; i < sort.length; i++) {
         const [key, sortType] = sort[i].split(':');

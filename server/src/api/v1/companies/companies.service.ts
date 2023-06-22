@@ -1,4 +1,4 @@
-import {BadRequestException, forwardRef, Inject, Injectable} from "@nestjs/common";
+import {BadRequestException, forwardRef, HttpException, HttpStatus, Inject, Injectable} from "@nestjs/common";
 import {CreateCompanyDto} from "./dto/create-company.dto";
 import {InjectModel} from "@nestjs/mongoose";
 import {Image} from "../image-loader/schemas/image.schema";
@@ -56,7 +56,7 @@ export class CompaniesService {
             return company;
         }
         catch (e) {
-            throw new BadRequestException(e).getResponse();
+            throw new HttpException(e.message, HttpStatus.BAD_REQUEST)
         }
     }
 
@@ -75,7 +75,7 @@ export class CompaniesService {
             }
         }
         catch (e) {
-            throw new BadRequestException(e).getResponse();
+            throw new HttpException(e.message, HttpStatus.BAD_REQUEST)
         }
     }
 
@@ -102,23 +102,22 @@ export class CompaniesService {
             }
         }
         catch (e) {
-            throw new BadRequestException(e).getResponse();
+            throw new HttpException(e.message, HttpStatus.BAD_REQUEST)
         }
     }
 
     async getFullOneByTitle (userId: string, title: string) {
         try {
             const company = await this.companyModel
-                .findOne({ title: title })
-                .populate(['icon'])
+                .findOne({ title })
                 .exec();
 
-            if (!company) throw { message: 'Такой компании не существует' }
+            if (!company) { throw { message: 'Такой компании не существует' } }
 
             const access = await this.companyAccessService.checkAccess(userId, company._id.toString());
 
             if (access) {
-                const brands = await this.brandsService.getByCompany(company._id.toString());
+                const brands = await this.brandsService.getByCompany(title);
                 return {
                     company: company,
                     brands: brands,
@@ -128,7 +127,7 @@ export class CompaniesService {
             }
         }
         catch (e) {
-            throw new BadRequestException(e).getResponse();
+            throw new HttpException(e.message, HttpStatus.BAD_REQUEST)
         }
     }
 

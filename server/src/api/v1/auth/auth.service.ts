@@ -18,6 +18,7 @@ export class AuthService {
                  private sessionService: SessionService) {}
 
     async registration (userLoginDto: UserLoginDto): Promise<[UserPrivateDataDto, string]> {
+        console.log(userLoginDto);
         try {
             const candidate = (await this.usersService.findByEmail(userLoginDto.email)).list[0];
             if (candidate) {
@@ -30,6 +31,7 @@ export class AuthService {
             return [ new UserPrivateDataDto({...user.toObject(), cart}), token ];
         }
         catch (e) {
+            console.log(e);
             throw new BadRequestException(e);
         }
     }
@@ -43,7 +45,6 @@ export class AuthService {
 
             throw { message: 'Ошибка авторизации' }
         }
-
         catch (e) {
             throw new UnauthorizedException(e);
         }

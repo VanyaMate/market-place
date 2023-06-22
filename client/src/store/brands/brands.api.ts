@@ -1,6 +1,7 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {API_BRANDS} from "../../cfg/links.config";
 import {IBrand} from "./brands.interfaces";
+import {IMultiResponse} from "../response.interfaces";
 
 export const brandsApi = createApi({
     reducerPath: 'brands/api',
@@ -16,7 +17,7 @@ export const brandsApi = createApi({
                 body: props.formData
             })
         }),
-        getBrandsByCompanyName: build.query<IBrand[], { title: string }>({
+        getBrandsByCompanyName: build.query<IMultiResponse<IBrand>, { title: string }>({
             query: (props) => ({
                 url: 'byCompany',
                 method: 'get',

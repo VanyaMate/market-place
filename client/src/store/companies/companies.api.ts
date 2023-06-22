@@ -1,6 +1,8 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {API_COMPANIES} from "../../cfg/links.config";
 import {ICompany} from "./companies.interfaces";
+import {IMultiResponse} from "../response.interfaces";
+import {IBrand} from "../brands/brands.interfaces";
 
 export const companiesApi = createApi({
     reducerPath: 'companies/api',
@@ -16,13 +18,13 @@ export const companiesApi = createApi({
                 method: "POST",
             })
         }),
-        getMyCompanies: build.query<ICompany[], void>({
+        getMyCompanies: build.query<IMultiResponse<ICompany>, void>({
             query: () => ({
                 url: 'my',
                 method: "GET",
             })
         }),
-        getFullDataCompany: build.query<ICompany, { title: string }>({
+        getFullDataCompany: build.query<{company: ICompany, brands: IMultiResponse<IBrand>}, { title: string }>({
             query: (props) => ({
                 url: 'getFullByTitle',
                 params: props,

@@ -10,17 +10,16 @@ import {useGetBrandsByCompanyNameQuery} from "../../../store/brands/brands.api";
 const BusinessCompanyPage = () => {
     const params = useParams<{ companyTitle: string }>();
     const fullDataCompany = useGetFullDataCompanyQuery({ title: params.companyTitle! });
-    const brands = useGetBrandsByCompanyNameQuery({ title: params.companyTitle! });
 
     return (
         <Vertical offset={20}>
-            { fullDataCompany.data ? <CompanyItem company={fullDataCompany.data}/> : '' }
+            { fullDataCompany.data ? <CompanyItem company={fullDataCompany.data.company}/> : '' }
             <TitledBlock title={'Создать бренд'}>
                 <CreateBrandForm/>
             </TitledBlock>
             <TitledBlock title={'Бренды'}>
                 {
-                    brands.data ? brands.data.map((brand) => <div key={brand.title}>{brand.title}</div>) : ''
+                    fullDataCompany.data?.brands ? fullDataCompany.data?.brands.list.map((brand) => <div key={brand.title}>{brand.title}</div>) : ''
                 }
             </TitledBlock>
         </Vertical>

@@ -2,26 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7db735f3-e9ce-4c73-8cce-5a3fcf56b2e9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/server/src/api/v2/managers/token/token-manager.controller.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/api/v2/managers/token/token-manager.module.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/api/v2/managers/user/user-manager.module.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/api/v2/managers/user/user-manager.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/api/v2/service-middlewares/mongoose/token/schemas/token-mongoose.schema.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/api/v2/service-middlewares/mongoose/token/token-mongoose.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/api/v2/services/token/dto/token.dto.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/api/v2/services/token/token.interface.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/api/v2/services/token/token.module.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/api/v2/services/token/token.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/store/response.interfaces.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/api/api-v2.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/api-v2.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/api/v2/service-middlewares/mongoose/user/user-mongoose.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/v2/service-middlewares/mongoose/user/user-mongoose.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/api/v2/service-middlewares/service-middleware.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/v2/service-middlewares/service-middleware.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/api/v2/user/dto/user.dto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/v2/services/user/dto/user.dto.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/api/v2/user/user.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/v2/managers/user/user-manager.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/api/v2/user/user.interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/v2/services/user/user.interface.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/api/v2/user/user.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/v2/services/user/user.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/api/v2/user/user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/v2/services/user/user.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/_brand/brand-with-logo/BrandWithLogo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/_brand/brand-with-logo/BrandWithLogo.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/_forms/create-brand-form/CreateBrandForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/_forms/create-brand-form/CreateBrandForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/_pages/business/BusinessCompanyPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/_pages/business/BusinessCompanyPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/_pages/business/BusinessPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/_pages/business/BusinessPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/_pages/catalogue/catalogue-page-products/CataloguePageProducts.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/_pages/catalogue/catalogue-page-products/CataloguePageProducts.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/store/brands/brands.api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/brands/brands.api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/store/brands/brands.interfaces.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/brands/brands.interfaces.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/store/companies/companies.api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/companies/companies.api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/store/products/products.api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/products/products.api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/store/products/products.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/products/products.types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/api/v1/auth/auth.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/v1/auth/auth.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/api/v1/auth/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/v1/auth/auth.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/api/v1/cart/cart.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/v1/cart/cart.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/api/v1/companies/companies.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/v1/companies/companies.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/app.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/helpers/utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/helpers/utils.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/services/file-service/file-service.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/services/file-service/file-service.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +91,8 @@
       <workItem from="1686162448031" duration="6012000" />
       <workItem from="1686232252826" duration="30903000" />
       <workItem from="1686337251231" duration="233000" />
-      <workItem from="1686347279594" duration="11065000" />
+      <workItem from="1686347279594" duration="11709000" />
+      <workItem from="1687448512683" duration="3702000" />
     </task>
     <servers />
   </component>
